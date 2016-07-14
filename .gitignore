@@ -4,3 +4,6 @@
 Homestead.yaml
 Homestead.json
 .env
+readme.md
+.env.example
+/.idea
