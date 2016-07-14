@@ -195,9 +195,8 @@ class AuthController extends Controller
 
         $validator = $this->validatorRegister($request->all());
         if ($validator->fails()) {
-            return json_encode(
-                ['successful' => false,
-                    'detail' => $validator->errors()->all()]
+            return json_encode(['successful' => false,
+                                'detail' => $validator->errors()->all()]
             );
         };
 

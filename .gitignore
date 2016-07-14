@@ -7,3 +7,4 @@ Homestead.json
 readme.md
 .env.example
 /.idea
+.idea/workspace.xml

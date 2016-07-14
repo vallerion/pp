@@ -3,7 +3,7 @@
 @section('header')
     <header class="main-header">
         <!-- Logo -->
-        <a href="index.html" class="logo">
+        <a href="{{url('/')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <!--<span class="logo-mini"><b>A</b>LT</span>-->
             <!-- logo for regular state and mobile devices -->
@@ -172,30 +172,30 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="files/img_user/user1.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Nezhuriov Valeriy</span>
+                            <img src="img/pira.png" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="files/img_user/user1.jpg" class="img-circle" alt="User Image">
+                                <img src="img/pira.png" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Nezhuriov Valeriy - Web Developer
-                                    <small>but C++ forever</small>
+                                    {{ Auth::user()->name }}
+                                    <small>but C++ forever<!-- TODO "about me" --></small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="row">
                                     <div class="col-xs-4 text-center">
-                                        <a href="#">Projects</a>
+                                        <a href="#">Company</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
                                         <a href="#">Teams</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                        <a href="#">Colleagues</a>
+                                        <a href="#">Projects</a>
                                     </div>
                                 </div>
                                 <!-- /.row -->
@@ -228,7 +228,7 @@
                     <img src="img/pira.png" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Valeriy Nezhuriov</p>
+                    <p>{{ Auth::user()->name }}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -237,26 +237,15 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
                 </div>
             </form>
-            <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
-                <li class="header">МЕНЮ</li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-cogs"></i> <span>Проекты</span> <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Project1</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Project2</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Project3</a></li>
-                    </ul>
-                </li>
-            </ul>
+
+            @yield('sidebar-menu')
+
+
+
         </section>
         <!-- /.sidebar -->
     </aside>
