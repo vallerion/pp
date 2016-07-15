@@ -45,7 +45,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'getLogout']]);
     }
 
     /**
@@ -102,6 +102,7 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'image' => asset('img/user_avatars/' .rand(1, 3). '.png'),
         ]);
     }
 
@@ -140,7 +141,7 @@ class AuthController extends Controller
         });
 
         return json_encode(['successful' => true,
-            'detail' => array('Registration complete!<br><br>Please confirm your email address')]);
+                            'detail' => array('Registration complete!<br><br>Please confirm your email address')]);
     }
 
     /**
@@ -171,9 +172,8 @@ class AuthController extends Controller
 
         $validator = $this->validatorLogin($request->all());
         if ($validator->fails()) {
-            return json_encode(
-                ['successful' => false,
-                    'detail' => $validator->errors()->all()]
+            return json_encode(['successful' => false,
+                                'detail' => $validator->errors()->all()]
             );
         };
 

@@ -91,6 +91,8 @@ $('form').submit(function(e){
         url: $(this).attr('action'),
         data: $(this).serialize(),
         success: function(data){
+
+            // console.log(data);
             
             $(this_id).slideDown('slow');
             $('.preloader').css("display", "none");

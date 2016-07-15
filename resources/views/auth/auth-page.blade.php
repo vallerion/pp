@@ -21,7 +21,7 @@
 
         <div class="preloader center-block"></div>
 
-        <form id="login-form" role="form6" action="auth/login">
+        <form id="login-form" role="form6" action="auth/login" method="post">
             {!! csrf_field() !!}
 
             <div class="form-group">
@@ -43,7 +43,7 @@
             </div>
         </form>
 
-        <form id="registration-form" role="form6" action="auth/register">
+        <form id="registration-form" role="form6" action="auth/register" method="post">
             {!! csrf_field() !!}
 
             <div class="form-group">
@@ -81,7 +81,7 @@
             </div>
         </form>
 
-        <form id="reset-form" role="form6" action="auth/reset">
+        <form id="reset-form" role="form6" action="auth/reset" method="post">
             {!! csrf_field() !!}
 
             <div class="form-group">

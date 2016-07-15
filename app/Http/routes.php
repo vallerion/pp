@@ -19,6 +19,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('workspace', 'Workspace\WorkspaceController@index');
 
+    Route::get('workspace/projects', 'Workspace\WorkspaceController@getProjects');
+
 });
 
 Route::get('auth/', 'Auth\AuthController@getRegister');
