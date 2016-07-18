@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function(){
-    return "welcome";
+    return redirect('workspace');
 });
 
 Route::group(['middleware' => 'auth'], function () {

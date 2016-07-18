@@ -15,6 +15,7 @@ class CreateUserCompanyTable extends Migration
         Schema::create('user_company', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('company_id')->unsigned();
+            $table->string('user_group', 128);
         });
     }
 

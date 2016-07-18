@@ -103,13 +103,13 @@ $('form').submit(function(e){
             responseHandler(response);
 
         },
-        error: function(data){
+        error: function(response){
 
             $(this_id).slideDown('slow');
             $('.preloader').css("display", "none");
             $('.tab-form').css("display", "block");
 
-            // TODO: сообщение("что-то пошло не так...")
+            responseHandler(response);
         }
     });
 
