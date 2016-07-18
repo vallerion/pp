@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Project extends Model
 {
-    protected $table = 'companies';
+    protected $table = 'projects';
 //    protected $fillable = ['user_id', 'code'];
 
     public function users(){
-        return $this->belongsToMany('App\User', 'user_company');
+        return $this->belongsToMany('App\User', 'user_project');
     }
 }

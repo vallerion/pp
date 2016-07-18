@@ -21,6 +21,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('workspace/projects', 'Workspace\WorkspaceController@getProjects');
 
+//    Route::get('workspace/test', function(){
+//        session(['current_team_id' => 55]);
+//        Session::forget('current_team_id');
+//    });
+
 });
 
 Route::get('auth/', 'Auth\AuthController@getRegister');
