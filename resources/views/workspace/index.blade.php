@@ -8,7 +8,7 @@
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-cogs"></i> <span>Проекты</span>
-                <i class="fa fa-plus pull-right plus show-modal" data-act="create-project" data-toggle="modal"></i>
+                <i class="fa fa-plus pull-right plus show-modal" modal-act="create-project"></i>
                 @if(count(Auth::user()->projects) > 0)
                     <i class="fa fa-angle-left pull-right"></i>
                 @endif
@@ -24,10 +24,11 @@
                 <li class="footer"><a href="workspace/projects">See all {{ Auth::user()->current_id_team }}</a></li>
             </ul>
         </li>
+
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-tasks"></i> <span>Задачи</span>
-                <i class="fa fa-plus pull-right plus show-modal"></i>
+                <i class="fa fa-plus pull-right plus show-modal" modal-act="create-task"></i>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
@@ -39,46 +40,60 @@
                 <li class="footer"><a href="workspace/projects">See all</a></li>
             </ul>
         </li>
+
         <li class="treeview">
-            @if(count(Auth::user()->teams) > 0)
-                <a href="#">
-            @else
-                <a class="show-modal" href="#">
-            @endif
 
-                <i class="fa fa-group"></i> <span>Команды</span>
-                <i class="fa fa-plus pull-right plus show-modal"></i>
+            @if(Auth::user()->current_team_id == "none")
+
                 @if(count(Auth::user()->teams) > 0)
-                    <i class="fa fa-angle-left pull-right"></i>
-                @endif
-            </a>
-            @if(count(Auth::user()->teams) > 0)
-                <ul class="treeview-menu">
-                    <!-- TODO вывод списка команд, если есть current_team_id то Моя команда и вывод мемберов -->
 
-                    @if(Auth::user()->current_team_id == "none")
+                    <a href="#">
+                        <i class="fa fa-group"></i> <span>Команды</span>
+                        <i class="fa fa-plus pull-right plus show-modal" modal-act="create-team"></i>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+
                         @for($i = 0; $i < count(Auth::user()->teams) && $i < 5; ++$i)
                             <li><a href="workspace/teams/{{ Auth::user()->teams[$i]->id }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->teams[$i]->name }}</a></li>
                         @endfor
 
-                            <li class="divider"></li>
-                            <li class="footer"><a href="workspace/myteams">See all</a></li>
+                        <li class="divider"></li>
+                        <li class="footer"><a href="workspace/teams/{{ Auth::user()->current_id_team }}">See all</a></li>
 
-                    @else
-                        @for($i = 0; $i < count(Auth::user()->member_my_team) && $i < 5; ++$i)
-                            <li><a href="workspace/profile/{{ Auth::user()->member_my_team[$i]->id }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->member_my_team[$i]->name }}</a></li>
-                        @endfor
+                    </ul>
 
-                            <li class="divider"></li>
-                            <li class="footer"><a href="workspace/teams/{{ Auth::user()->current_id_team }}">See all</a></li>
+                @else
 
-                    @endif
-
+                    <a class="show-modal" modal-act="create-first-team" href="#">
+                        <i class="fa fa-group"></i> <span>Команды</span>
+                        <!-- <i class="fa fa-plus pull-right plus show-modal" modal-act="create-team"></i> -->
+                    </a>
 
 
+                @endif
+
+            @else
+
+                <a href="#">
+                    <i class="fa fa-group"></i> <span>Моя команда</span>
+                    <i class="fa fa-plus pull-right plus show-modal" modal-act="create-team"></i>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+
+                    @for($i = 0; $i < count(Auth::user()->member_my_team) && $i < 5; ++$i)
+                        <li><a href="workspace/profile/{{ Auth::user()->member_my_team[$i]->id }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->member_my_team[$i]->name }}</a></li>
+                    @endfor
+
+                    <li class="divider"></li>
+                    <li class="footer"><a href="workspace/myteams">See all</a></li>
 
                 </ul>
+
             @endif
+
+
         </li>
     </ul>
 @endsection

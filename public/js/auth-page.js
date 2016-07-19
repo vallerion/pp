@@ -1,23 +1,4 @@
 
-function showMessage(text, type){
-    noty({
-        text        : text,
-        type        : type,
-        dismissQueue: true,
-        layout      : 'topRight',
-        theme       : 'relax',
-        maxVisible  : 5,
-        timeout     : 10000,
-        animation   : {
-            open: 'animated fadeInDown',
-            close: 'animated fadeOutUp',
-            easing: 'swing',
-            speed : 500
-        }
-    });
-}
-
-
 function tab(id){
 
     switch (id){
@@ -86,6 +67,9 @@ $('form').submit(function(e){
     $('.preloader').css("display", "block");
     var this_id = "#" + $(this).attr('id');
 
+    console.log($(this).serialize());
+    console.log($(this).attr('action'));
+
     $.ajax({
         type: "POST",
         url: $(this).attr('action'),
@@ -116,32 +100,3 @@ $('form').submit(function(e){
     // $(this).slideDown('slow');
 
 });
-
-function responseHandler(response) {
-
-    if(response.successful){
-
-        if(response.redirect)
-            window.location.replace(response.redirect);
-
-        if(response.detail) {
-
-            response.detail.forEach(function (item) {
-                showMessage(item, "success");
-            });
-        }
-    }
-    else{
-
-        if(response.detail){
-
-            response.detail.forEach(function(item){
-                showMessage(item, "error");
-            });
-        }
-        else{
-            showMessage("Oops, something went wrong", "error");
-        }
-    }
-
-}

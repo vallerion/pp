@@ -112,8 +112,12 @@
 
 <script src="{{asset('js/lib/jquery.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.js')}}"></script>
-<script src="{{asset('js/auth-page.js')}}"></script>
 <script src="{{asset('js/lib/noty/packaged/jquery.noty.packaged.min.js')}}"></script>
+
+<script src="{{asset('js/responseHandler.js')}}"></script>
+<script src="{{asset('js/auth-page.js')}}"></script>
+
+
 
 </body>
 </html>

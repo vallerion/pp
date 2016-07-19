@@ -4,13 +4,16 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\Request;
+use Cookie;
 
 class User extends Authenticatable
 {
     public function __construct(){
         parent::__construct();
 
-        $this->current_team_id = Session::get('current_team_id', 'none');
+//        $this->current_team_id = Session::get('current_team_id', 'none');
+        $this->current_team_id = Cookie::get('current_team_id', 'none');
     }
 
     /**
@@ -42,7 +45,7 @@ class User extends Authenticatable
     }
 
     public function teams(){
-        return $this->belongsToMany('App\Team', 'user_team')->withPivot('user_group');
+        return $this->belongsToMany(Team::class, 'user_team')->withPivot('user_group');
     }
 
     public function member_my_team(){

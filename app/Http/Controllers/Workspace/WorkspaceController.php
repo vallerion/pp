@@ -9,17 +9,42 @@ use App\Company;
 use App\Project;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TeamController;
 
 class WorkspaceController extends Controller
 {
+    private $teamController;
+    private $projectController;
+    private $companyController;
+
+    public function __construct(){
+        $this->teamController = new TeamController();
+    }
+
+    public function __destruct(){
+    }
+
     public function index(){
         return view("workspace.index");
     }
 
     public function getProjects(){
-
         return Auth::user()->projects;
+    }
 
-//        return view("workspace.page.projects");
+    public function getTeams(){
+        return Auth::user()->teams;
+    }
+    
+    public function getTeamCreateFirst(){
+        return view("workspace.ajax_responce.modal_form.create_first_team");
+    }
+
+    public function getTeamCreate(){
+        return view("workspace.ajax_responce.modal_form.create_team");
+    }
+
+    public function postTeamCreate(Request $request){
+        return $this->teamController->create($request->all());
     }
 }
