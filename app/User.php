@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\Request;
+//use App\Http\Requests\Request;
 use Cookie;
 
 class User extends Authenticatable
 {
-    public function __construct(){
-        parent::__construct();
+    public function __construct($data){
+        parent::__construct($data);
 
 //        $this->current_team_id = Session::get('current_team_id', 'none');
         $this->current_team_id = Cookie::get('current_team_id', 'none');
