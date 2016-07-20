@@ -9,7 +9,7 @@ use Cookie;
 
 class User extends Authenticatable
 {
-    public function __construct($data){
+    public function __construct($data = []){
         parent::__construct($data);
 
 //        $this->current_team_id = Session::get('current_team_id', 'none');
