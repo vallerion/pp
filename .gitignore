@@ -6,5 +6,5 @@ Homestead.json
 .env
 readme.md
 .env.example
-/.idea
+.idea
 .idea/workspace.xml
