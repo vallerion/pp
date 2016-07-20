@@ -67,9 +67,6 @@ $('form').submit(function(e){
     $('.preloader').css("display", "block");
     var this_id = "#" + $(this).attr('id');
 
-    console.log($(this).serialize());
-    console.log($(this).attr('action'));
-
     $.ajax({
         type: "POST",
         url: $(this).attr('action'),

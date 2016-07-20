@@ -169,7 +169,7 @@ class AuthController extends Controller
     }
 
     public function postLogin(Request $request){
-//echo "123";exit;
+        
         $validator = $this->validatorLogin($request->all());
         if ($validator->fails()) {
             return json_encode(['successful' => false,
