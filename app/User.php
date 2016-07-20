@@ -37,15 +37,19 @@ class User extends Authenticatable
     public $current_team_id;
 
     public function company(){
-        return $this->belongsToMany('App\Company', 'user_company')->withPivot('user_group');
+        return $this->belongsToMany(Company::class, 'user_company')->withPivot('user_group');
     }
 
     public function projects(){
-        return $this->belongsToMany('App\Project', 'user_project')->withPivot('user_group');
+        return $this->belongsToMany(Project::class, 'user_project')->withPivot('user_group');
     }
 
     public function teams(){
         return $this->belongsToMany(Team::class, 'user_team')->withPivot('user_group');
+    }
+
+    public function tasks(){
+        return $this->hasMany(Task::class, 'user_to_id');
     }
 
     public function member_my_team(){

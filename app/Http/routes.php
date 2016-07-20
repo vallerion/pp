@@ -20,20 +20,22 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
     Route::get('/', 'Workspace\WorkspaceController@index');
 
     Route::get('projects', 'Workspace\WorkspaceController@getProjects');
+    Route::get('projects/create', 'Workspace\WorkspaceController@getProjectCreate');
+    Route::post('projects/create', 'Workspace\WorkspaceController@postProjectCreate');
 
-    Route::get('teams', 'Workspace\WorkspaceController@getTeams');
+    Route::get('tasks', 'Workspace\WorkspaceController@getTasks');
 
-    Route::get('test', function(){
+
+//    Route::get('test', function(){
 //        session(['current_team_id' => 55]);
 //        Session::forget('current_team_id');
 //        echo
 //        $response = new \Illuminate\Http\Response();
 //        return $response->withCookie(cookie('current_team_id', 55));
-    });
+//    });
 
-    Route::get('teams/fcreate', 'Workspace\WorkspaceController@getTeamCreateFirst');
+    Route::get('teams', 'Workspace\WorkspaceController@getTeams');
     Route::get('teams/create', 'Workspace\WorkspaceController@getTeamCreate');
-
     Route::post('teams/create', 'Workspace\WorkspaceController@postTeamCreate');
 
 });

@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
 
-    <form role="form6" action="team/create" method="post">
+    <form role="form6" action="workspace/teams/create">
         {!! csrf_field() !!}
 
         <div class="form-group">
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <div class="checkbox">
-                <label><input name="visible" type="checkbox">Публичная команда</label>
+                <label><input checked name="visible" type="checkbox">Публичная команда</label>
             </div>
         </div>
     </form>
@@ -25,5 +25,5 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-    <button type="button" onclick="modal_submit()" class="btn btn-primary">Создать</button>
+    <button type="button" id="modal-submit" class="btn btn-primary">Создать</button>
 </div>

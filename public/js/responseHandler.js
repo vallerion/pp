@@ -31,6 +31,8 @@ function responseHandler(response) {
                 showMessage(item, "success");
             });
         }
+
+        return true;
     }
     else{
 
@@ -43,6 +45,8 @@ function responseHandler(response) {
         else{
             showMessage("Oops, something went wrong", "error");
         }
+
+        return false;
     }
 
 }

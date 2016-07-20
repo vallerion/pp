@@ -18,7 +18,7 @@ class CreateTeamsTable extends Migration
             $table->string('about', 1024);
             $table->string('image', 128);
             $table->timestamps('created_at');
-            $table->boolean('visible')->default(1);
+            $table->boolean('visible')->default(0);
         });
     }
 

@@ -6,23 +6,33 @@
     <ul class="sidebar-menu">
         <li class="header">МЕНЮ</li>
         <li class="treeview">
-            <a href="#">
-                <i class="fa fa-cogs"></i> <span>Проекты</span>
-                <i class="fa fa-plus pull-right plus show-modal" modal-act="create-project"></i>
-                @if(count(Auth::user()->projects) > 0)
+
+             @if(count(Auth::user()->projects) > 0)
+
+                <a href="#">
+                    <i class="fa fa-cogs"></i> <span>Проекты</span>
+                    <i class="fa fa-plus pull-right plus show-modal" modal-act="create-project"></i>
+
                     <i class="fa fa-angle-left pull-right"></i>
-                @endif
-            </a>
-            <ul class="treeview-menu">
-                <!-- TODO вывод списка проектов -->
+                </a>
 
-                @for($i = 0; $i < count(Auth::user()->projects) && $i < 5; ++$i)
-                    <li><a href="workspace/projects/{{ Auth::user()->projects[$i]->id }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->projects[$i]->name }}</a></li>
-                @endfor
+                <ul class="treeview-menu">
+                    <!-- TODO вывод списка проектов -->
 
-                <li class="divider"></li>
-                <li class="footer"><a href="workspace/projects">See all {{ Auth::user()->current_id_team }}</a></li>
-            </ul>
+                    @for($i = 0; $i < count(Auth::user()->projects) && $i < 5; ++$i)
+                        <li><a href="workspace/projects/{{ Auth::user()->projects[$i]->id }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->projects[$i]->name }}</a></li>
+                    @endfor
+
+                    <li class="divider"></li>
+                    <li class="footer"><a href="workspace/projects">See all {{ Auth::user()->current_id_team }}</a></li>
+                </ul>
+
+            @else
+                <a class="show-modal" modal-act="create-project" href="#">
+                    <i class="fa fa-cogs"></i> <span>Проекты</span>
+                </a>
+            @endif
+
         </li>
 
         <li class="treeview">
@@ -65,7 +75,7 @@
 
                 @else
 
-                    <a class="show-modal" modal-act="create-first-team" href="#">
+                    <a class="show-modal" modal-act="create-team" href="#">
                         <i class="fa fa-group"></i> <span>Команды</span>
                         <!-- <i class="fa fa-plus pull-right plus show-modal" modal-act="create-team"></i> -->
                     </a>
