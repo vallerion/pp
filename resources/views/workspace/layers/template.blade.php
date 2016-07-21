@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{asset("css/admin_panel.css")}}">
     <link rel="stylesheet" href="{{asset("css/skin-black.css")}}">
     <link rel="stylesheet" href="{{asset('css/lib/noty/animate.css')}}">
+    <link rel="stylesheet" href="{{asset('bootstrap/bootstrap-editable/css/bootstrap-editable.css')}}">
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css">-->
 </head>
 <body class="hold-transition skin-black sidebar-mini">
@@ -59,6 +60,7 @@
 <script src="{{asset("bootstrap/js/bootstrap.min.js")}}"></script>
 <script src="{{asset("bootstrap/js/bootstrap-select.js")}}"></script>
 <script src="{{asset('js/lib/noty/packaged/jquery.noty.packaged.min.js')}}"></script>
+<script src="{{asset('bootstrap/bootstrap-editable/js/bootstrap-editable.min.js')}}"></script>
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>

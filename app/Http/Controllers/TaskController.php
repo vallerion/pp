@@ -25,7 +25,7 @@ class TaskController extends Controller
 
         if($task)
             return json_encode(['successful' => true,
-                'detail' => ['Team "' . $task->name . '" is created']
+                'detail' => ['Task "' . $task->name . '" is created']
             ]);
     }
 

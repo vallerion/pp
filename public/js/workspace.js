@@ -3,6 +3,8 @@
     //
     // });
 
+    // $('#name').editable();
+
     $(document).on("click", ".show-modal", function(){
         switcherModalAction($(this).attr('modal-act'));
     });
@@ -14,6 +16,7 @@
 
     $('#modal-block').on('hidden.bs.modal', function () {
         $.noty.closeAll();
+        $(this).find('.modal-content').html('');
     })
     
 
@@ -41,17 +44,23 @@
 
             case 'show-task':
 
-                // var task_id = $('.show-modal[modal-act="show-task"]').attr('modal-task-id');
-                // console.log();
-                // getModalHtml('workspace/projects/' + task_id);
-                // $('#modal-block').modal("show");
+                var id = $('.show-modal[modal-act="' + modal_act + '"]').attr('modal-id');
+                getModalHtml(window.location.origin + '/workspace/tasks/' + id);
+                $('#modal-block').modal("show");
 
                 break;
 
             case 'show-project':
 
-                var id = $('.show-modal[modal-act="show-project"]').attr('modal-id');
+                var id = $('.show-modal[modal-act="' + modal_act + '"]').attr('modal-id');
                 getModalHtml(window.location.origin + '/workspace/projects/' + id);
+                $('#modal-block').modal("show");
+
+                break;
+            case 'show-team':
+
+                var id = $('.show-modal[modal-act="' + modal_act + '"]').attr('modal-id');
+                getModalHtml(window.location.origin + '/workspace/teams/' + id);
                 $('#modal-block').modal("show");
 
                 break;

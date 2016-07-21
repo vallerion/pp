@@ -264,7 +264,7 @@
 
                             <li class="divider"></li>
                             <li class="footer">
-                                <a href="{{ url('workspace/projects') }}">See all {{ Auth::user()->current_id_team }}</a>
+                                <a href="{{ url('workspace/projects') }}">See all</a>
                             </li>
                         </ul>
 
@@ -283,7 +283,7 @@
                         @if(count(Auth::user()->tasks) > 0)
 
                             <a href="#">
-                                <i class="fa fa-group"></i> <span>Задачи</span>
+                                <i class="fa fa-tasks"></i> <span>Задачи</span>
                                 <i class="fa fa-plus pull-right plus show-modal" modal-act="create-task"></i>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
@@ -325,11 +325,11 @@
                             <ul class="treeview-menu">
 
                                 @for($i = 0; $i < count(Auth::user()->teams) && $i < 5; ++$i)
-                                    <li><a href="{{ url('workspace/teams/'.Auth::user()->teams[$i]->id) }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->teams[$i]->name }}</a></li>
+                                    <li><a class="show-modal" modal-act="show-team" modal-id="{{ Auth::user()->teams[$i]->id }}" href="#"><i class="fa fa-circle-o"></i>{{ Auth::user()->teams[$i]->name }}</a></li>
                                 @endfor
 
                                 <li class="divider"></li>
-                                <li class="footer"><a href="{{ url('workspace/teams/'.Auth::user()->current_id_team) }}">See all</a></li>
+                                <li class="footer"><a href="{{ url('workspace/teams/') }}">See all</a></li>
 
                             </ul>
 

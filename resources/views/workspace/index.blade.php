@@ -17,7 +17,8 @@
         <!-- Small boxes (Stat box) -->
     <div class="row">
     <!-- TODO вывод последних событий компании, команды, проекта -->
-
+        {{--<script>$('#name').editable({});</script>--}}
+        {{--<h4 class="modal-title" id="name">{{ $project->name }} </h4>--}}
     </div>
     <!-- /.row (main row) -->
 

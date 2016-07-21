@@ -21,7 +21,7 @@ class ProjectController extends Controller
 
         if($project)
             return json_encode(['successful' => true,
-                'detail' => ['Team "' . $project->name . '" is created']
+                'detail' => ['Project "' . $project->name . '" is created']
             ]);
     }
 

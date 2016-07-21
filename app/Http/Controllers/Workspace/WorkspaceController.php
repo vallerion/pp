@@ -58,7 +58,7 @@ class WorkspaceController extends Controller
     }
 
     public function postTeamById(Request $request, Team $team){
-        return $team;
+        return view("workspace.ajax_responce.modal_form.show_team", ['team' => $team]);
     }
 
     public function getProjectCreate(){
@@ -86,7 +86,7 @@ class WorkspaceController extends Controller
     }
 
     public function postTaskById(Request $request, Task $task){
-        return $task;
+        return view("workspace.ajax_responce.modal_form.show_task", ['task' => $task]);
     }
 
 }
