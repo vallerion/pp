@@ -12,6 +12,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Task;
+use App\Team;
+use App\User;
+
 
 class WorkspaceController extends Controller
 {
@@ -53,12 +57,20 @@ class WorkspaceController extends Controller
         return $this->teamController->create($request->all());
     }
 
+    public function postTeamById(Request $request, Team $team){
+        return $team;
+    }
+
     public function getProjectCreate(){
         return view("workspace.ajax_responce.modal_form.create_project");
     }
 
     public function postProjectCreate(Request $request){
         return $this->projectController->create($request->all());
+    }
+
+    public function postProjectById(Request $request, Project $project){
+        return view("workspace.ajax_responce.modal_form.show_project", ['project' => $project]);
     }
 
     public function getTasks(){
@@ -71,6 +83,10 @@ class WorkspaceController extends Controller
 
     public function postTaskCreate(Request $request){
         return $this->taskController->create($request->all());
+    }
+
+    public function postTaskById(Request $request, Task $task){
+        return $task;
     }
 
 }

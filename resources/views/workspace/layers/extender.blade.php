@@ -195,7 +195,7 @@
                                         <a href="#">Teams</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                        <a href="workspace/projects">Projects</a>
+                                        <a href="{{ url('workspace/projects') }}">Projects</a>
                                     </div>
                                 </div>
                                 <!-- /.row -->
@@ -206,7 +206,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="auth/logout" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ url('auth/logout') }}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -259,11 +259,13 @@
                             <!-- TODO вывод списка проектов -->
 
                             @for($i = 0; $i < count(Auth::user()->projects) && $i < 5; ++$i)
-                                <li><a href="workspace/projects/{{ Auth::user()->projects[$i]->id }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->projects[$i]->name }}</a></li>
+                                <li><a class="show-modal" modal-act="show-project" modal-id="{{ Auth::user()->projects[$i]->id }}" href="#" ><i class="fa fa-circle-o"></i>{{ Auth::user()->projects[$i]->name }}</a></li>
                             @endfor
 
                             <li class="divider"></li>
-                            <li class="footer"><a href="workspace/projects">See all {{ Auth::user()->current_id_team }}</a></li>
+                            <li class="footer">
+                                <a href="{{ url('workspace/projects') }}">See all {{ Auth::user()->current_id_team }}</a>
+                            </li>
                         </ul>
 
                     @else
@@ -288,11 +290,11 @@
                             <ul class="treeview-menu">
 
                                 @for($i = 0; $i < count(Auth::user()->tasks) && $i < 5; ++$i)
-                                    <li><a class="show-modal" modal-act="show-task" modal-task-id="{{ Auth::user()->tasks[$i]->id }}" href="#"><i class="fa fa-circle-o"></i>{{ strlen(Auth::user()->tasks[$i]->name) > 25 ? substr(Auth::user()->tasks[$i]->name, 0, 25).'...' :  Auth::user()->tasks[$i]->name }}</a></li>
+                                    <li><a class="show-modal" modal-act="show-task" modal-id="{{ Auth::user()->tasks[$i]->id }}" href="#"><i class="fa fa-circle-o"></i>{{ strlen(Auth::user()->tasks[$i]->name) > 25 ? substr(Auth::user()->tasks[$i]->name, 0, 25).'...' :  Auth::user()->tasks[$i]->name }}</a></li>
                                 @endfor
 
                                 <li class="divider"></li>
-                                <li class="footer"><a href="workspace/tasks">See all</a></li>
+                                <li class="footer"><a href="{{ url('workspace/tasks') }}">See all</a></li>
 
                             </ul>
 
@@ -323,11 +325,11 @@
                             <ul class="treeview-menu">
 
                                 @for($i = 0; $i < count(Auth::user()->teams) && $i < 5; ++$i)
-                                    <li><a href="workspace/teams/{{ Auth::user()->teams[$i]->id }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->teams[$i]->name }}</a></li>
+                                    <li><a href="{{ url('workspace/teams/'.Auth::user()->teams[$i]->id) }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->teams[$i]->name }}</a></li>
                                 @endfor
 
                                 <li class="divider"></li>
-                                <li class="footer"><a href="workspace/teams/{{ Auth::user()->current_id_team }}">See all</a></li>
+                                <li class="footer"><a href="{{ url('workspace/teams/'.Auth::user()->current_id_team) }}">See all</a></li>
 
                             </ul>
 
@@ -351,11 +353,11 @@
                         <ul class="treeview-menu">
 
                             @for($i = 0; $i < count(Auth::user()->member_my_team) && $i < 5; ++$i)
-                                <li><a href="workspace/profile/{{ Auth::user()->member_my_team[$i]->id }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->member_my_team[$i]->name }}</a></li>
+                                <li><a href="{{ url('workspace/profile/'.Auth::user()->member_my_team[$i]->id) }}"><i class="fa fa-circle-o"></i>{{ Auth::user()->member_my_team[$i]->name }}</a></li>
                             @endfor
 
                             <li class="divider"></li>
-                            <li class="footer"><a href="workspace/myteams">See all</a></li>
+                            <li class="footer"><a href="{{ url('workspace/myteams') }}">See all</a></li>
 
                         </ul>
 

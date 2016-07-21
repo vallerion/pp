@@ -4,12 +4,12 @@
     // });
 
     $(document).on("click", ".show-modal", function(){
-        switcher($(this).attr('modal-act'));
+        switcherModalAction($(this).attr('modal-act'));
     });
 
     $(document).on("click", "#modal-submit", function(){
         // console.log($('#modal-block form').serialize().replace('visible=on', 'visible=1'));
-        postModal(window.location.origin + $('#modal-block form').attr('action'), $('#modal-block form').serialize().replace('visible=on', 'visible=1'));
+        postModal($('#modal-block form').attr('action'), $('#modal-block form').serialize().replace('visible=on', 'visible=1'));
     });
 
     $('#modal-block').on('hidden.bs.modal', function () {
@@ -17,7 +17,7 @@
     })
     
 
-    function switcher(modal_act){
+    function switcherModalAction(modal_act){
 
         switch(modal_act){
             case 'create-team':
@@ -47,6 +47,14 @@
                 // $('#modal-block').modal("show");
 
                 break;
+
+            case 'show-project':
+
+                var id = $('.show-modal[modal-act="show-project"]').attr('modal-id');
+                getModalHtml(window.location.origin + '/workspace/projects/' + id);
+                $('#modal-block').modal("show");
+
+                break;
         }
 
     }
@@ -66,9 +74,9 @@
 
     }
 
-    function postModal(url, data){
+    function postModal(action, data){
 
-        // var  = url;
+        var url = window.location.origin + '/' + action;
 
         $.ajax({
             type: "POST",
@@ -82,7 +90,7 @@
                 if(responseHandler(response)) {
                     setTimeout(function () {
                         $('#modal-block').modal("hide");
-                        updateMenuSwitcher(url);
+                        switcherUpdateMenu(action);
                     }, 1800);
 
                     // console.log(url);
@@ -98,13 +106,22 @@
 
     }
 
-    function updateMenuSwitcher(url){
+    function switcherUpdateMenu(url){
 
         switch(url){
             case 'workspace/teams/create':
 
-
                 updateMenuAjax('workspace/teams', '.teams-section');
+
+                break;
+            case 'workspace/projects/create':
+
+                updateMenuAjax('workspace/projects', '.projects-section');
+
+                break;
+            case 'workspace/tasks/create':
+
+                updateMenuAjax('workspace/tasks', '.tasks-section');
 
                 break;
         }

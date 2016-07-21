@@ -7,7 +7,7 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Latest events
+        My tasks
     </h1>
     <!-- TODO сделать лист для заметок -->
 </section>
@@ -33,8 +33,8 @@
                         <i class="fa fa-ellipsis-v"></i>
                         <i class="fa fa-ellipsis-v"></i>
                       </span>
-                        <input value="" type="checkbox">
-                        <span class="text">{{ $task->name }}</span>
+                        {{--<input value="" type="checkbox">--}}
+                        <a href="#" class="text">{{ $task->name }}</a>
                         {{--<small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>--}}
                         <a href="#" class="tools">
                             <i class="fa fa-edit"></i>
@@ -48,8 +48,8 @@
         <!-- /.box-body -->
         <div class="box-footer clearfix no-border">
             <div class="pull-right">
-                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
-                <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
+                {{--<button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>--}}
+                <button type="button" class="btn btn-primary show-modal" modal-act="create-task"><i class="fa fa-plus"></i> Add</button>
             </div>
         </div>
     </div>
