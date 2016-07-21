@@ -11,16 +11,19 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 
 class WorkspaceController extends Controller
 {
     private $teamController;
     private $projectController;
     private $companyController;
+    private $taskController;
 
     public function __construct(){
         $this->teamController = new TeamController();
         $this->projectController = new ProjectController();
+        $this->taskController = new TaskController();
     }
 
     public function __destruct(){
@@ -31,15 +34,15 @@ class WorkspaceController extends Controller
     }
 
     public function getProjects(){
-        return Auth::user()->projects;
+        return json_encode(Auth::user()->projects);
     }
 
     public function getTeams(){
-        return Auth::user()->teams;
-    }
 
-    public function getTasks(){
-        return Auth::user()->tasks;
+        if(Auth::user()->current_team_id != 'none')
+            return json_encode(Auth::user()->teams->where('id', Auth::user()->current_team_id));
+        else
+            return json_encode(Auth::user()->teams);
     }
 
     public function getTeamCreate(){
@@ -58,5 +61,16 @@ class WorkspaceController extends Controller
         return $this->projectController->create($request->all());
     }
 
+    public function getTasks(){
+        return view("workspace.tasks");
+    }
+
+    public function getTaskCreate(){
+        return view("workspace.ajax_responce.modal_form.create_task");
+    }
+
+    public function postTaskCreate(Request $request){
+        return $this->taskController->create($request->all());
+    }
 
 }

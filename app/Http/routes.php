@@ -19,25 +19,28 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
     Route::get('/', 'Workspace\WorkspaceController@index');
 
+    Route::get('profile', 'Workspace\WorkspaceController@getProfile');
+
     Route::get('projects', 'Workspace\WorkspaceController@getProjects');
     Route::get('projects/create', 'Workspace\WorkspaceController@getProjectCreate');
     Route::post('projects/create', 'Workspace\WorkspaceController@postProjectCreate');
 
     Route::get('tasks', 'Workspace\WorkspaceController@getTasks');
-
-
-//    Route::get('test', function(){
-//        session(['current_team_id' => 55]);
-//        Session::forget('current_team_id');
-//        echo
-//        $response = new \Illuminate\Http\Response();
-//        return $response->withCookie(cookie('current_team_id', 55));
-//    });
+    Route::get('tasks/create', 'Workspace\WorkspaceController@getTaskCreate');
+    Route::post('tasks/create', 'Workspace\WorkspaceController@postTaskCreate');
 
     Route::get('teams', 'Workspace\WorkspaceController@getTeams');
     Route::get('teams/create', 'Workspace\WorkspaceController@getTeamCreate');
     Route::post('teams/create', 'Workspace\WorkspaceController@postTeamCreate');
 
+
+//    Route::get('test', function(){
+//        session(['current_team_id' => 55]);
+//        Session::forget('current_team_id');
+//        $response = new \Illuminate\Http\Response();
+//        return $response->withCookie(cookie('current_team_id', 'none'));
+//        echo \App\Task::where('id', '1')->first()->users_from;
+//    });
 });
 
 Route::get('auth/', 'Auth\AuthController@getRegister');

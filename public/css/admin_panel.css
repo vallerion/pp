@@ -40,6 +40,18 @@ body {
 .wrapper:after {
   clear: both;
 }
+.list-item{
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.list-item.active{
+	border-left: 4px solid #3c8dbc;
+}
 .layout-boxed .wrapper {
   max-width: 1250px;
   margin: 0 auto;

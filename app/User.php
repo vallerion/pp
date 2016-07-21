@@ -48,6 +48,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class, 'user_team')->withPivot('user_group');
     }
 
+    public function privilegesTeams(){
+        return $this->belongsToMany(Team::class, 'user_team')->withPivot('user_group')->wherePivotIn('user_group', ['author']);
+    }
+
     public function tasks(){
         return $this->hasMany(Task::class, 'user_to_id');
     }
@@ -55,5 +59,10 @@ class User extends Authenticatable
     public function member_my_team(){
         $team = Team::where('id', $this->current_team_id)->first();
         return $team->users();
+    }
+
+    // TODO DELETE IT
+    public function all_users(){
+        return User::where('activated', 1)->get();
     }
 }

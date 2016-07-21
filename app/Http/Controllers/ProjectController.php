@@ -17,7 +17,7 @@ class ProjectController extends Controller
             );
         };
 
-        $project = Auth::user()->projects()->create($data);
+        $project = Auth::user()->projects()->create($data, ['user_group' => 'author']);
 
         if($project)
             return json_encode(['successful' => true,
