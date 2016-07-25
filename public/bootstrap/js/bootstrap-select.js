@@ -1730,12 +1730,12 @@
     })
   });
 
-  $(document).on("shown.bs.modal", "#modal-block", function(){
-    $('#modal-block .selectpicker').each(function () {
-      var $selectpicker = $(this);
-      Plugin.call($selectpicker, $selectpicker.data());
-    })
-  });
+  // $(document).on("shown.bs.modal", "#modal-block", function(){
+  //   $('#modal-block .selectpicker').each(function () {
+  //     var $selectpicker = $(this);
+  //     Plugin.call($selectpicker, $selectpicker.data());
+  //   })
+  // });
 })(jQuery);
 
 

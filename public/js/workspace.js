@@ -14,10 +14,17 @@
         postModal($('#modal-block form').attr('action'), $('#modal-block form').serialize().replace('visible=on', 'visible=1'));
     });
 
-    $('#modal-block').on('hidden.bs.modal', function () {
+    // $('#modal-block').on('hidden.bs.modal', function () {
+    //     $.noty.closeAll();
+    //     $(this).find('.modal-content').html('');
+    // })
+
+    function onHiddenModal($modal){
         $.noty.closeAll();
-        $(this).find('.modal-content').html('');
-    })
+        $modal.data('bs.modal', null);
+        $modal.remove();
+        $('#modal-block').remove();
+    }
     
 
     function switcherModalAction(modal_act){
@@ -26,19 +33,16 @@
             case 'create-team':
 
                 getModalHtml(window.location.origin + '/workspace/teams/create');
-                $('#modal-block').modal("show");
 
                 break;
             case 'create-project':
 
                 getModalHtml(window.location.origin + '/workspace/projects/create');
-                $('#modal-block').modal("show");
 
                 break;
             case 'create-task':
 
                 getModalHtml(window.location.origin + '/workspace/tasks/create');
-                $('#modal-block').modal("show");
 
                 break;
 
@@ -46,7 +50,6 @@
 
                 var id = $('.show-modal[modal-act="' + modal_act + '"]').attr('modal-id');
                 getModalHtml(window.location.origin + '/workspace/tasks/' + id);
-                $('#modal-block').modal("show");
 
                 break;
 
@@ -54,14 +57,12 @@
 
                 var id = $('.show-modal[modal-act="' + modal_act + '"]').attr('modal-id');
                 getModalHtml(window.location.origin + '/workspace/projects/' + id);
-                $('#modal-block').modal("show");
 
                 break;
             case 'show-team':
 
                 var id = $('.show-modal[modal-act="' + modal_act + '"]').attr('modal-id');
                 getModalHtml(window.location.origin + '/workspace/teams/' + id);
-                $('#modal-block').modal("show");
 
                 break;
         }
@@ -74,7 +75,17 @@
             type: "GET",
             url: url,
             success: function(data){
-                $('#modal-block .modal-content').html(data);
+
+                $modal = $(data).modal({show:false});
+                $modal.find('.selectpicker').selectpicker();
+                $('body').append(data);
+                $modal.on('hidden.bs.modal', function(){
+                    onHiddenModal($modal);
+                });
+
+                $modal.modal("show");
+
+                // $('#modal-block .modal-content').html(data);
             },
             error: function(response){
                 $('#modal-block').modal("hide");
@@ -98,7 +109,7 @@
 
                 if(responseHandler(response)) {
                     setTimeout(function () {
-                        $('#modal-block').modal("hide");
+                        $('#modal-block.modal.fade.in').modal("hide");
                         switcherUpdateMenu(action);
                     }, 1800);
 
