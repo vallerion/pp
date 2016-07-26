@@ -23,9 +23,12 @@
                 {{-- TODO about <p class="text-muted text-center"></p>--}}
 
                 <ul class="list-group list-group-unbordered">
-                    <li class="list-item active">
-                        <a aria-expanded="true" href="#projects" data-toggle="tab"><b>Projects</b></a> <a class="pull-right">{{ count($user->projects) }}</a>
-                    </li>
+                    @if(count($user->projects) > 0)
+                        <li class="list-item active">
+                            <a aria-expanded="true" href="#projects" data-toggle="tab"><b>Projects</b></a> <a class="pull-right">{{ count($user->projects) }}</a>
+                        </li>
+                    @endif
+
                     <li class="list-item">
                         <a aria-expanded="true" href="#tasks" data-toggle="tab"><b>Tasks</b></a> <a class="pull-right">{{ count($user->tasks) }}</a>
                     </li>
@@ -56,10 +59,11 @@
                                     <th>Command</th>
                                 </tr>
 
+
                                 @foreach($user->projects as $key => $project)
 
                                     <tr>
-                                        <td>{{ $key }}.</td>
+                                        <td>{{ $key + 1 }}.</td>
                                         <td>{{ $project->name }}</td>
                                         <td>{{ $project->created_at }}</td>
                                         {{-- TODO состояние проекта <td><span class="label label-primary">{{ $project->state }}</span></td>--}}
@@ -108,20 +112,9 @@
                                 @foreach($user->tasks as $key => $task)
 
                                     <tr>
-                                        <td>{{ $key }}.</td>
+                                        <td>{{ $key + 1 }}.</td>
                                         <td>{{ $task->name }}</td>
                                         <td>{{ $task->created_at }}</td>
-                                        <td>
-                                            <div class="progress progress-md">
-                                                <div class="progress-bar progress-bar-danger" style="width: 55%">55%</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ $key }}.</td>
-                                        <td>{{ $task->name }}</td>
-                                        <td>{{ $task->created_at }}</td>
-                                        {{-- TODO  процесс задачи --}}
                                         <td>
                                             <div class="progress progress-md">
                                                 <div class="progress-bar progress-bar-danger" style="width: 55%">55%</div>
