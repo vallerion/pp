@@ -203,7 +203,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ url('workspace/profile') }}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ url('auth/logout') }}" class="btn btn-default btn-flat">Sign out</a>
@@ -301,7 +301,7 @@
                         @else
 
                             <a class="show-modal" modal-act="create-task" href="#">
-                                <i class="fa fa-group"></i> <span>Задачи</span>
+                                <i class="fa fa-tasks"></i> <span>Задачи</span>
                                 <!-- <i class="fa fa-plus pull-right plus show-modal" modal-act="create-team"></i> -->
                             </a>
 

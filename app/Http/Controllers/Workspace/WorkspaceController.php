@@ -36,6 +36,12 @@ class WorkspaceController extends Controller
     public function index(){
         return view("workspace.index");
     }
+    
+    public function getProfile(User $user){
+        return $user->exists ?
+                    view("workspace.profile", ['user' => $user]) :
+                    view("workspace.profile", ['user' => Auth::user()]);
+    }
 
     public function getProjects(){
         return json_encode(Auth::user()->projects);
@@ -70,6 +76,9 @@ class WorkspaceController extends Controller
     }
 
     public function postProjectById(Request $request, Project $project){
+//        echo "<pre>";
+//        print_r($project->users[0]);
+//        echo "</pre>";exit;
         return view("workspace.ajax_responce.modal_form.show_project", ['project' => $project]);
     }
 

@@ -52,5 +52,6 @@
 <script src="{{asset("js/workspace.js")}}"></script>
 <script src="{{asset('js/responseHandler.js')}}"></script>
 <script src="{{asset('js/move_list.js')}}"></script>
+<script src="{{asset('js/editable.js')}}"></script>
 </body>
 </html>

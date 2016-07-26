@@ -6,7 +6,7 @@
     // $('#name').editable();
 
     $(document).on("click", ".show-modal", function(){
-        switcherModalAction($(this).attr('modal-act'));
+        switcherModalAction($(this).attr('modal-act'), $(this).attr('modal-id'));
     });
 
     $(document).on("click", "#modal-submit", function(){
@@ -27,7 +27,7 @@
     }
     
 
-    function switcherModalAction(modal_act){
+    function switcherModalAction(modal_act, modal_id){
 
         switch(modal_act){
             case 'create-team':
@@ -48,21 +48,18 @@
 
             case 'show-task':
 
-                var id = $('.show-modal[modal-act="' + modal_act + '"]').attr('modal-id');
-                getModalHtml(window.location.origin + '/workspace/tasks/' + id);
+                getModalHtml(window.location.origin + '/workspace/tasks/' + modal_id);
 
                 break;
 
             case 'show-project':
 
-                var id = $('.show-modal[modal-act="' + modal_act + '"]').attr('modal-id');
-                getModalHtml(window.location.origin + '/workspace/projects/' + id);
+                getModalHtml(window.location.origin + '/workspace/projects/' + modal_id);
 
                 break;
             case 'show-team':
 
-                var id = $('.show-modal[modal-act="' + modal_act + '"]').attr('modal-id');
-                getModalHtml(window.location.origin + '/workspace/teams/' + id);
+                getModalHtml(window.location.origin + '/workspace/teams/' + modal_id);
 
                 break;
         }
@@ -131,24 +128,24 @@
         switch(url){
             case 'workspace/teams/create':
 
-                updateMenuAjax('workspace/teams', '.teams-section');
+                updateMenuAjax('workspace/teams', '.teams-section', 'show-team');
 
                 break;
             case 'workspace/projects/create':
 
-                updateMenuAjax('workspace/projects', '.projects-section');
+                updateMenuAjax('workspace/projects', '.projects-section', 'show-project');
 
                 break;
             case 'workspace/tasks/create':
 
-                updateMenuAjax('workspace/tasks', '.tasks-section');
+                updateMenuAjax('workspace/tasks', '.tasks-section', 'show-task');
 
                 break;
         }
 
     }
 
-    function updateMenuAjax(url, menu_section){
+    function updateMenuAjax(url, menu_section, modal_action){
 
         $.ajax({
             type: "GET",
@@ -158,7 +155,7 @@
                 var response = $.parseJSON(data);
                 // console.log(response);
 
-                updateMenuHtml(url, menu_section, response);
+                updateMenuHtml(url, menu_section, response, modal_action);
 
                 // $(menu_section).append('')
                 // $('#modal-block .modal-content').html(data);
@@ -170,7 +167,7 @@
 
     }
 
-    function updateMenuHtml(url, menu_section, responce){
+    function updateMenuHtml(url, menu_section, responce, modal_action){
 
         var modal_act = $(menu_section + ' a.show-modal').attr('modal-act');
         $(menu_section + ' a.show-modal').append('<i class="fa fa-plus pull-right plus show-modal" modal-act="' + modal_act + '"></i><i class="fa fa-angle-left pull-right"></i>');
@@ -179,8 +176,10 @@
         $(menu_section + ' ul.treeview-menu').remove();
         $(menu_section).append('<ul class="treeview-menu"></ul>');
 
-        responce.forEach(function (item) {
-            $(menu_section + ' ul.treeview-menu').append('<li><a href="' + url + '/' + item.id + '"><i class="fa fa-circle-o"></i>' + item.name + '</a></li>');
+        responce.forEach(function (item, index) {
+            if(index > 4)
+                return;
+            $(menu_section + ' ul.treeview-menu').append('<li><a class="show-modal" modal-act="' + modal_action + '" modal-id="' + item.id + '" href="#"><i class="fa fa-circle-o"></i>' + item.name + '</a></li>');
         });
 
         $(menu_section + ' ul.treeview-menu').append('<li class="divider"></li><li class="footer"><a href="' + url + '">See all</a></li>');

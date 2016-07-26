@@ -20,7 +20,8 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
     Route::get('/', 'Workspace\WorkspaceController@index');
 
     Route::get('profile', 'Workspace\WorkspaceController@getProfile');
-
+    
+    Route::get('profile/{user}', 'Workspace\WorkspaceController@getProfile');
 
 
 
