@@ -11,6 +11,9 @@ class TaskController extends Controller
 {
     public function create(array $data){
 
+        if(!empty($data["mark"]))
+            $data["mark"] = implode(',', $data["mark"]);
+
         $validator = $this->validatorCreate($data);
         if ($validator->fails()) {
             return json_encode(['successful' => false,
@@ -33,8 +36,8 @@ class TaskController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'about' => 'max:2048',
-            'user_to_id' => 'required|integer',
-            'team_id' => 'integer'
+            'user_to_id' => 'required|integer|not_in:0',
+            'team_id' => 'integer|not_in:0'
         ]);
     }
 }

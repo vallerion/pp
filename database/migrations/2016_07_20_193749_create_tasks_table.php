@@ -19,6 +19,8 @@ class CreateTasksTable extends Migration
             $table->integer('team_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('about', 2048);
+            $table->integer('priority')->unsigned()->default(1);
+            $table->string('mark')->nullable();
             $table->timestamps();
         });
     }

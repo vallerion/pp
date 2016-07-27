@@ -23,11 +23,9 @@
                 {{-- TODO about <p class="text-muted text-center"></p>--}}
 
                 <ul class="list-group list-group-unbordered">
-                    @if(count($user->projects) > 0)
-                        <li class="list-item active">
-                            <a aria-expanded="true" href="#projects" data-toggle="tab"><b>Projects</b></a> <a class="pull-right">{{ count($user->projects) }}</a>
-                        </li>
-                    @endif
+                    <li class="list-item active">
+                        <a aria-expanded="true" href="#projects" data-toggle="tab"><b>Projects</b></a> <a class="pull-right">{{ count($user->projects) }}</a>
+                    </li>
 
                     <li class="list-item">
                         <a aria-expanded="true" href="#tasks" data-toggle="tab"><b>Tasks</b></a> <a class="pull-right">{{ count($user->tasks) }}</a>
@@ -45,6 +43,8 @@
 
             <div class="nav-tabs-custom">
                 <div class="tab-content">
+
+                    @if(count($user->projects) > 0)
                     <div class="tab-pane active" id="projects">
                         <div class="box-header with-border">
                             <h3 class="box-title">Projects</h3>
@@ -74,28 +74,13 @@
                                     </tr>
 
                                 @endforeach
-                                {{--<tr>--}}
-                                    {{--<td>1.</td>--}}
-                                    {{--<td>Pira</td>--}}
-                                    {{--<td>12.06.2016</td>--}}
-                                    {{--<td><span class="label label-primary">gotovo</span></td>--}}
-                                    {{--<td>--}}
-                                        {{--12 chelovek--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--<tr>--}}
-                                    {{--<td>2.</td>--}}
-                                    {{--<td>Rapira</td>--}}
-                                    {{--<td>13.06.2016</td>--}}
-                                    {{--<td><span class="label label-danger">negotovo</span></td>--}}
-                                    {{--<td>--}}
-                                        {{--2.5 chelovek--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
+
                                 </tbody></table>
                         </div>
                     </div>
+                    @endif
 
+                    @if(count($user->tasks) > 0)
                     <div class="tab-pane" id="tasks">
                         <div class="box-header with-border">
                             <h3 class="box-title">Tasks</h3>
@@ -124,27 +109,11 @@
 
                                 @endforeach
 
-                                {{--<tr>--}}
-                                    {{--<td>1.</td>--}}
-                                    {{--<td>Update software</td>--}}
-                                    {{--<td>--}}
-                                        {{--<div class="progress progress-md">--}}
-                                            {{--<div class="progress-bar progress-bar-danger" style="width: 55%">55%</div>--}}
-                                        {{--</div>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--<tr>--}}
-                                    {{--<td>2.</td>--}}
-                                    {{--<td>Clean database</td>--}}
-                                    {{--<td>--}}
-                                        {{--<div class="progress progress-md">--}}
-                                            {{--<div class="progress-bar progress-bar-yellow" style="width: 70%">70%</div>--}}
-                                        {{--</div>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
                                 </tbody></table>
                         </div>
                     </div>
+                    @endif
+
                 </div>
             </div>
 

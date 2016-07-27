@@ -13,9 +13,9 @@ class CreateCompanyTeamProjectTable extends Migration
     public function up()
     {
         Schema::create('company_team_project', function (Blueprint $table) {
-            $table->integer('company_id')->unsigned();
-            $table->integer('team_id')->unsigned();
-            $table->integer('projects_id')->unsigned();
+            $table->integer('company_id')->unsigned()->nullable();
+            $table->integer('team_id')->unsigned()->nullable();
+            $table->integer('project_id')->unsigned()->nullable();
         });
     }
 

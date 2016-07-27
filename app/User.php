@@ -60,9 +60,4 @@ class User extends Authenticatable
         $team = Team::where('id', $this->current_team_id)->first();
         return $team->users();
     }
-
-    // TODO DELETE IT
-    public function all_users(){
-        return User::where('activated', 1)->get();
-    }
 }

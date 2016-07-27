@@ -8,8 +8,13 @@ class Task extends Model
 {
     protected $table = 'tasks';
 
+    const marks = [
+        "dev" => "#3c8dbc",
+        "test" => "#d84315",
+        "design" => "#00695c"];
+
     protected $fillable = [
-        'name', 'about', 'user_to_id', 'user_from_id', 'team_id'
+        'name', 'about', 'priority', 'mark', 'user_to_id', 'user_from_id', 'team_id'
     ];
 
     public function users_to(){

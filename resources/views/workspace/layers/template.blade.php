@@ -7,6 +7,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{asset("bootstrap/css/bootstrap.css")}}">
     <link rel="stylesheet" href="{{asset("bootstrap/css/bootstrap-select.min.css")}}">
+    <link rel="stylesheet" href="{{asset("bootstrap/css/bootstrap-slider.css")}}">
     <link rel="stylesheet" href="{{asset("css/font-awesome.css")}}">
     <link rel="stylesheet" href="{{asset("css/admin_panel.css")}}">
     <link rel="stylesheet" href="{{asset("css/skin-black.css")}}">
@@ -40,9 +41,10 @@
 <!-- ./wrapper -->
 
 <script src="{{asset("js/lib/jquery.js")}}"></script>
-<script src="{{asset("js/lib/jquery-ui.min.js")}}"></script>
+<script src="{{asset("js/lib/jquery-ui.js")}}"></script>
 <script src="{{asset("bootstrap/js/bootstrap.min.js")}}"></script>
 <script src="{{asset("bootstrap/js/bootstrap-select.js")}}"></script>
+<script src="{{asset("bootstrap/js/bootstrap-slider.js")}}"></script>
 <script src="{{asset('js/lib/noty/packaged/jquery.noty.packaged.min.js')}}"></script>
 <script src="{{asset('bootstrap/bootstrap-editable/js/bootstrap-editable.min.js')}}"></script>
 <script>

@@ -23,6 +23,7 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
     
     Route::get('profile/{user}', 'Workspace\WorkspaceController@getProfile');
 
+    
 
 
     Route::get('projects', 'Workspace\WorkspaceController@getProjects');
@@ -31,7 +32,7 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
     Route::post('projects/create', 'Workspace\WorkspaceController@postProjectCreate');
 
-    Route::get('projects/{project}', 'Workspace\WorkspaceController@postProjectById');
+    Route::get('projects/{project}', 'Workspace\WorkspaceController@getProjects');
 
 
 
@@ -42,7 +43,7 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
     Route::post('tasks/create', 'Workspace\WorkspaceController@postTaskCreate');
 
-    Route::get('tasks/{task}', 'Workspace\WorkspaceController@postTaskById');
+    Route::get('tasks/{task}', 'Workspace\WorkspaceController@getTasks');
 
 
 
@@ -53,7 +54,7 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
     Route::post('teams/create', 'Workspace\WorkspaceController@postTeamCreate');
 
-    Route::get('teams/{team}', 'Workspace\WorkspaceController@postTeamById');
+    Route::get('teams/{team}', 'Workspace\WorkspaceController@getTeams');
 
 
 //    Route::get('test', function(){
