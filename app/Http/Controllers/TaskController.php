@@ -9,7 +9,17 @@ use App\Http\Requests;
 
 class TaskController extends Controller
 {
-    public function create(array $data){
+
+    public function index(){
+        return view("workspace.tasks");
+    }
+
+    public function create(){
+        return view("workspace.ajax_responce.modal_form.create_task", ["marks" => Task::marks]);
+    }
+
+    public function store(){
+        $data = \Request::all();
 
         if(!empty($data["mark"]))
             $data["mark"] = implode(',', $data["mark"]);
@@ -39,5 +49,29 @@ class TaskController extends Controller
             'user_to_id' => 'required|integer|not_in:0',
             'team_id' => 'integer|not_in:0'
         ]);
+    }
+
+    public function show($task){
+//        echo \Request::ajax();
+    }
+
+    public function modal($task){
+        return view("workspace.ajax_responce.modal_form.show_task", ['task' => $task]);
+    }
+
+    public function users($task){
+        return json_encode($task->users);
+    }
+
+    public function projects($task){
+        return json_encode($task->projects);
+    }
+
+    public function update($task, $data){
+
+    }
+
+    public function destroy($task){
+
     }
 }

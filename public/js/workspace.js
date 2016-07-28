@@ -11,7 +11,12 @@
 
     $(document).on("click", "#modal-submit", function(){
         // console.log($('#modal-block form').serialize().replace('visible=on', 'visible=1'));
-        postModal($('#modal-block form').attr('action'), $('#modal-block form').serialize().replace('visible=on', 'visible=1'));
+
+        var form = $(this).parent().parent().find('form');
+        var action = form.attr('action');
+        var serialize = form.serialize();
+
+        postModal(action, serialize.replace('visible=on', 'visible=1'));
     });
 
     // $('#modal-block').on('hidden.bs.modal', function () {
@@ -32,34 +37,34 @@
         switch(modal_act){
             case 'create-team':
 
-                getModalHtml(window.location.origin + '/workspace/teams/create');
+                getModalHtml(window.location.origin + '/workspace/team/create');
 
                 break;
             case 'create-project':
 
-                getModalHtml(window.location.origin + '/workspace/projects/create');
+                getModalHtml(window.location.origin + '/workspace/project/create');
 
                 break;
             case 'create-task':
 
-                getModalHtml(window.location.origin + '/workspace/tasks/create');
+                getModalHtml(window.location.origin + '/workspace/task/create');
 
                 break;
 
             case 'show-task':
 
-                getModalHtml(window.location.origin + '/workspace/tasks/' + modal_id);
+                getModalHtml(window.location.origin + '/workspace/task/' + modal_id + '/modal');
 
                 break;
 
             case 'show-project':
 
-                getModalHtml(window.location.origin + '/workspace/projects/' + modal_id);
+                getModalHtml(window.location.origin + '/workspace/project/' + modal_id + '/modal');
 
                 break;
             case 'show-team':
 
-                getModalHtml(window.location.origin + '/workspace/teams/' + modal_id);
+                getModalHtml(window.location.origin + '/workspace/team/' + modal_id + '/modal');
 
                 break;
         }
@@ -117,6 +122,8 @@
             },
             error: function(response){
 
+                // console.log(response.responseText);
+
                 responseHandler(response);
             }
         });
@@ -126,19 +133,19 @@
     function switcherUpdateMenu(url){
 
         switch(url){
-            case 'workspace/teams/create':
+            case 'workspace/team':
 
-                updateMenuAjax('workspace/teams', '.teams-section', 'show-team');
-
-                break;
-            case 'workspace/projects/create':
-
-                updateMenuAjax('workspace/projects', '.projects-section', 'show-project');
+                updateMenuAjax(url, '.teams-section', 'show-team');
 
                 break;
-            case 'workspace/tasks/create':
+            case 'workspace/project':
 
-                updateMenuAjax('workspace/tasks', '.tasks-section', 'show-task');
+                updateMenuAjax(url, '.projects-section', 'show-project');
+
+                break;
+            case 'workspace/task':
+
+                updateMenuAjax(url, '.tasks-section', 'show-task');
 
                 break;
         }

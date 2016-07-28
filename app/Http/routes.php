@@ -23,48 +23,41 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
     
     Route::get('profile/{user}', 'Workspace\WorkspaceController@getProfile');
 
-    
-
-
-    Route::get('projects', 'Workspace\WorkspaceController@getProjects');
-
-    Route::get('projects/create', 'Workspace\WorkspaceController@getProjectCreate');
-
-    Route::post('projects/create', 'Workspace\WorkspaceController@postProjectCreate');
-
-    Route::get('projects/{project}', 'Workspace\WorkspaceController@getProjects');
 
 
 
+    Route::get('project/{project}/users', 'ProjectController@users');
 
-    Route::get('tasks', 'Workspace\WorkspaceController@getTasks');
+    Route::get('project/{project}/teams', 'ProjectController@teams');
 
-    Route::get('tasks/create', 'Workspace\WorkspaceController@getTaskCreate');
+    Route::get('project/{project}/modal', 'ProjectController@modal');
 
-    Route::post('tasks/create', 'Workspace\WorkspaceController@postTaskCreate');
-
-    Route::get('tasks/{task}', 'Workspace\WorkspaceController@getTasks');
+    Route::resource('project', 'ProjectController');
 
 
 
 
-    Route::get('teams', 'Workspace\WorkspaceController@getTeams');
+    Route::get('task/{task}/users', 'TaskController@users');
 
-    Route::get('teams/create', 'Workspace\WorkspaceController@getTeamCreate');
+    Route::get('task/{task}/projects', 'TaskController@projects');
 
-    Route::post('teams/create', 'Workspace\WorkspaceController@postTeamCreate');
+    Route::get('task/{task}/modal', 'TaskController@modal');
 
-    Route::get('teams/{team}', 'Workspace\WorkspaceController@getTeams');
+    Route::resource('task', 'TaskController');
 
 
-//    Route::get('test', function(){
-//        session(['current_team_id' => 55]);
-//        Session::forget('current_team_id');
-//        $response = new \Illuminate\Http\Response();
-//        return $response->withCookie(cookie('current_team_id', 'none'));
-//        echo \App\Task::where('id', '1')->first()->users_from;
-//    });
+
+
+    Route::get('team/{team}/users', 'TeamController@users');
+
+    Route::get('team/{team}/projects', 'TeamController@projects');
+
+    Route::get('team/{team}/modal', 'TeamController@modal');
+
+    Route::resource('team', 'TeamController');
+
 });
+
 
 Route::get('auth/', 'Auth\AuthController@getRegister');
 

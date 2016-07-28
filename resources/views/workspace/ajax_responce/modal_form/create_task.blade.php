@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
 
-                <form role="form6" action="workspace/tasks/create">
+                <form role="form6" action="workspace/task">
                     {!! csrf_field() !!}
 
                     <div class="form-group">
@@ -106,12 +106,12 @@
             switch (name){
                 case 'team_id':
 
-                    refreshSelectpicker('project_id', window.location.origin + '/workspace/teams/' + selected + '?type=projects');
+                    refreshSelectpicker('project_id', window.location.origin + '/workspace/team/' + selected + '/projects');
 
                     break;
                 case 'project_id':
 
-                    refreshSelectpicker('user_to_id', window.location.origin + '/workspace/projects/' + selected + '?type=users');
+                    refreshSelectpicker('user_to_id', window.location.origin + '/workspace/project/' + selected + '/users');
 
                     break;
             }

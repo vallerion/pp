@@ -2,13 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Input;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function create(array $data){
+
+    public function index(){
+        return Auth::user()->projects->toJson();
+    }
+
+    public function create(){
+        return view("workspace.ajax_responce.modal_form.create_project");
+    }
+
+    public function store(){
+        $data = \Request::all();
 
         $validator = $this->validatorCreate($data);
         if ($validator->fails()) {
@@ -31,4 +42,31 @@ class ProjectController extends Controller
             'about' => 'max:1024'
         ]);
     }
+
+    public function show($project){
+//        echo \Request::ajax();
+    }
+
+    public function modal($project){
+//        return $project->toJson();
+//        return ["project" => $project, "users" => ];
+        return view("workspace.ajax_responce.modal_form.show_project", ['project' => $project]);
+    }
+    
+    public function users($project){
+        return json_encode($project->users);
+    }
+
+    public function teams($project){
+        return json_encode($project->teams);
+    }
+
+    public function update($project, $data){
+
+    }
+
+    public function destroy($project){
+
+    }
+
 }

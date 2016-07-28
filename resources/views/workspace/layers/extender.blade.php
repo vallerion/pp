@@ -195,7 +195,7 @@
                                         <a href="#">Teams</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                        <a href="{{ url('workspace/projects') }}">Projects</a>
+                                        <a href="{{ url('workspace/project') }}">Projects</a>
                                     </div>
                                 </div>
                                 <!-- /.row -->
@@ -264,7 +264,7 @@
 
                             <li class="divider"></li>
                             <li class="footer">
-                                <a href="{{ url('workspace/projects') }}">See all</a>
+                                <a href="{{ url('workspace/project') }}">See all</a>
                             </li>
                         </ul>
 
@@ -294,7 +294,7 @@
                                 @endfor
 
                                 <li class="divider"></li>
-                                <li class="footer"><a href="{{ url('workspace/tasks') }}">See all</a></li>
+                                <li class="footer"><a href="{{ url('workspace/task') }}">See all</a></li>
 
                             </ul>
 
@@ -329,7 +329,7 @@
                                 @endfor
 
                                 <li class="divider"></li>
-                                <li class="footer"><a href="{{ url('workspace/teams/') }}">See all</a></li>
+                                <li class="footer"><a href="{{ url('workspace/team') }}">See all</a></li>
 
                             </ul>
 

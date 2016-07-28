@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
 
-                <form role="form6" action="workspace/teams/create">
+                <form role="form6" action="workspace/team">
                     {!! csrf_field() !!}
 
                     <div class="form-group">
