@@ -6,29 +6,25 @@ use Input;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Guard;
+
+use App\Http\Requests\ProjectRequest;
 
 class ProjectController extends Controller
 {
 
-    public function index(){
-        return Auth::user()->projects->toJson();
+    public function index(Guard $auth){
+//        return Auth::user()->projects->toJson();
+        return $auth->user()->projects->toJson();
     }
 
     public function create(){
         return view("workspace.ajax_responce.modal_form.create_project");
     }
 
-    public function store(){
-        $data = \Request::all();
+    public function store(ProjectRequest $request, Guard $auth){
 
-        $validator = $this->validatorCreate($data);
-        if ($validator->fails()) {
-            return json_encode(['successful' => false,
-                    'detail' => $validator->errors()->all()]
-            );
-        };
-
-        $project = Auth::user()->projects()->create($data, ['user_group' => 'author']);
+        $project = $auth->user()->projects()->create($request->all(), ['user_group' => 'author']);
 
         if($project)
             return json_encode(['successful' => true,
@@ -36,14 +32,7 @@ class ProjectController extends Controller
             ]);
     }
 
-    private function validatorCreate(array $data){
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'about' => 'max:1024'
-        ]);
-    }
-
-    public function show($project){
+    public function show(Request $request, $project){
 //        echo \Request::ajax();
     }
 
@@ -61,7 +50,7 @@ class ProjectController extends Controller
         return json_encode($project->teams);
     }
 
-    public function update($project, $data){
+    public function update(ProjectRequest $request){
 
     }
 

@@ -106,7 +106,7 @@
             data: data,
             success: function(data){
                 // $('#modal-block .modal-content').html(data);
-                console.log(data);
+                // console.log(data);
                 var response = $.parseJSON(data);
 
                 if(responseHandler(response)) {
@@ -124,7 +124,9 @@
 
                 // console.log(response.responseText);
 
-                responseHandler(response);
+                var errors = $.parseJSON(response.responseText);
+
+                responseHandler(errors);
             }
         });
 
@@ -132,20 +134,22 @@
 
     function switcherUpdateMenu(url){
 
+
+
         switch(url){
             case 'workspace/team':
 
-                updateMenuAjax(url, '.teams-section', 'show-team');
+                updateMenuAjax(window.location.origin + '/' + url, '.teams-section', 'show-team');
 
                 break;
             case 'workspace/project':
 
-                updateMenuAjax(url, '.projects-section', 'show-project');
+                updateMenuAjax(window.location.origin + '/' + url, '.projects-section', 'show-project');
 
                 break;
             case 'workspace/task':
 
-                updateMenuAjax(url, '.tasks-section', 'show-task');
+                updateMenuAjax(window.location.origin + '/' + url, '.tasks-section', 'show-task');
 
                 break;
         }
@@ -154,13 +158,16 @@
 
     function updateMenuAjax(url, menu_section, modal_action){
 
+
         $.ajax({
             type: "GET",
             url: url,
             success: function(data){
 
+                // console.log(data);
+
                 var response = $.parseJSON(data);
-                // console.log(response);
+
 
                 updateMenuHtml(url, menu_section, response, modal_action);
 

@@ -3,6 +3,9 @@
 @section('title', 'Tasks')
 
 @section('content')
+
+    <link rel="stylesheet" href="{{asset("css/task.css")}}">
+
 <section class="content-header">
     <h1>
         My tasks
@@ -34,6 +37,29 @@
                         {{--<input value="" type="checkbox">--}}
                         <a href="#" class="text">{{ $task->name }}</a>
                         {{--<small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>--}}
+
+                        <div class="label-mark-block">
+                            {{--$marks = explode(",", $task->mark);--}}
+                        @foreach($task->getMark() as $mark)
+                            <span class="label" style='background-color:{{ $task::marks[$mark] }};'>{{ $mark }}</span>
+                        @endforeach
+                        </div>
+
+                        <p class="about">{{ $task->about }}</p>
+
+                        <div class="label-priority-block">
+                            <span class="label" style='background-color:{{ $task::priority[$task->priority] }};'>{{ $task->priority }}</span>
+                        </div>
+
+                        <div class="user-detail">
+                            <a href="#">{{ $task->user_from->name }}</a> -> <a href="#">{{ $task->user_to->name }}</a>
+                        </div>
+
+
+                        {{--<div class="">--}}
+                            {{--<span class="label">Default Label</span>--}}
+                            {{--<span class="label">Default Label</span>--}}
+                        {{--</div>--}}
                         <a href="#" class="tools">
                             <i class="fa fa-edit"></i>
                             <i class="fa fa-trash-o"></i>

@@ -6,11 +6,14 @@ use App\Task;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Requests;
+use Illuminate\Contracts\Auth\Guard;
+
+use App\Http\Requests\TaskRequest;
 
 class TaskController extends Controller
 {
 
-    public function index(){
+    public function index(Guard $auth){
         return view("workspace.tasks");
     }
 
@@ -18,37 +21,21 @@ class TaskController extends Controller
         return view("workspace.ajax_responce.modal_form.create_task", ["marks" => Task::marks]);
     }
 
-    public function store(){
-        $data = \Request::all();
+    public function store(TaskRequest $request, Guard $auth){
 
-        if(!empty($data["mark"]))
-            $data["mark"] = implode(',', $data["mark"]);
+        if(!empty($request->mark)) {
+            $mark = implode(',', $request->mark);
+            $request->merge(["mark" => $mark]);
+        }
 
-        $validator = $this->validatorCreate($data);
-        if ($validator->fails()) {
-            return json_encode(['successful' => false,
-                    'detail' => $validator->errors()->all()]
-            );
-        };
+        $request->merge(["user_from_id" => $auth->user()->id]);
 
-        $data = array_add($data, 'user_from_id', Auth::user()->id);
-
-//        var_dump($data);exit;
-        $task = Task::create($data);
+        $task = Task::create($request->all());
 
         if($task)
             return json_encode(['successful' => true,
                 'detail' => ['Task "' . $task->name . '" is created']
             ]);
-    }
-
-    private function validatorCreate(array $data){
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'about' => 'max:2048',
-            'user_to_id' => 'required|integer|not_in:0',
-            'team_id' => 'integer|not_in:0'
-        ]);
     }
 
     public function show($task){

@@ -30,10 +30,6 @@
 
                         </select>
                     </div>
-                    <div class="form-group">
-                        <input type="text" name="priority">
-                        <div id="slider-priority"></div>
-                    </div>
 
                     <div style="width: 100%;height: 1px;background-color: #e5e5e5;margin-bottom: 15px;"></div>
                     @if(count(Auth::user()->privilegesTeams) > 0)
@@ -41,7 +37,7 @@
                         <div class="form-group" style="display: inline;">
                             {{--<label for="sel1">Select Team:</label><br>--}}
 
-                            <select class="selectpicker" data-width="33%" name="team_id" data-live-search="true" data-size="5">
+                            <select id="team" class="selectpicker" data-width="33%" data-live-search="true" data-size="5">
 
                                 <option value="0"><b>Select Team</b></option>
 
@@ -60,7 +56,7 @@
                     <div class="form-group" style="display: none; width: 33%;">
                         {{--<label for="sel1">Select Project:</label><br>--}}
 
-                        <select class="selectpicker" data-width="33%" name="project_id" data-live-search="true" data-size="5">
+                        <select id="project" class="selectpicker" data-width="33%" name="project_id" data-live-search="true" data-size="5">
                             <option value="0"><b>Select Project</b></option>
                         </select>
 
@@ -69,7 +65,7 @@
                     <div class="form-group" style="display: none; width: 33%;">
                         {{--<label for="sel1">Select User:</label><br>--}}
 
-                        <select class="selectpicker" data-width="33%" name="user_to_id" data-live-search="true" data-size="5">
+                        <select id="user_to" class="selectpicker" data-width="33%" name="user_to_id" data-live-search="true" data-size="5">
                             <option value="0"><b>Select User</b></option>
                         </select>
 
@@ -86,45 +82,37 @@
     </div>
 
     <script>
-        $("#slider-priority").slider();
-//            $("#slider-priority").slider({
-//                range: "max",
-//                min: 1,
-//                max: 10,
-//                value: 1,
-//                slide: function (event, ui) {
-//                    $("input[name='priority']").val(ui.value);
-//                }
-//            });
 
 
         $('.selectpicker').on('change', function(){
 
             var selected = $(this).find("option:selected").val();
-            var name = $(this).attr("name");
+            var id = $(this).attr("id");
 
-            switch (name){
-                case 'team_id':
+            console.log(selected);
 
-                    refreshSelectpicker('project_id', window.location.origin + '/workspace/team/' + selected + '/projects');
+            switch (id){
+                case 'team':
+
+                    refreshSelectpicker('project', window.location.origin + '/workspace/team/' + selected + '/projects');
 
                     break;
-                case 'project_id':
+                case 'project':
 
-                    refreshSelectpicker('user_to_id', window.location.origin + '/workspace/project/' + selected + '/users');
+                    refreshSelectpicker('user_to', window.location.origin + '/workspace/project/' + selected + '/users');
 
                     break;
             }
 
         });
 
-        function refreshSelectpicker(name_selectpicker, url){
+        function refreshSelectpicker(id_selectpicker, url){
 
-            var $selectpicker = $(".selectpicker[name='" + name_selectpicker + "']");
+            var $selectpicker = $(" .selectpicker#" + id_selectpicker);
             $selectpicker.parent().parent().css('display', 'none');
 
             $.get(url, function(data){
-//                console.log(data);
+                console.log($selectpicker);
                 var responce = $.parseJSON(data);
 
                 if(responce.length > 0){

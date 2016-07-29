@@ -43,7 +43,12 @@ function responseHandler(response) {
             });
         }
         else{
-            showMessage("Oops, something went wrong", "error");
+
+            $.each(response, function(index, value) {
+                showMessage(value, "error");
+            });
+
+
         }
 
         return false;

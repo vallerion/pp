@@ -5,41 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Requests;
+use Illuminate\Contracts\Auth\Guard;
+
+use App\Http\Requests\TeamRequest;
 
 class TeamController extends Controller
 {
 
-    public function index(){
-        return Auth::user()->teams;
+    public function index(Guard $auth){
+        return $auth->user()->teams->toJson();
     }
 
     public function create(){
         return view("workspace.ajax_responce.modal_form.create_team");
     }
 
-    public function store(){
-        $data = \Request::all();
-
-        $validator = $this->validatorCreate($data);
-        if ($validator->fails()) {
-            return json_encode(['successful' => false,
-                                'detail' => $validator->errors()->all()]
-            );
-        };
+    public function store(TeamRequest $request, Guard $auth){
         
-        $team = Auth::user()->teams()->create($data, ['user_group' => 'author']);
+        $team = $auth->user()->teams()->create($request->all(), ['user_group' => 'author']);
 
         if($team)
             return json_encode(['successful' => true,
                                 'detail' => ['Team "' . $team->name . '" is created']
                                 ]);
-    }
-
-    private function validatorCreate(array $data){
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'about' => 'max:1024'
-        ]);
     }
 
     public function show($team){
