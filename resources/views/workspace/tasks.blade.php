@@ -38,14 +38,14 @@
                         <a href="#" class="text">{{ $task->name }}</a>
                         {{--<small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>--}}
 
-                        <div class="label-mark-block">
+                        <div class="label-mark-block hidden-xs">
                             {{--$marks = explode(",", $task->mark);--}}
                         @foreach($task->getMark() as $mark)
                             <span class="label" style='background-color:{{ $task::marks[$mark] }};'>{{ $mark }}</span>
                         @endforeach
                         </div>
 
-                        <p class="about">{{ $task->about }}</p>
+                        <p class="about hidden-xs">{{ $task->about }}</p>
 
                         <div class="label-priority-block">
                             <span class="label" style='background-color:{{ $task::priority[$task->priority] }};'>{{ $task->priority }}</span>

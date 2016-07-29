@@ -12,7 +12,6 @@
     /*position: absolute;*/
     /*left: 40%;*/
     display: inline;
-
 }
 
 .label-mark-block span{
@@ -21,7 +20,7 @@
 
 .label-priority-block{
     position: absolute;
-    left: 50%;
+    /*left: 50%;*/
     display: inline;
 }
 
@@ -30,12 +29,48 @@
     font-weight: bold;
     font-size: 80% !important;
     border-radius: 0px;
-    padding: .2em .6em .3em;
+    /*padding: .2em .6em .3em;*/
 }
 
 .user-detail{
     display: inline;
-    left: 70%;
+    /*left: 70%;*/
     position: absolute;
 
+}
+
+@media screen and (max-width: 768px) {
+    .label-priority-block{
+        left: 42%;
+    }
+    .user-detail{
+        right: 20%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .label-priority-block{
+        left: 40%;
+    }
+    .user-detail{
+        left: 60%;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .label-priority-block{
+        left: 50%;
+    }
+    .user-detail{
+        left: 70%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .label-priority-block{
+        left: 50%;
+    }
+    .user-detail{
+        left: 70%;
+    }
 }
