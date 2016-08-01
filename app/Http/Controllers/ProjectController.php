@@ -26,6 +26,13 @@ class ProjectController extends Controller
 
         $project = $auth->user()->projects()->create($request->all(), ['user_group' => 'author']);
 
+        if($request->team_id){
+
+//            $project->teams()->sync(["project_id" => $project->id, "team_id" => $request->team_id]);
+            $project->teams()->sync([$project->id=>["project_id" => $project->id, "team_id" => $request->team_id]]);
+
+        }
+
         if($project)
             return json_encode(['successful' => true,
                 'detail' => ['Project "' . $project->name . '" is created']

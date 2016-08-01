@@ -23,6 +23,26 @@
                             <label><input checked name="visible" type="checkbox">Публичный проект</label>
                         </div>
                     </div>
+
+                    @if(count(Auth::user()->privilegesTeams) > 0)
+
+                        <div class="form-group" style="display: inline;">
+                            {{--<label for="sel1">Select Team:</label><br>--}}
+
+                            <select id="team" class="selectpicker" name="team_id" data-width="33%" data-live-search="true" data-size="5">
+
+                                <option value="0"><b>Select Team</b></option>
+
+                                @foreach(Auth::user()->privilegesTeams as $team)
+                                    <option value="{{ $team->id }}" data-tokens="{{ $team->name }}">{{ $team->name }}</option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+                    @endif
+
                 </form>
 
             </div>

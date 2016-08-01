@@ -31,6 +31,18 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <select class="selectpicker" data-width="30%" name="priority">
+
+                            @for($i = 1; $i < 11; ++$i)
+
+                                <option value="{{ $i }}">{{ $i }}</option>
+
+                            @endfor
+
+                        </select>
+                    </div>
+
                     <div style="width: 100%;height: 1px;background-color: #e5e5e5;margin-bottom: 15px;"></div>
                     @if(count(Auth::user()->privilegesTeams) > 0)
 
