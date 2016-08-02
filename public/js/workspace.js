@@ -5,7 +5,12 @@
 
     // $('#name').editable();
 
-    $(document).on("click", ".show-modal", function(){
+    // $(document).on('click', 'li.list-item', function(){
+    //     $(this).find('a:first').click();
+    // });
+
+    $(document).on("click", ".show-modal", function(e){
+        e.preventDefault();
         switcherModalAction($(this).attr('modal-act'), $(this).attr('modal-id'));
     });
 
@@ -100,13 +105,15 @@
 
         var url = window.location.origin + '/' + action;
 
+        console.log(data);
+
         $.ajax({
             type: "POST",
             url: url,
             data: data,
             success: function(data){
                 // $('#modal-block .modal-content').html(data);
-                // console.log(data);
+                console.log(data);
                 var response = $.parseJSON(data);
 
                 if(responseHandler(response)) {

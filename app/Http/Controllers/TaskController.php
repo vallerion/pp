@@ -22,7 +22,7 @@ class TaskController extends Controller
     }
 
     public function store(TaskRequest $request, Guard $auth){
-
+        
         if(!empty($request->mark)) {
             $mark = implode(',', $request->mark);
             $request->merge(["mark" => $mark]);

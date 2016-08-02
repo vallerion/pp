@@ -10,6 +10,9 @@
     <!-- TODO сделать лист для заметок -->
 </section>
 
+<input type="hidden" name="_token" content="{{ csrf_token() }}">
+<input type="hidden" name="_user_id" content="{{ $user->id }}">
+
 <!-- Main content -->
 <section class="content">
     <div class="col-md-3">
@@ -18,18 +21,51 @@
             <div class="box-body box-profile">
                 <img class="profile-user-img img-responsive img-circle" src="{{ $user->image }}" alt="User profile picture">
 
-                <h3 class="profile-username text-center"><span class="editable">{{ $user->name }}</span></h3>
+                <h3 class="profile-username text-center"><span id="name" data-type="text" class="editable" data-pk="{{ $user->id }}">{{ $user->name }}</span></h3>
 
                 {{-- TODO about <p class="text-muted text-center"></p>--}}
 
-                <ul class="list-group list-group-unbordered">
-                    <li class="list-item active">
-                        <a aria-expanded="true" href="#projects" data-toggle="tab"><b>Projects</b></a> <a class="pull-right">{{ count($user->projects) }}</a>
-                    </li>
+                {{--<ul class="list-group list-group-unbordered">--}}
+                    {{--<li class="list-item active">--}}
+                        {{--<a aria-expanded="true" href="#projects" data-toggle="tab"><b>Projects</b></a> <a class="pull-right">{{ count($user->projects) }}</a>--}}
+                    {{--</li>--}}
 
-                    <li class="list-item">
-                        <a aria-expanded="true" href="#tasks" data-toggle="tab"><b>Tasks</b></a> <a class="pull-right">{{ count($user->tasks) }}</a>
+                    {{--<li class="list-item">--}}
+                        {{--<a aria-expanded="true" href="#tasks" data-toggle="tab"><b>Tasks</b></a> <a class="pull-right">{{ count($user->tasks) }}</a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Folders</h3>
+
+                <div class="box-tools">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <a aria-expanded="true" href="#projects" data-toggle="tab">
+                            <i class="fa fa-inbox"></i><b>Projects</b>
+                            <span class="label label-primary pull-right">{{ count($user->projects) }}</span>
+                        </a>
                     </li>
+                    <li class="">
+                        <a aria-expanded="true" href="#projects" data-toggle="tab">
+                            <i class="fa fa-inbox"></i><b>Tasks</b>
+                            <span class="label label-primary pull-right">{{ count($user->tasks) }}</span>
+                        </a>
+                    </li>
+                    {{--<li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>--}}
+                    {{--<li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>--}}
+                    {{--<li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>--}}
+                    {{--</li>--}}
+                    {{--<li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>--}}
                 </ul>
             </div>
             <!-- /.box-body -->
@@ -122,6 +158,7 @@
     </div>
 
 </section>
+
 
 
 @endsection

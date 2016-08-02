@@ -49,7 +49,7 @@
                         <div class="form-group" style="display: inline;">
                             {{--<label for="sel1">Select Team:</label><br>--}}
 
-                            <select id="team" class="selectpicker" data-width="33%" data-live-search="true" data-size="5">
+                            <select id="team" class="selectpicker" data-width="32%" data-live-search="true" data-size="5">
 
                                 <option value="0"><b>Select Team</b></option>
 
@@ -61,23 +61,44 @@
 
                         </div>
 
+                        <div class="form-group" style="display: none;">
+                            {{--<label for="sel1">Select Project:</label><br>--}}
+
+                            <select id="project" class="selectpicker" data-width="32%" name="project_id" data-live-search="true" data-size="5">
+                                <option value="0"><b>Select Project</b></option>
+                            </select>
+
+                        </div>
+
+                    @else
+
+                        <div class="form-group" style="display: inline;">
+                            {{--<label for="sel1">Select Project:</label><br>--}}
+
+                            <select id="project" class="selectpicker" data-width="32%" name="project_id" data-live-search="true" data-size="5">
+
+                                <option value="0"><b>Select Project</b></option>
+
+                                @foreach(Auth::user()->privilegesProjects as $project)
+                                    <option value="{{ $project->id }}" data-tokens="{{ $project->name }}">{{ $project->name }}</option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+
+
                     @endif
 
 
 
-                    <div class="form-group" style="display: none; width: 33%;">
-                        {{--<label for="sel1">Select Project:</label><br>--}}
 
-                        <select id="project" class="selectpicker" data-width="33%" name="project_id" data-live-search="true" data-size="5">
-                            <option value="0"><b>Select Project</b></option>
-                        </select>
 
-                    </div>
-
-                    <div class="form-group" style="display: none; width: 33%;">
+                    <div class="form-group" style="display: none;">
                         {{--<label for="sel1">Select User:</label><br>--}}
 
-                        <select id="user_to" class="selectpicker" data-width="33%" name="user_to_id" data-live-search="true" data-size="5">
+                        <select id="user_to" class="selectpicker" data-width="32%" name="user_to_id" data-live-search="true" data-size="5">
                             <option value="0"><b>Select User</b></option>
                         </select>
 
@@ -124,7 +145,7 @@
             $selectpicker.parent().parent().css('display', 'none');
 
             $.get(url, function(data){
-                console.log($selectpicker);
+                console.log(data);
                 var responce = $.parseJSON(data);
 
                 if(responce.length > 0){

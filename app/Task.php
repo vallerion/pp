@@ -21,7 +21,7 @@ class Task extends Model
         "#ff5722", "#d50000"];
 
     protected $fillable = [
-        'name', 'about', 'priority', 'mark', 'user_to_id', 'user_from_id', 'team_id'
+        'name', 'about', 'priority', 'mark', 'user_to_id', 'user_from_id', 'project_id'
     ];
 
     public function user_to(){

@@ -19,9 +19,15 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
     Route::get('/', 'Workspace\WorkspaceController@index');
 
-    Route::get('profile', 'Workspace\WorkspaceController@getProfile');
+
+
+//    Route::get('profile', 'Auth\AuthController@getProfile');
     
-    Route::get('profile/{user}', 'Workspace\WorkspaceController@getProfile');
+//    Route::get('profile/{user}', 'Auth\AuthController@getProfile');
+
+    Route::resource('profile', 'Auth\AuthController', ['only' => [
+        'index', 'show', 'update'
+    ]]);
 
 
 

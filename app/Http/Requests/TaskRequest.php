@@ -27,7 +27,7 @@ class TaskRequest extends Request
             'name' => 'required|max:255',
             'about' => 'max:2048',
             'user_to_id' => 'required|integer|not_in:0',
-            'team_id' => 'integer|not_in:0'
+            'project_id' => 'integer|not_in:0'
         ];
     }
 }

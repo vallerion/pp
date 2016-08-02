@@ -1893,7 +1893,7 @@ a:focus {
   margin: 0;
   padding: 0;
   list-style: none;
-  overflow: auto;
+  overflow: hidden;
 }
 .todo-list > li {
   border-radius: 2px;
@@ -1915,7 +1915,7 @@ a:focus {
   font-weight: 600;
 }
 .todo-list > li .label {
-  margin-left: 10px;
+  /*margin-left: 10px;*/
   font-size: 9px;
 }
 .todo-list > li .tools {

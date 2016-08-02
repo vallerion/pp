@@ -13,6 +13,7 @@ use App\Code;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\Guard;
 
 use Illuminate\Support\Facades\Mail;
 
@@ -45,7 +46,23 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'getLogout']]);
+        $this->middleware($this->guestMiddleware(), [ 'except' => ['getLogout', 'index', 'update', 'show'] ]);
+    }
+
+    public function index(Guard $auth){
+        return view("workspace.profile", ['user' => $auth->user()]);
+    }
+
+    public function show($id){
+        return view("workspace.profile", ['user' => User::findOrFail($id)]);
+    }
+
+    public function update(Request $request, User $user, $id){
+
+        $user->findOrFail($id)->update([$request->name => $request->value]);
+        return json_encode(['successful' => true]);
+
+//        return $user->findOrFail($id)->update([$request->name => $request->value]);
     }
 
     /**
