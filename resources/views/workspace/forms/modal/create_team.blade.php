@@ -16,7 +16,11 @@
                     </div>
                     <div class="form-group">
                         <label for="about">Описание:</label>
-                        <textarea class="form-control" rows="5" id="about" name="about"></textarea>
+                        {{--<textarea class="form-control" rows="5" id="about" name="about"></textarea>--}}
+                        {{--<textarea id="about" name="about" class="form-control" placeholder="Enter text ..." rows="5" style="width: 100%;"></textarea>--}}
+
+                        @include('workspace.forms.text-editor')
+
                     </div>
                     <div class="form-group">
                         <div class="checkbox">

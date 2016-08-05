@@ -3,17 +3,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="name">{{ $team->name }} </h4>
+                <a href="{{ url('workspace/project/' . $project->id) }}"><h4 class="modal-title" id="name">{{ $project->name }} </h4></a>
             </div>
             <div class="modal-body">
 
                 {!! csrf_field() !!}
 
                 <label for="about">Описание:</label>
-                <span id="about">{{ $team->about }}</span>
+                <span id="about">{{ $project->about }}</span>
 
                 {{--<div class="checkbox">--}}
-                {{--<label><input checked name="visible" type="checkbox">Публичная команда</label>--}}
+                    {{--<label><input checked name="visible" type="checkbox">Публичная команда</label>--}}
                 {{--</div>--}}
 
             </div>

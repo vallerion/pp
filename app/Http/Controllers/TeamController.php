@@ -17,7 +17,7 @@ class TeamController extends Controller
     }
 
     public function create(){
-        return view("workspace.ajax_responce.modal_form.create_team");
+        return view("workspace.forms.modal.create_team");
     }
 
     public function store(TeamRequest $request, Guard $auth){
@@ -35,7 +35,7 @@ class TeamController extends Controller
     }
 
     public function modal($team){
-        return view("workspace.ajax_responce.modal_form.show_team", ['team' => $team]);
+        return view("workspace.forms.modal.show_team", ['team' => $team]);
     }
 
     public function users($project){

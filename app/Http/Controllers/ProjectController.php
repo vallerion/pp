@@ -19,7 +19,7 @@ class ProjectController extends Controller
     }
 
     public function create(){
-        return view("workspace.ajax_responce.modal_form.create_project");
+        return view("workspace.forms.modal.create_project");
     }
 
     public function store(ProjectRequest $request, Guard $auth){
@@ -46,7 +46,7 @@ class ProjectController extends Controller
     public function modal($project){
 //        return $project->toJson();
 //        return ["project" => $project, "users" => ];
-        return view("workspace.ajax_responce.modal_form.show_project", ['project' => $project]);
+        return view("workspace.forms.modal.show_project", ['project' => $project]);
     }
     
     public function users($project){

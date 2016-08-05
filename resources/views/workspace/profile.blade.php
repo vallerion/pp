@@ -56,7 +56,7 @@
                         </a>
                     </li>
                     <li class="">
-                        <a aria-expanded="true" href="#projects" data-toggle="tab">
+                        <a aria-expanded="true" href="#tasks" data-toggle="tab">
                             <i class="fa fa-inbox"></i><b>Tasks</b>
                             <span class="label label-primary pull-right">{{ count($user->tasks) }}</span>
                         </a>

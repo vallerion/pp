@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset("css/skin-black.css")}}">
     <link rel="stylesheet" href="{{asset('css/lib/noty/animate.css')}}">
     <link rel="stylesheet" href="{{asset('bootstrap/bootstrap-editable/css/bootstrap-editable.css')}}">
+    {{--<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-wysihtml5.css')}}">--}}
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css">-->
 </head>
 <body class="hold-transition skin-black sidebar-mini">
@@ -47,6 +48,10 @@
 {{--<script src="{{asset("bootstrap/js/bootstrap-slider.js")}}"></script>--}}
 <script src="{{asset('js/lib/noty/packaged/jquery.noty.packaged.min.js')}}"></script>
 <script src="{{asset('bootstrap/bootstrap-editable/js/bootstrap-editable.min.js')}}"></script>
+{{--<script src="{{asset('bootstrap/js/wysihtml5-0.3.0.js')}}"></script>--}}
+<script src="{{asset('bootstrap/js/wysihtml5-0.4.0pre.js')}}"></script>
+<script src="{{asset('bootstrap/js/wysihtml5ParserRules.js')}}"></script>
+
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>

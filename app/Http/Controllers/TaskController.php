@@ -18,7 +18,7 @@ class TaskController extends Controller
     }
 
     public function create(){
-        return view("workspace.ajax_responce.modal_form.create_task", ["marks" => Task::marks]);
+        return view("workspace.forms.modal.create_task", ["marks" => Task::marks]);
     }
 
     public function store(TaskRequest $request, Guard $auth){
@@ -39,11 +39,11 @@ class TaskController extends Controller
     }
 
     public function show($task){
-//        echo \Request::ajax();
+        return $task;
     }
 
     public function modal($task){
-        return view("workspace.ajax_responce.modal_form.show_task", ['task' => $task]);
+        return view("workspace.forms.modal.show_task", ['task' => $task]);
     }
 
     public function users($task){

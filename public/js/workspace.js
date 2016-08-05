@@ -1,12 +1,55 @@
 
-    // $('.show-modal').click(function(){
-    //
+
+    // $(document).on("click", "a[data-toggle='popover']", function(){
+    //     console.log($(this).attr("data-content-id"));
     // });
 
-    // $('#name').editable();
+    // $(document).click(function (e) {
+        // if (($("[data-toggle='popover']").has(e.target).length == 0) || $(e.target).is('.close')) {
+        //     $("[data-toggle='popover']").popover('hide');
+        // }
+    // });
 
-    // $(document).on('click', 'li.list-item', function(){
-    //     $(this).find('a:first').click();
+    // var editor = new wysihtml5.Editor(document.getElementById("textarea"), {
+    //     toolbar:        "toolbar",
+    //     // stylesheets:    "css/stylesheet.css",
+    //     parserRules:    wysihtml5ParserRules
+    // });
+
+
+    // $(document).ready(function(){
+
+        // console.log(document.getElementById("textarea"));
+        // console.log(document.getElementsByTagName("textarea"));
+
+        // $('textarea').each(function(){
+        //     console.log(this);
+            // new wysihtml5.Editor(this, {
+            //     toolbar:        "toolbar",
+            //     // stylesheets:    "css/stylesheet.css",
+            //     parserRules:    wysihtml5ParserRules
+            // });
+            // $(this).wysihtml5.Editor({
+            //     toolbar: "toolbar",
+            //     parserRules: wysihtml5ParserRules
+            // });
+        // });
+
+
+    //     $('.text-editor').each(function(){
+    //         var textarea = $(this).find('textarea')[0];
+    //         var toolbar = $(this).find('.toolbar')[0];
+    //
+    //         new wysihtml5.Editor(textarea, {
+    //             toolbar: toolbar,
+    //             // stylesheets:    "css/stylesheet.css",
+    //             parserRules: wysihtml5ParserRules
+    //         });
+    //
+    //         // console.log(toolbar);
+    //
+    //     });
+    //
     // });
 
     $(document).on("click", ".show-modal", function(e){
@@ -84,7 +127,9 @@
             success: function(data){
 
                 $modal = $(data).modal({show:false});
-                $modal.find('.selectpicker').selectpicker();
+
+                renderModal($modal);
+
                 $('body').append(data);
                 $modal.on('hidden.bs.modal', function(){
                     onHiddenModal($modal);
@@ -98,6 +143,56 @@
                 $('#modal-block').modal("hide");
             }
         });
+
+    }
+
+    function renderModal($modal){
+
+        // selectpicker render
+        $modal.find('.selectpicker').selectpicker();
+
+        $modal.find('.text-editor').each(function(){
+            var textarea = $(this).find('textarea')[0];
+            var toolbar = $(this).find('.toolbar')[0];
+
+            new wysihtml5.Editor(textarea, {
+                toolbar: toolbar,
+                parserRules: wysihtml5ParserRules
+            });
+
+            // console.log(toolbar);
+
+        });
+
+        // text editor render
+        // $modal.find('.textarea').wysihtml5({
+        //     toolbar: "toolbar",
+        //     // parserRules: wysihtml5ParserRules,
+        //     "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+        //     "emphasis": true, //Italics, bold, etc. Default true
+        //     "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+        //     "html": false, //Button which allows you to edit the generated HTML. Default false
+        //     "link": true, //Button to insert a link. Default true
+        //     "image": true, //Button to insert an image. Default true,
+        //     "color": false //Button to change color of font
+        // });
+        //
+        // // popover render
+        // $modal.find('[data-toggle="popover"]').each(function(index, element) {
+        //     // var popover = $(this).popover({html:true});
+        //     var contentElementId = $(element).attr("data-content-id");
+        //     var contentHtml = $modal.find('#' + contentElementId).html();
+        //     $(contentHtml).css("display", "block");
+        //
+        //     var titleHtml = String($(element).attr("data-title")) + "<a href='#' class='close'>&times;</a>";
+        //
+        //     $(element).popover({
+        //         // trigger: 'focus',
+        //         html: true,
+        //         title: titleHtml,
+        //         content: contentHtml
+        //     });
+        // });
 
     }
 

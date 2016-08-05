@@ -16,7 +16,11 @@
                     </div>
                     <div class="form-group">
                         <label for="about">Описание:</label>
-                        <textarea class="form-control" rows="5" id="about" name="about"></textarea>
+                        {{--<textarea class="form-control" rows="5" id="about" name="about"></textarea>--}}
+                        {{--<textarea class="textarea" placeholder="Enter text ..." rows="5"  style="width: 100%; height: 200px;"></textarea>--}}
+
+                        @include('workspace.forms.text-editor')
+
                     </div>
 
                     <div class="form-group">
