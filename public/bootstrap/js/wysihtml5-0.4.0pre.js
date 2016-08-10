@@ -7491,11 +7491,13 @@ wysihtml5.commands.bold = {
   
   wysihtml5.commands.justifyCenter = {
     exec: function(composer, command) {
-      return wysihtml5.commands.formatBlock.exec(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      // return wysihtml5.commands.formatBlock.exec(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      return wysihtml5.commands.formatBlock.exec(composer, command, null, CLASS_NAME, REG_EXP);
     },
 
     state: function(composer, command) {
-      return wysihtml5.commands.formatBlock.state(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      // return wysihtml5.commands.formatBlock.state(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      return wysihtml5.commands.formatBlock.state(composer, command, null, CLASS_NAME, REG_EXP);
     }
   };
 })(wysihtml5);(function(wysihtml5) {
@@ -7504,11 +7506,13 @@ wysihtml5.commands.bold = {
   
   wysihtml5.commands.justifyLeft = {
     exec: function(composer, command) {
-      return wysihtml5.commands.formatBlock.exec(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      // return wysihtml5.commands.formatBlock.exec(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      return wysihtml5.commands.formatBlock.exec(composer, command, null, CLASS_NAME, REG_EXP);
     },
 
     state: function(composer, command) {
-      return wysihtml5.commands.formatBlock.state(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      // return wysihtml5.commands.formatBlock.state(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      return wysihtml5.commands.formatBlock.state(composer, command, null, CLASS_NAME, REG_EXP);
     }
   };
 })(wysihtml5);(function(wysihtml5) {
@@ -7517,11 +7521,13 @@ wysihtml5.commands.bold = {
   
   wysihtml5.commands.justifyRight = {
     exec: function(composer, command) {
-      return wysihtml5.commands.formatBlock.exec(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      // return wysihtml5.commands.formatBlock.exec(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      return wysihtml5.commands.formatBlock.exec(composer, command, null, CLASS_NAME, REG_EXP);
     },
 
     state: function(composer, command) {
-      return wysihtml5.commands.formatBlock.state(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      // return wysihtml5.commands.formatBlock.state(composer, "formatBlock", null, CLASS_NAME, REG_EXP);
+      return wysihtml5.commands.formatBlock.state(composer, command, null, CLASS_NAME, REG_EXP);
     }
   };
 })(wysihtml5);(function(wysihtml5) {

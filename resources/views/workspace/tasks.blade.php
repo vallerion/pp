@@ -52,7 +52,7 @@
 
                     <li class="row">
                         <div class="col-xs-5">
-                          <span class="handle ui-sortable-handle">
+                          <span class="handle ui-sortable-handle hidden-xs">
                             <i class="fa fa-ellipsis-v"></i>
                             <i class="fa fa-ellipsis-v"></i>
                           </span>
@@ -77,11 +77,16 @@
                         <div class="user-detail col-xs-4">
                             <a href="#">{{ $task->user_from->name }}</a> -> <a href="#">{{ $task->user_to->name }}</a>
                         </div>
+                        
+                        <div class="tools col-xs-2">
+                            <a href="#" class="btn-xs btn-primary hvr-bounce-in"><i class="fa fa-edit"></i></a>
+                            <a href="#" class="btn-xs btn-danger hvr-bounce-in col-xs-offset-1"><i class="fa fa-trash-o"></i></a>
+                        </div>
 
-                        <a href="#" class="tools col-xs-2">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </a>
+                        {{--<a href="#" class="tools col-xs-2">--}}
+                            {{--<i class="fa fa-edit"></i>--}}
+                            {{--<i class="fa fa-trash-o"></i>--}}
+                        {{--</a>--}}
                     </li>
 
         @endforeach
