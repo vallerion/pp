@@ -21,6 +21,7 @@ class CreateTasksTable extends Migration
             $table->string('about', 2048);
             $table->integer('priority')->unsigned()->default(1);
             $table->string('mark')->nullable();
+            $table->integer('status')->unsigned()->default(1); // 0 - close, 1 - open, 2 - reopen, 3 - test
             $table->timestamps();
         });
     }

@@ -181,17 +181,19 @@ a.editable-click:hover {
 /*}*/
 
 .editable-click:after {
-    content: "\f044";
+    content: "\f040";
     font: normal normal normal 14px/1 FontAwesome;
     padding-left: 2px;
     transition: all 0.3s ease 0s;
     -webkit-transition: all 0.3s ease 0s;
     border-radius: 5px;
+    display: none;
 }
 
 .editable-click:hover:after{
-    width: 100%;
-    background-color: rgba(0, 167, 208, 0.13);
+    display: inline-block;
+    /*width: 100%;*/
+    /*background-color: rgba(0, 167, 208, 0.13);*/
 }
 
 .editable-click.editable-disabled, 

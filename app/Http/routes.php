@@ -20,6 +20,11 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
     Route::get('/', 'Workspace\WorkspaceController@index');
 
 
+    Route::get('test', function(){
+        return Helper::filterHtml("test");
+    });
+
+
 
 //    Route::get('profile', 'Auth\AuthController@getProfile');
     

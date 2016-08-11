@@ -1918,37 +1918,52 @@ a:focus {
   /*margin-left: 10px;*/
   font-size: 9px;
 }
+
+@media screen and (max-width: 768px){
+  .todo-list > li .tools{
+    display: block;
+  }
+}
+@media screen and (min-width: 768px){
+  .todo-list > li .tools{
+    display: none;
+  }
+}
 .todo-list > li .tools {
   /*display: none;*/
   float: right;
   color: #dd4b39;
-}.todo-list > li .tools .hvr-bounce-in {
-  /*display: none;*/
-
 }
+/*.todo-list > li .tools .hvr-bounce-in {*/
+  /*display: none;*/
+/*}*/
 .todo-list > li .tools > .fa,
 .todo-list > li .tools > .glyphicon,
 .todo-list > li .tools > .ion {
   margin-right: 5px;
   cursor: pointer;
 }
-/*.todo-list > li:hover .tools {*/
+.todo-list > li:hover .tools {
+  display: block;
+}
+.todo-list > li:hover .about {
+  display: inline-block;
+}
+/*.todo-list > li:hover .tools .hvr-bounce-in {*/
   /*display: inline-block;*/
+  /*-webkit-transform: scale(1.2);*/
+  /*transform: scale(1.2);*/
+  /*-webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);*/
+  /*transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);*/
+  /*font-size: 15px;*/
 /*}*/
-.todo-list > li:hover .tools .hvr-bounce-in {
-  /*display: inline-block;*/
-  -webkit-transform: scale(1.2);
-  transform: scale(1.2);
-  -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-}
-.todo-list > li:hover .tools .hvr-bounce-in:active {
-  /*display: inline-block;*/
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-}
+/*.todo-list > li:hover .tools .hvr-bounce-in:active {*/
+  /*!*display: inline-block;*!*/
+  /*-webkit-transform: scale(1);*/
+  /*transform: scale(1);*/
+  /*-webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);*/
+  /*transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);*/
+/*}*/
 .todo-list > li.done {
   color: #999;
 }
@@ -2478,6 +2493,8 @@ a:focus {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   border-top-color: #3c8dbc;
+  background-color: transparent;
+  color: #333;
 }
 .nav-pills > li.active > a {
   font-weight: 600;

@@ -48,16 +48,21 @@
                 <ul class="todo-list ui-sortable">
 
 
-        @foreach(Auth::user()->tasks->where('project_id', $project->id) as $task)
+        @foreach(Auth::user()->tasks()->where('project_id', $project->id)->orderBy('status')->get() as $task)
 
                     <li class="row">
-                        <div class="col-xs-5">
+                        <div class="col-xs-3 col-md-5">
                           <span class="handle ui-sortable-handle hidden-xs">
                             <i class="fa fa-ellipsis-v"></i>
                             <i class="fa fa-ellipsis-v"></i>
                           </span>
                             {{--<input value="" type="checkbox">--}}
-                            <a href="#" class="text show-modal" modal-act="show-task" modal-id="{{ $task->id }}">{{ $task->name }}</a>
+
+                            @if($task->status == 0)
+                                <a href="#" class="text-task-closed text show-modal" modal-act="show-task" modal-id="{{ $task->id }}">{{ $task->name }}</a>
+                            @else
+                                <a href="#" class="text show-modal" modal-act="show-task" modal-id="{{ $task->id }}">{{ $task->name }}</a>
+                            @endif
                             {{--<small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>--}}
 
                             <div class="label-mark-block hidden-xs">
@@ -67,21 +72,29 @@
                                 @endforeach
                             </div>
 
-                            <p class="about hidden-xs">{{ $task->about }}</p>
+                            <p class="about hidden-xs">{{ Helper::filterHtml($task->about) }}</p>
                         </div>
 
-                        <div class="label-priority-block col-xs-1">
+                        <div class="label-priority-block col-xs-1 col-md-1">
                             <span class="label" style='background-color:{{ $task::priority[$task->priority] }};'>{{ $task->priority }}</span>
                         </div>
 
-                        <div class="user-detail col-xs-4">
+                        <div class="user-detail col-xs-4 col-md-4">
                             <a href="#">{{ $task->user_from->name }}</a> -> <a href="#">{{ $task->user_to->name }}</a>
                         </div>
-                        
-                        <div class="tools col-xs-2">
-                            <a href="#" class="btn-xs btn-primary hvr-bounce-in"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn-xs btn-danger hvr-bounce-in col-xs-offset-1"><i class="fa fa-trash-o"></i></a>
+
+                        <div class="tools col-xs-4 col-md-2 pull-right">
+                            <a href="#" class="btn-xs btn-primary hvr-bounce-in"><i class="fa fa-pencil"></i></a>
+                            <a href="#" class="btn-xs btn-danger hvr-bounce-in col-xs-offset-1">
+                                <i class="fa fa-trash-o"></i>
+                                {{--<i class="glyphicon glyphicon-envelope"></i>--}}
+                            </a>
                         </div>
+                        
+                        {{--<div class="tools col-xs-2">--}}
+                            {{--<a href="#" class="btn-xs btn-primary hvr-bounce-in"><i class="fa fa-edit"></i></a>--}}
+                            {{--<a href="#" class="btn-xs btn-danger hvr-bounce-in col-xs-offset-1"><i class="fa fa-trash-o"></i></a>--}}
+                        {{--</div>--}}
 
                         {{--<a href="#" class="tools col-xs-2">--}}
                             {{--<i class="fa fa-edit"></i>--}}

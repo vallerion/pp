@@ -4,22 +4,22 @@ var wysihtml5ParserRules = {
      * CSS Class white-list
      * Following CSS classes won't be removed when parsed by the wysihtml5 HTML parser
      */
-    // "classes": {
+    "classes": {
     //     "wysiwyg-clear-both": 1,
     //     "wysiwyg-clear-left": 1,
     //     "wysiwyg-clear-right": 1,
     //     "wysiwyg-color-aqua": 1,
     //     "wysiwyg-color-black": 1,
-    //     "text-info": 1,
+        "text-info": 1,
     //     "wysiwyg-color-fuchsia": 1,
     //     "wysiwyg-color-gray": 1,
-    //     "text-success": 1,
+        "text-success": 1,
     //     "wysiwyg-color-lime": 1,
     //     "wysiwyg-color-maroon": 1,
     //     "wysiwyg-color-navy": 1,
     //     "wysiwyg-color-olive": 1,
     //     "wysiwyg-color-purple": 1,
-    //     "text-danger": 1,
+        "text-danger": 1,
     //     "wysiwyg-color-silver": 1,
     //     "wysiwyg-color-teal": 1,
     //     "wysiwyg-color-white": 1,
@@ -39,7 +39,7 @@ var wysihtml5ParserRules = {
     //     "wysiwyg-text-align-justify": 1,
     //     "wysiwyg-text-align-left": 1,
     //     "wysiwyg-text-align-right": 1
-    // },
+    },
     /**
      * Tag list
      *

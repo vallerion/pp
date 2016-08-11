@@ -9,19 +9,28 @@ class Task extends Model
     protected $table = 'tasks';
 
     const marks = [
-        "dev" => "#3c8dbc",
-        "test" => "#d84315",
-        "design" => "#00695c"];
+                        "dev" => "#3c8dbc",
+                        "test" => "#d84315",
+                        "design" => "#00695c"
+                    ];
 
-    const priority = ["",
-        "#424242", "#455a64",
-        "#824444", "#0091ea",
-        "#827717", "#00c853",
-        "#ff6d00", "#e65100",
-        "#ff5722", "#d50000"];
+    const priority = [  "",
+                        "#424242", "#455a64",
+                        "#824444", "#0091ea",
+                        "#827717", "#00c853",
+                        "#ff6d00", "#e65100",
+                        "#ff5722", "#d50000"
+                    ];
+
+    const status = [
+                        ["name" => "closed", "color" => "#d50000"],
+                        ["name" => "open", "color" => "#3c8dbc"],
+                        ["name" => "reopen", "color" => "#00c853"],
+                        ["name" => "test", "color" => "#00695c"]
+                    ];
 
     protected $fillable = [
-        'name', 'about', 'priority', 'mark', 'user_to_id', 'user_from_id', 'project_id'
+        'name', 'about', 'priority', 'mark', 'user_to_id', 'user_from_id', 'project_id', 'status'
     ];
 
     public function user_to(){

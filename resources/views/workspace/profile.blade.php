@@ -25,6 +25,20 @@
 
                 {{-- TODO about <p class="text-muted text-center"></p>--}}
 
+                <div class="text-center">
+                    <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+                </div>
+
+                @if(isset($user->skype))
+                    <div class="text-center">
+                        <a class="text-center" href="skype:{{ $user->skype }}"><i class="fa fa-skype"></i>{{ $user->skype }}</a>
+                    </div>
+                @else
+                    <div class="text-center">
+                        <span class="editable">Enter skype</span>
+                    </div>
+                @endif
+
                 {{--<ul class="list-group list-group-unbordered">--}}
                     {{--<li class="list-item active">--}}
                         {{--<a aria-expanded="true" href="#projects" data-toggle="tab"><b>Projects</b></a> <a class="pull-right">{{ count($user->projects) }}</a>--}}
@@ -39,14 +53,14 @@
         </div>
 
         <div class="box box-solid">
-            <div class="box-header with-border">
-                <h3 class="box-title">Folders</h3>
+            {{--<div class="box-header with-border">--}}
+                {{--<h3 class="box-title">Folders</h3>--}}
 
-                <div class="box-tools">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                </div>
-            </div>
+                {{--<div class="box-tools">--}}
+                    {{--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>--}}
+                    {{--</button>--}}
+                {{--</div>--}}
+            {{--</div>--}}
             <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active">
@@ -126,21 +140,28 @@
                                 <tbody><tr>
                                     <th style="width: 10px">#</th>
                                     <th>Task</th>
+                                    <th>From</th>
+                                    <th>Status</th>
                                     <th>Date</th>
-                                    <th>Progress</th>
+
+                                    {{--<th>Progress</th>--}}
                                 </tr>
 
-                                @foreach($user->tasks as $key => $task)
+                                @foreach($user->tasks()->orderBy('created_at')->get() as $key => $task)
 
                                     <tr>
                                         <td>{{ $key + 1 }}.</td>
-                                        <td>{{ $task->name }}</td>
+                                        <td><a href="#" class="show-modal" modal-act="show-task" modal-id="{{ $task->id }}">{{ $task->name }}</a></td>
+                                        <td><a href="#">{{ $task->user_from->name }}</a></td>
+                                        {{--<td><a href="#">{{ $task::status[$task->status][0] }}</a></td>--}}
+                                        <td><span class="label" style='background-color:{{ $task::status[$task->status]["color"] }};'>{{ $task::status[$task->status]["name"] }}</span></td>
                                         <td>{{ $task->created_at }}</td>
-                                        <td>
-                                            <div class="progress progress-md">
-                                                <div class="progress-bar progress-bar-danger" style="width: 55%">55%</div>
-                                            </div>
-                                        </td>
+
+                                        {{--<td>--}}
+                                            {{--<div class="progress progress-md">--}}
+                                                {{--<div class="progress-bar progress-bar-danger" style="width: 55%">55%</div>--}}
+                                            {{--</div>--}}
+                                        {{--</td>--}}
                                     </tr>
 
                                 @endforeach
