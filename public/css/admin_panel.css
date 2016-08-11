@@ -1944,7 +1944,7 @@ a:focus {
   cursor: pointer;
 }
 .todo-list > li:hover .tools {
-  display: block;
+  display: inline-flex;
 }
 .todo-list > li:hover .about {
   display: inline-block;

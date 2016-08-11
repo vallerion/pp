@@ -47,7 +47,8 @@
                         </select>
                     </div>
 
-                    <div style="width: 100%;height: 1px;background-color: #e5e5e5;margin-bottom: 15px;"></div>
+                    {{--<div style="width: 100%;height: 1px;background-color: #e5e5e5;margin-bottom: 15px;"></div>--}}
+                    <hr>
                     @if(count(Auth::user()->privilegesTeams) > 0)
 
                         <div class="form-group" style="display: inline;">

@@ -48,10 +48,15 @@
                 <ul class="todo-list ui-sortable">
 
 
-        @foreach(Auth::user()->tasks()->where('project_id', $project->id)->orderBy('status')->get() as $task)
+        @foreach(Auth::user()->tasks()->where('project_id', $project->id)->orderBy('status', 'DESC')->get() as $task)
 
-                    <li class="row">
-                        <div class="col-xs-3 col-md-5">
+                    @if($task->status == 0)
+                        <li class="row" style="border-left: 20px solid #c5c5c5;">
+                    @else
+                        <li class="row" style="border-left: 20px solid {{ $task::status[$task->status]["color"] }};">
+                    @endif
+
+                        <div class="col-xs-3 col-md-5 task-name">
                           <span class="handle ui-sortable-handle hidden-xs">
                             <i class="fa fa-ellipsis-v"></i>
                             <i class="fa fa-ellipsis-v"></i>

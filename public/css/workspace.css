@@ -1,0 +1,16 @@
+
+.modal-block {
+  position: relative;
+  /*padding: 0 15px 15px 15px;*/
+  padding: 15px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.header-modal-block {
+  margin: -15px;
+}
+
+.header-modal-block img {
+  width: 40px;
+  padding: 5px;
+}
