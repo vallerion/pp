@@ -11,6 +11,8 @@ class Project extends Model
     protected $fillable = [
         'name', 'about', 'image', 'visible'
     ];
+    
+
 
     public function users(){
         return $this->belongsToMany('App\User', 'user_project');
@@ -18,5 +20,9 @@ class Project extends Model
 
     public function teams(){
         return $this->belongsToMany('App\Team', 'company_team_project');
+    }
+
+    public function tasks(){
+        return $this->hasMany('App\Task', 'project_id');
     }
 }

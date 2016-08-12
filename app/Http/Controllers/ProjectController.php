@@ -41,12 +41,17 @@ class ProjectController extends Controller
 
     public function show(Request $request, $project){
 //        echo \Request::ajax();
+        return $project;
     }
 
     public function modal($project){
 //        return $project->toJson();
 //        return ["project" => $project, "users" => ];
         return view("workspace.forms.modal.show_project", ['project' => $project]);
+    }
+
+    public function myTask($project, Guard $auth){
+        return $project->tasks("id", "name")->where('user_to_id', $auth->user()->id)->orderBy('status', 'DESC')->get()->toJson();
     }
     
     public function users($project){

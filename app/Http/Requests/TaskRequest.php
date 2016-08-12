@@ -23,11 +23,24 @@ class TaskRequest extends Request
      */
     public function rules()
     {
-        return [
-            'name' => 'required|max:255',
-            'about' => 'max:2048',
-            'user_to_id' => 'required|integer|not_in:0',
-            'project_id' => 'integer|not_in:0'
-        ];
+
+        switch ($this->method()){
+
+            case 'GET':
+
+                return [];
+
+            case 'POST':
+
+                return [
+                    'name' => 'required|max:255',
+                    'about' => 'max:2048',
+                    'user_to_id' => 'required|integer|not_in:0',
+                    'project_id' => 'integer|not_in:0'
+                ];
+        }
+        
+        
+
     }
 }

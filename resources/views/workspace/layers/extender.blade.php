@@ -1,5 +1,22 @@
 @extends('workspace.layers.template')
 
+@push('stylesheets')
+
+
+<link rel="stylesheet" href="{{asset("css/workspace.css")}}">
+{{--<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-wysihtml5.css')}}">--}}
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css">-->
+
+@endpush
+
+@push('scripts')
+
+
+<script src="{{asset('js/move_list.js')}}"></script>
+<script src="{{asset('js/editable.js')}}"></script>
+
+@endpush
+
 @section('header')
     <header class="main-header">
         <!-- Logo -->

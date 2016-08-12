@@ -7,10 +7,22 @@
 }
 
 .header-modal-block {
-  margin: -15px;
+  margin-top: -10px;
+  position: relative;
+}
+.header-modal-block .headline{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 0 45px;
 }
 
 .header-modal-block img {
   width: 40px;
   padding: 5px;
+}
+
+.body-modal-block{
+  padding: 0 30px;
 }

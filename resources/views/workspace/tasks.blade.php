@@ -2,9 +2,21 @@
 
 @section('title', 'Tasks')
 
+@push('scripts')
+
+<script src="{{ asset("js/task.js") }}"></script>
+
+@endpush
+
+
+@push('stylesheets')
+
+<link rel="stylesheet" href="{{ asset("css/task.css") }}">
+
+@endpush
+
 @section('content')
 
-    <link rel="stylesheet" href="{{asset("css/task.css")}}">
 
 <section class="content-header">
     <h1>
@@ -19,7 +31,7 @@
 
     @foreach(Auth::user()->projects as $project)
 
-        <div class="box box-primary">
+        <div class="box box-primary" data-id="{{ $project->id }}">
             <div class="box-header">
                 <i class="ion ion-clipboard"></i>
 

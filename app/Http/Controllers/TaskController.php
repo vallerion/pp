@@ -50,8 +50,31 @@ class TaskController extends Controller
         return json_encode($task->users);
     }
 
-    public function projects($task){
-        return json_encode($task->projects);
+    public function project($task){
+        return json_encode($task->project);
+    }
+    
+    public function action(TaskRequest $request, $task){
+
+        if(!isset($request->action))
+            exit;
+
+        switch ($request->action){
+
+            case 'close':
+
+                $task->close();
+
+                break;
+
+            case 'open':
+
+                $task->open();
+
+                break;
+
+        }
+        
     }
 
     public function update($task, $data){

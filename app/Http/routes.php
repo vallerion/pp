@@ -39,6 +39,8 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
     Route::get('project/{project}/users', 'ProjectController@users');
 
+    Route::get('project/{project}/mytask', 'ProjectController@myTask');
+
     Route::get('project/{project}/teams', 'ProjectController@teams');
 
     Route::get('project/{project}/modal', 'ProjectController@modal');
@@ -47,10 +49,11 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
 
 
+    Route::get('task/{task}/action', 'TaskController@action');
 
     Route::get('task/{task}/users', 'TaskController@users');
 
-    Route::get('task/{task}/projects', 'TaskController@projects');
+    Route::get('task/{task}/project', 'TaskController@project');
 
     Route::get('task/{task}/modal', 'TaskController@modal');
 

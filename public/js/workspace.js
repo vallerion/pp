@@ -52,6 +52,25 @@
     //
     // });
 
+    $(document).on("click", '*[data-submit="get"]', function(e){
+        e.preventDefault();
+
+        $.get($(this).attr('href'));
+
+        var project_id = $(this).attr('data-project-id');
+
+        // console.log(project_id);
+
+        var project_block = $('section.content').find('[data-id=' + project_id + ']');
+
+        // console.log(project_block);
+
+        updateTasks(project_block);
+
+        // window.location.reload();
+
+    });
+
     $(document).on("click", ".show-modal", function(e){
         e.preventDefault();
         switcherModalAction($(this).attr('modal-act'), $(this).attr('modal-id'));

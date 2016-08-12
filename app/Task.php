@@ -33,6 +33,10 @@ class Task extends Model
         'name', 'about', 'priority', 'mark', 'user_to_id', 'user_from_id', 'project_id', 'status'
     ];
 
+    protected $hidden = [
+        'user_to_id', 'user_from_id', 'project_id', 'created_at', 'updated_at'
+    ];
+
     public function user_to(){
         return $this->belongsTo('App\User', 'user_to_id');
     }
@@ -47,5 +51,13 @@ class Task extends Model
 
     public function getMark(){
         return empty($this->mark) ? [] : explode(",", $this->mark);
+    }
+
+    public function close(){
+        return $this->update(["status" => 0]);
+    }
+
+    public function open(){
+        return $this->update(["status" => 1]);
     }
 }

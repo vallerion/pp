@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title') - PIRA</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
     <link rel="stylesheet" href="{{asset("bootstrap/css/bootstrap.css")}}">
     <link rel="stylesheet" href="{{asset("bootstrap/css/bootstrap-select.min.css")}}">
     {{--<link rel="stylesheet" href="{{asset("bootstrap/css/bootstrap-slider.css")}}">--}}
@@ -13,9 +14,10 @@
     <link rel="stylesheet" href="{{asset("css/skin-black.css")}}">
     <link rel="stylesheet" href="{{asset("css/lib/noty/animate.css")}}">
     <link rel="stylesheet" href="{{asset("bootstrap/bootstrap-editable/css/bootstrap-editable.css")}}">
-    <link rel="stylesheet" href="{{asset("css/workspace.css")}}">
-    {{--<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-wysihtml5.css')}}">--}}
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css">-->
+
+    @stack('stylesheets')
+
+
 </head>
 <body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
@@ -42,6 +44,7 @@
 </div>
 <!-- ./wrapper -->
 
+
 <script src="{{asset("js/lib/jquery.js")}}"></script>
 <script src="{{asset("js/lib/jquery-ui.js")}}"></script>
 <script src="{{asset("bootstrap/js/bootstrap.min.js")}}"></script>
@@ -59,7 +62,9 @@
 <script src="{{asset("js/app.js")}}"></script>
 <script src="{{asset("js/workspace.js")}}"></script>
 <script src="{{asset('js/responseHandler.js')}}"></script>
-<script src="{{asset('js/move_list.js')}}"></script>
-<script src="{{asset('js/editable.js')}}"></script>
+
+@stack('scripts')
+
+
 </body>
 </html>
