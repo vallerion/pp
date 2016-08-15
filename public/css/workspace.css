@@ -26,3 +26,7 @@
 .body-modal-block{
   padding: 0 30px;
 }
+
+.header-text-task-closed{
+  text-decoration: line-through;
+}

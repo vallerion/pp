@@ -46,7 +46,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), [ 'except' => ['getLogout', 'index', 'update', 'show'] ]);
+        $this->middleware($this->guestMiddleware(), [ 'except' => ['getLogout', 'index', 'update', 'show', 'myTask'] ]);
     }
 
     public function index(Guard $auth){
@@ -63,6 +63,11 @@ class AuthController extends Controller
         return json_encode(['successful' => true]);
 
 //        return $user->findOrFail($id)->update([$request->name => $request->value]);
+    }
+
+    public function myTask($id){
+
+        return \App\Task::toHtml(Auth::user()->tasks()->where('project_id', $id)->orderBy('status', 'DESC')->get())->toJson();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -22,12 +23,12 @@ class Task extends Model
                         "#ff5722", "#d50000"
                     ];
 
-    const status = [
-                        ["name" => "closed", "color" => "#d50000"],
-                        ["name" => "open", "color" => "#3c8dbc"],
-                        ["name" => "reopen", "color" => "#00c853"],
-                        ["name" => "test", "color" => "#00695c"]
-                    ];
+//    const status = [
+//                        ["name" => "closed", "color" => "#d50000"],
+//                        ["name" => "open", "color" => "#3c8dbc"],
+//                        ["name" => "reopen", "color" => "#00c853"],
+//                        ["name" => "test", "color" => "#00695c"]
+//                    ];
 
     protected $fillable = [
         'name', 'about', 'priority', 'mark', 'user_to_id', 'user_from_id', 'project_id', 'status'
@@ -59,5 +60,33 @@ class Task extends Model
 
     public function open(){
         return $this->update(["status" => 1]);
+    }
+
+    static function toHtml($tasks){
+
+        $tasks->map(function($task){
+            $task->transformToHtml();
+        });
+
+        return $tasks;
+    }
+
+    private function transformToHtml(){
+
+        $this->about = \Helper::filterHtml($this->about);
+
+        $this->priority = "<span class=\"label\" style='background-color:" . $this::priority[$this->priority] . ";'>" . $this->priority . "</span>";
+
+        $marks = "";
+        foreach ($this->getMark() as $mark){
+            $marks .= "<span class=\"label\" style='background-color:" . $this::marks[$mark] . ";'>" . $mark . "</span>";
+        }
+
+        $this->mark = $marks;
+
+        $this->status = $this->status == 0 ? "#c5c5c5" : $this::status[$this->status]["color"];
+
+
+
     }
 }

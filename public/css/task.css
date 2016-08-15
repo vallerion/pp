@@ -2,11 +2,9 @@
     margin-left: -15px;
 }
 .text-task-closed{
-    color: #9b9b9b;
+    color: #c5c5c5;
 }
-.header-text-task-closed{
-    text-decoration: line-through;
-}
+
 /*.todo-list li:hover > .about{*/
     /*display: inline;*/
 /*}*/

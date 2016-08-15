@@ -197,11 +197,11 @@
 
             <div class="modal-footer">
                 @if($task->status == 0)
-                    <a href="{{ url('workspace/task/' . $task->id . '/action?action=open') }}" class="btn btn-danger" data-project-id="{{ $task->project_id }}" data-submit="get" data-dismiss="modal"><i class="fa fa-refresh"></i> Reopen</a>
+                    <a href="{{ url('workspace/task/' . $task->id . '/action?action=open') }}" class="btn btn-danger" data-id="{{ $task->id }}" data-action="reopen-task" data-dismiss="modal"><i class="fa fa-refresh"></i> Reopen</a>
                 @else
-                    <a href="{{ url('workspace/task/' . $task->id . '/action?action=open') }}" class="btn btn-danger" data-project-id="{{ $task->project_id }}" data-submit="get" data-dismiss="modal"><i class="fa fa-refresh"></i> Reopen</a>
+{{--                    <a href="{{ url('workspace/task/' . $task->id . '/action?action=open') }}" class="btn btn-danger" data-id="{{ $task->project_id }}" data-action="reopen-task" data-dismiss="modal"><i class="fa fa-refresh"></i> Reopen</a>--}}
                     {{--<a class="btn btn-success" ><i class="fa fa-check"></i> Apply</a>--}}
-                    <a href="{{ url('workspace/task/' . $task->id . '/action?action=close') }}" class="btn btn-success" data-project-id="{{ $task->project_id }}" data-submit="get" data-dismiss="modal"><i class="fa fa-check"></i> Apply</a>
+                    <a href="{{ url('workspace/task/' . $task->id . '/action?action=close') }}" class="btn btn-success" data-id="{{ $task->id }}" data-action="apply-task" data-dismiss="modal"><i class="fa fa-check"></i> Apply</a>
                 @endif
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 {{--<button type="button" id="modal-submit" class="btn btn-primary">Создать</button>--}}

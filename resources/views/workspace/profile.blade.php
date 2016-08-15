@@ -140,9 +140,9 @@
                                 <tbody><tr>
                                     <th style="width: 10px">#</th>
                                     <th>Task</th>
-                                    <th>From</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
+                                    <th class="text-center">From</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Date</th>
 
                                     {{--<th>Progress</th>--}}
                                 </tr>
@@ -151,11 +151,29 @@
 
                                     <tr>
                                         <td>{{ $key + 1 }}.</td>
-                                        <td><a href="#" class="show-modal" modal-act="show-task" modal-id="{{ $task->id }}">{{ $task->name }}</a></td>
-                                        <td><a href="#">{{ $task->user_from->name }}</a></td>
+
+                                        @if($task->status == 0)
+                                            <td><a href="#" style="color: #c5c5c5;text-decoration: line-through;" class="show-modal" modal-act="show-task" modal-id="{{ $task->id }}">{{ $task->name }}</a></td>
+                                        @else
+                                            <td><a href="#" class="show-modal" modal-act="show-task" modal-id="{{ $task->id }}">{{ $task->name }}</a></td>
+                                        @endif
+
+                                        <td class="text-center"><a href="#">{{ $task->user_from->name }}</a></td>
                                         {{--<td><a href="#">{{ $task::status[$task->status][0] }}</a></td>--}}
-                                        <td><span class="label" style='background-color:{{ $task::status[$task->status]["color"] }};'>{{ $task::status[$task->status]["name"] }}</span></td>
-                                        <td>{{ $task->created_at }}</td>
+                                        {{--<td><span class="label" style='background-color:{{ $task::status[$task->status]["color"] }};'>{{ $task::status[$task->status]["name"] }}</span></td>--}}
+                                        {{--@if($task->status == 0)--}}
+                                            {{--<td><span class="label" style="background-color:#c5c5c5;font-weight:bold;"> closed</span></td>--}}
+                                        {{--@else--}}
+                                            {{--<td><span class="label" style="background-color:#3c8dbc;font-weight:bold;"> open</span></td>--}}
+                                        {{--@endif--}}
+
+                                        @if($task->status == 0)
+                                            <td class="text-center"><span class="label" style="color:#c5c5c5;font-weight:bold;font-size: 15px;"> closed</span></td>
+                                        @else
+                                            <td class="text-center"><span class="label" style="color:#3c8dbc;font-weight:bold;font-size: 15px;"> open</span></td>
+                                        @endif
+
+                                        <td class="text-center">{{ $task->created_at }}</td>
 
                                         {{--<td>--}}
                                             {{--<div class="progress progress-md">--}}

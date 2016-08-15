@@ -63,9 +63,9 @@
         @foreach(Auth::user()->tasks()->where('project_id', $project->id)->orderBy('status', 'DESC')->get() as $task)
 
                     @if($task->status == 0)
-                        <li class="row" style="border-left: 20px solid #c5c5c5;">
+                        <li class="row task-row" style="border-left: 20px solid #c5c5c5;" data-id="{{ $task->id }}">
                     @else
-                        <li class="row" style="border-left: 20px solid {{ $task::status[$task->status]["color"] }};">
+                        <li class="row task-row" style="border-left: 20px solid #3c8dbc;" data-id="{{ $task->id }}">
                     @endif
 
                         <div class="col-xs-3 col-md-5 task-name">

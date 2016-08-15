@@ -60,6 +60,10 @@ class User extends Authenticatable
         return $this->hasMany(Task::class, 'user_to_id');
     }
 
+//    public function tasks_in_project($project_id){
+//        return $this->hasMany(Task::class, 'user_to_id')->where('project_id', $project_id);
+//    }
+
     public function member_my_team(){
         $team = Team::where('id', $this->current_team_id)->first();
         return $team->users();

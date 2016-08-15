@@ -21,7 +21,7 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
 
     Route::get('test', function(){
-        return Helper::filterHtml("test");
+        return Auth::user()->tasks_in_project(1)->get();
     });
 
 
@@ -34,12 +34,13 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
         'index', 'show', 'update'
     ]]);
 
+    Route::get('profile/mytask/{id?}', 'Auth\AuthController@myTask');
 
 
 
     Route::get('project/{project}/users', 'ProjectController@users');
 
-    Route::get('project/{project}/mytask', 'ProjectController@myTask');
+//    Route::get('project/{project}/mytask', 'ProjectController@myTask');
 
     Route::get('project/{project}/teams', 'ProjectController@teams');
 

@@ -51,7 +51,12 @@ class ProjectController extends Controller
     }
 
     public function myTask($project, Guard $auth){
-        return $project->tasks("id", "name")->where('user_to_id', $auth->user()->id)->orderBy('status', 'DESC')->get()->toJson();
+
+        $response = $project->tasks("id", "name")->where('user_to_id', $auth->user()->id)->orderBy('status', 'DESC');
+
+
+
+//        return $project->tasks("id", "name")->where('user_to_id', $auth->user()->id)->orderBy('status', 'DESC')->get()->toJson();
     }
     
     public function users($project){

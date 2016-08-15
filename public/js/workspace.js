@@ -1,75 +1,64 @@
 
 
-    // $(document).on("click", "a[data-toggle='popover']", function(){
-    //     console.log($(this).attr("data-content-id"));
-    // });
 
-    // $(document).click(function (e) {
-        // if (($("[data-toggle='popover']").has(e.target).length == 0) || $(e.target).is('.close')) {
-        //     $("[data-toggle='popover']").popover('hide');
-        // }
-    // });
-
-    // var editor = new wysihtml5.Editor(document.getElementById("textarea"), {
-    //     toolbar:        "toolbar",
-    //     // stylesheets:    "css/stylesheet.css",
-    //     parserRules:    wysihtml5ParserRules
-    // });
-
-
-    // $(document).ready(function(){
-
-        // console.log(document.getElementById("textarea"));
-        // console.log(document.getElementsByTagName("textarea"));
-
-        // $('textarea').each(function(){
-        //     console.log(this);
-            // new wysihtml5.Editor(this, {
-            //     toolbar:        "toolbar",
-            //     // stylesheets:    "css/stylesheet.css",
-            //     parserRules:    wysihtml5ParserRules
-            // });
-            // $(this).wysihtml5.Editor({
-            //     toolbar: "toolbar",
-            //     parserRules: wysihtml5ParserRules
-            // });
-        // });
-
-
-    //     $('.text-editor').each(function(){
-    //         var textarea = $(this).find('textarea')[0];
-    //         var toolbar = $(this).find('.toolbar')[0];
-    //
-    //         new wysihtml5.Editor(textarea, {
-    //             toolbar: toolbar,
-    //             // stylesheets:    "css/stylesheet.css",
-    //             parserRules: wysihtml5ParserRules
-    //         });
-    //
-    //         // console.log(toolbar);
-    //
-    //     });
-    //
-    // });
-
-    $(document).on("click", '*[data-submit="get"]', function(e){
+    $(document).on("click", '*[data-action]', function(e){
         e.preventDefault();
 
-        $.get($(this).attr('href'));
+        var action = $(this).attr('data-action');
 
-        var project_id = $(this).attr('data-project-id');
+        // console.log($(this).attr('data-action'));
+
+        switcherAction(action, this);
+
+        // $.get($(this).attr('href'));
+
+        // var project_id = $(this).attr('data-project-id');
 
         // console.log(project_id);
 
-        var project_block = $('section.content').find('[data-id=' + project_id + ']');
+        // var project_block = $('section.content').find('[data-id=' + project_id + ']');
 
         // console.log(project_block);
 
-        updateTasks(project_block);
+        // updateTasks(project_id);
 
         // window.location.reload();
 
     });
+
+    function switcherAction(action, object){
+
+        switch (action){
+            case 'apply-task':
+
+                var url = window.location.origin + '/workspace/task/' + $(object).attr("data-id") + '/action?action=close';
+
+                $.get(url, function(){
+
+                    var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
+                    $task_row.css("border-left", "20px solid #c5c5c5");
+                    $task_row.find('a[modal-act="show-task"]').addClass('text-task-closed');
+
+                });
+
+                break;
+
+            case 'reopen-task':
+
+                var url = window.location.origin + '/workspace/task/' + $(object).attr("data-id") + '/action?action=open';
+
+                $.get(url, function(){
+
+                    var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
+                    $task_row.css("border-left", "20px solid #3c8dbc");
+                    $task_row.find('a[modal-act="show-task"]').removeClass('text-task-closed');
+
+                });
+
+                break;
+        }
+
+    }
 
     $(document).on("click", ".show-modal", function(e){
         e.preventDefault();
