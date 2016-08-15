@@ -37,7 +37,7 @@
 
                     var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
                     $task_row.css("border-left", "20px solid #c5c5c5");
-                    $task_row.find('a[modal-act="show-task"]').addClass('text-task-closed');
+                    $task_row.find('a[data-action="modal-task"]').addClass('text-task-closed');
 
                 });
 
@@ -51,80 +51,74 @@
 
                     var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
                     $task_row.css("border-left", "20px solid #3c8dbc");
-                    $task_row.find('a[modal-act="show-task"]').removeClass('text-task-closed');
+                    $task_row.find('a[data-action="modal-task"]').removeClass('text-task-closed');
 
                 });
+
+                break;
+
+            case 'modal-project':
+
+                var data_id = $(object).attr("data-id");
+
+                getModalHtml(window.location.origin + '/workspace/project/' + data_id + '/modal');
+
+                break;
+
+            case 'modal-task':
+
+                var data_id = $(object).attr("data-id");
+
+                getModalHtml(window.location.origin + '/workspace/task/' + data_id + '/modal');
+
+                break;
+
+            case 'modal-team':
+
+                var data_id = $(object).attr("data-id");
+
+                getModalHtml(window.location.origin + '/workspace/team/' + data_id + '/modal');
+
+                break;
+
+            case 'modal-create-team':
+
+                getModalHtml(window.location.origin + '/workspace/team/create');
+
+                break;
+
+            case 'modal-create-task':
+
+                getModalHtml(window.location.origin + '/workspace/task/create');
+
+                break;
+
+            case 'modal-create-project':
+
+                getModalHtml(window.location.origin + '/workspace/project/create');
+
+                break;
+
+            case 'modal-submit':
+
+                postModal(object);
+
+                break;
+
+            case 'refresh-tasks':
+
+                refreshTasks(object); // refreshTasks() -> task.js
 
                 break;
         }
 
     }
-
-    $(document).on("click", ".show-modal", function(e){
-        e.preventDefault();
-        switcherModalAction($(this).attr('modal-act'), $(this).attr('modal-id'));
-    });
-
-    $(document).on("click", "#modal-submit", function(){
-        // console.log($('#modal-block form').serialize().replace('visible=on', 'visible=1'));
-
-        var form = $(this).parent().parent().find('form');
-        var action = form.attr('action');
-        var serialize = form.serialize();
-
-        postModal(action, serialize.replace('visible=on', 'visible=1'));
-    });
-
-    // $('#modal-block').on('hidden.bs.modal', function () {
-    //     $.noty.closeAll();
-    //     $(this).find('.modal-content').html('');
-    // })
 
     function onHiddenModal($modal){
         $.noty.closeAll();
         $modal.data('bs.modal', null);
         $modal.remove();
         $('#modal-block').remove();
-    }
-    
-
-    function switcherModalAction(modal_act, modal_id){
-
-        switch(modal_act){
-            case 'create-team':
-
-                getModalHtml(window.location.origin + '/workspace/team/create');
-
-                break;
-            case 'create-project':
-
-                getModalHtml(window.location.origin + '/workspace/project/create');
-
-                break;
-            case 'create-task':
-
-                getModalHtml(window.location.origin + '/workspace/task/create');
-
-                break;
-
-            case 'show-task':
-
-                getModalHtml(window.location.origin + '/workspace/task/' + modal_id + '/modal');
-
-                break;
-
-            case 'show-project':
-
-                getModalHtml(window.location.origin + '/workspace/project/' + modal_id + '/modal');
-
-                break;
-            case 'show-team':
-
-                getModalHtml(window.location.origin + '/workspace/team/' + modal_id + '/modal');
-
-                break;
-        }
-
     }
 
     function getModalHtml(url){
@@ -204,11 +198,16 @@
 
     }
 
-    function postModal(action, data){
+    // function postModal(action, data){
+    function postModal(object){
 
-        var url = window.location.origin + '/' + action;
+        var form = $(object).parent().parent().find('form');
+        var form_action = form.attr('action');
+        var data = form.serialize();
 
-        console.log(data);
+        var url = window.location.origin + '/' + form_action;
+
+        // console.log(data);
 
         $.ajax({
             type: "POST",
@@ -222,7 +221,7 @@
                 if(responseHandler(response)) {
                     setTimeout(function () {
                         $('#modal-block.modal.fade.in').modal("hide");
-                        switcherUpdateMenu(action);
+                        // switcherUpdateMenu(form_action);
                     }, 1800);
 
                     // console.log(url);

@@ -267,7 +267,7 @@
 
                         <a href="#">
                             <i class="fa fa-cogs"></i> <span>Проекты</span>
-                            <i class="fa fa-plus pull-right plus show-modal" modal-act="create-project"></i>
+                            <i class="fa fa-plus pull-right plus" data-action="modal-create-project"></i>
 
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
@@ -276,7 +276,8 @@
                             <!-- TODO вывод списка проектов -->
 
                             @for($i = 0; $i < count(Auth::user()->projects) && $i < 5; ++$i)
-                                <li><a class="show-modal" modal-act="show-project" modal-id="{{ Auth::user()->projects[$i]->id }}" href="#" ><i class="fa fa-circle-o"></i>{{ Auth::user()->projects[$i]->name }}</a></li>
+                                {{-- old <li><a class="show-modal" modal-act="show-project" modal-id="{{ Auth::user()->projects[$i]->id }}" href="#" ><i class="fa fa-circle-o"></i>{{ Auth::user()->projects[$i]->name }}</a></li>--}}
+                                <li><a data-action="modal-project" data-id="{{ Auth::user()->projects[$i]->id }}" href="#" ><i class="fa fa-circle-o"></i>{{ Auth::user()->projects[$i]->name }}</a></li>
                             @endfor
 
                             <li class="divider"></li>
@@ -286,7 +287,7 @@
                         </ul>
 
                     @else
-                        <a class="show-modal" modal-act="create-project" href="#">
+                        <a data-action="modal-create-project" href="#">
                             <i class="fa fa-cogs"></i> <span>Проекты</span>
                         </a>
                     @endif
@@ -301,13 +302,14 @@
 
                             <a href="#">
                                 <i class="fa fa-tasks"></i> <span>Задачи</span>
-                                <i class="fa fa-plus pull-right plus show-modal" modal-act="create-task"></i>
+                                <i class="fa fa-plus pull-right plus" data-action="modal-create-task"></i>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
 
                                 @for($i = 0; $i < count(Auth::user()->tasks) && $i < 5; ++$i)
-                                    <li><a class="show-modal" modal-act="show-task" modal-id="{{ Auth::user()->tasks[$i]->id }}" href="#"><i class="fa fa-circle-o"></i>{{ strlen(Auth::user()->tasks[$i]->name) > 25 ? substr(Auth::user()->tasks[$i]->name, 0, 25).'...' :  Auth::user()->tasks[$i]->name }}</a></li>
+                                    {{-- old <li><a class="show-modal" modal-act="show-task" modal-id="{{ Auth::user()->tasks[$i]->id }}" href="#"><i class="fa fa-circle-o"></i>{{ strlen(Auth::user()->tasks[$i]->name) > 25 ? substr(Auth::user()->tasks[$i]->name, 0, 25).'...' :  Auth::user()->tasks[$i]->name }}</a></li>--}}
+                                    <li><a data-action="modal-task" data-id="{{ Auth::user()->tasks[$i]->id }}" href="#"><i class="fa fa-circle-o"></i>{{ strlen(Auth::user()->tasks[$i]->name) > 25 ? substr(Auth::user()->tasks[$i]->name, 0, 25).'...' :  Auth::user()->tasks[$i]->name }}</a></li>
                                 @endfor
 
                                 <li class="divider"></li>
@@ -317,7 +319,7 @@
 
                         @else
 
-                            <a class="show-modal" modal-act="create-task" href="#">
+                            <a data-action="modal-create-task"" href="#">
                                 <i class="fa fa-tasks"></i> <span>Задачи</span>
                                 <!-- <i class="fa fa-plus pull-right plus show-modal" modal-act="create-team"></i> -->
                             </a>
@@ -336,13 +338,14 @@
 
                             <a href="#">
                                 <i class="fa fa-group"></i> <span>Команды</span>
-                                <i class="fa fa-plus pull-right plus show-modal" modal-act="create-team"></i>
+                                <i class="fa fa-plus pull-right plus" data-action="modal-create-team"></i>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
 
                                 @for($i = 0; $i < count(Auth::user()->teams) && $i < 5; ++$i)
-                                    <li><a class="show-modal" modal-act="show-team" modal-id="{{ Auth::user()->teams[$i]->id }}" href="#"><i class="fa fa-circle-o"></i>{{ Auth::user()->teams[$i]->name }}</a></li>
+                                    {{--<li><a class="show-modal" modal-act="show-team" modal-id="{{ Auth::user()->teams[$i]->id }}" href="#"><i class="fa fa-circle-o"></i>{{ Auth::user()->teams[$i]->name }}</a></li>--}}
+                                    <li><a data-action="modal-team" data-id="{{ Auth::user()->teams[$i]->id }}" href="#"><i class="fa fa-circle-o"></i>{{ Auth::user()->teams[$i]->name }}</a></li>
                                 @endfor
 
                                 <li class="divider"></li>
@@ -352,7 +355,7 @@
 
                         @else
 
-                            <a class="show-modal" modal-act="create-team" href="#">
+                            <a data-action="modal-create-team" href="#">
                                 <i class="fa fa-group"></i> <span>Команды</span>
                                 <!-- <i class="fa fa-plus pull-right plus show-modal" modal-act="create-team"></i> -->
                             </a>

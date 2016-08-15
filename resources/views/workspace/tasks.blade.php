@@ -31,26 +31,32 @@
 
     @foreach(Auth::user()->projects as $project)
 
-        <div class="box box-primary" data-id="{{ $project->id }}">
+        <?php $tasks = Auth::user()->tasks()->where('project_id', $project->id)->orderBy('status', 'DESC')->get(); ?>
+
+        @if(count($tasks) < 1)
+            @continue
+        @endif
+
+        <div class="box box-primary project-box" data-id="{{ $project->id }}">
             <div class="box-header">
                 <i class="ion ion-clipboard"></i>
 
                 <h3 class="box-title">{{ $project->name }}</h3>
 
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-wrench"></i></button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button type="button" data-action="refresh-tasks" class="btn btn-box-tool"><i class="fa fa-refresh"></i></button>
+                    {{--<div class="btn-group">--}}
+                        {{--<button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">--}}
+                            {{--<i class="fa fa-wrench"></i></button>--}}
+                        {{--<ul class="dropdown-menu" role="menu">--}}
+                            {{--<li><a href="#">Action</a></li>--}}
+                            {{--<li><a href="#">Another action</a></li>--}}
+                            {{--<li><a href="#">Something else here</a></li>--}}
+                            {{--<li class="divider"></li>--}}
+                            {{--<li><a href="#">Separated link</a></li>--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
                     <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                 </div>
 
@@ -60,7 +66,7 @@
                 <ul class="todo-list ui-sortable">
 
 
-        @foreach(Auth::user()->tasks()->where('project_id', $project->id)->orderBy('status', 'DESC')->get() as $task)
+        @foreach($tasks as $task)
 
                     @if($task->status == 0)
                         <li class="row task-row" style="border-left: 20px solid #c5c5c5;" data-id="{{ $task->id }}">
@@ -76,9 +82,9 @@
                             {{--<input value="" type="checkbox">--}}
 
                             @if($task->status == 0)
-                                <a href="#" class="text-task-closed text show-modal" modal-act="show-task" modal-id="{{ $task->id }}">{{ $task->name }}</a>
+                                <a href="#" class="text-task-closed text" data-action="modal-task" data-id="{{ $task->id }}">{{ $task->name }}</a>
                             @else
-                                <a href="#" class="text show-modal" modal-act="show-task" modal-id="{{ $task->id }}">{{ $task->name }}</a>
+                                <a href="#" class="text" data-action="modal-task" data-id="{{ $task->id }}">{{ $task->name }}</a>
                             @endif
                             {{--<small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>--}}
 
@@ -128,7 +134,7 @@
             <div class="box-footer clearfix no-border">
                 <div class="pull-right">
                     {{--<button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>--}}
-                    <button type="button" class="btn btn-primary show-modal" modal-act="create-task"><i class="fa fa-plus"></i> Add</button>
+                    <button type="button" class="btn btn-primary" data-action="modal-create-task"><i class="fa fa-plus"></i> Add</button>
                 </div>
             </div>
         </div>

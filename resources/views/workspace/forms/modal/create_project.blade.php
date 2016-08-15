@@ -52,7 +52,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                <button type="button" id="modal-submit" class="btn btn-primary">Создать</button>
+                <button type="button" data-action="modal-submit" class="btn btn-primary">Создать</button>
             </div>
         </div>
     </div>

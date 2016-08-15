@@ -30,3 +30,7 @@
 .header-text-task-closed{
   text-decoration: line-through;
 }
+
+.header-text-task-closed:hover{
+  text-decoration: none;
+}

@@ -67,7 +67,9 @@ class AuthController extends Controller
 
     public function myTask($id){
 
-        return \App\Task::toHtml(Auth::user()->tasks()->where('project_id', $id)->orderBy('status', 'DESC')->get())->toJson();
+        return view("workspace.forms.task_block", ["project_id" => $id ]);
+
+//        return \App\Task::toHtml(Auth::user()->tasks()->where('project_id', $id)->orderBy('status', 'DESC')->get())->toJson();
     }
 
     /**

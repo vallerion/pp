@@ -15,7 +15,9 @@ class ProjectController extends Controller
 
     public function index(Guard $auth){
 //        return Auth::user()->projects->toJson();
-        return $auth->user()->projects->toJson();
+//        return $auth->user()->projects->toJson();
+
+        return view("workspace.projects", ["projects" => $auth->user()->projects]);
     }
 
     public function create(){
