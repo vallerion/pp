@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset("css/admin_panel.css")}}">
     <link rel="stylesheet" href="{{asset("css/skin-black.css")}}">
     <link rel="stylesheet" href="{{asset("css/lib/noty/animate.css")}}">
+    <link rel="stylesheet" href="{{asset("css/lib/wysiwyg.css")}}">
     <link rel="stylesheet" href="{{asset("bootstrap/bootstrap-editable/css/bootstrap-editable.css")}}">
 
     @stack('stylesheets')

@@ -6923,6 +6923,9 @@ wysihtml5.commands.bold = {
   
   wysihtml5.commands.foreColor = {
     exec: function(composer, command, color) {
+        // console.log(composer);
+        // console.log(command);
+        // console.log(color);
       return wysihtml5.commands.formatInline.exec(composer, command, "span", "wysiwyg-color-" + color, REG_EXP);
     },
 

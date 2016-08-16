@@ -25,4 +25,19 @@ class Helper{
         return strip_tags($output);
     }
 
+    public function getMaterialColor($index){
+
+//        $index = intval($index);
+//        $index %= 10;
+
+        return $this->colors[$index%10];
+
+    }
+
+    private $colors = [
+        "#311b92", "#3e2723",//, "#bf360c", "#01579b"
+        "#1a237e", "#e65100", "#b71c1c", "#004d40",
+        "#006064", "#4a148c", "#1b5e20", "#0d47a1",
+    ];
+
 }

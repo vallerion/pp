@@ -2,6 +2,12 @@
 
 @section('title', 'Projects')
 
+@push('stylesheets')
+
+<link rel="stylesheet" href="{{ asset("css/project.css") }}">
+
+@endpush
+
 @section('content')
 <section class="content-header">
     <h1>
@@ -24,7 +30,7 @@
                 <!-- Widget: user widget style 1 -->
                 <div class="box box-widget widget-user-2">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header bg-blue">
+                    <div class="widget-user-header" style="background-color: {{ Helper::getMaterialColor($project->id) }}">
 
                     @if(!empty($project->image))
                         <div class="widget-user-image">
@@ -33,7 +39,7 @@
                     @endif
 
                         <!-- /.widget-user-image -->
-                        <h3 class="widget-user-username">{{ $project->name }}</h3>
+                        <h3 class="widget-user-username project-name">{{ $project->name }}</h3>
                     </div>
                     <div class="box-footer no-padding">
                         <ul class="nav nav-stacked">

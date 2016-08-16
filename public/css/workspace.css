@@ -34,3 +34,22 @@
 .header-text-task-closed:hover{
   text-decoration: none;
 }
+
+.profiler-box{
+
+}
+.profiler-header img {
+  padding: 5px;
+  width: 40px;
+}
+.profiler-body{
+  padding: 5px 0 0 0;
+}
+
+.profiler-header{
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #b5b5b5;
+}
+.profiler-header .headline{
+  padding: 8px 0 0 20px;
+}

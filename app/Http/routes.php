@@ -21,7 +21,7 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
 
     Route::get('test', function(){
-        return Auth::user()->tasks_in_project(1)->get();
+        return \Helper::getMaterialColor(5);
     });
 
 

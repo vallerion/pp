@@ -1,5 +1,21 @@
 
+    // var popover_options = {}
 
+    $(document).ready(function(){
+        $('.profile-sm').each(function(key, object){
+
+            console.log(object);
+
+            $(object).popover({
+                html: true,
+                // trigger: "focus",
+                // title: object,
+                placement: "top",
+                content: switcherAction("user-info", object)
+            });
+
+        });
+    });
 
     $(document).on("click", '*[data-action]', function(e){
         e.preventDefault();
@@ -110,7 +126,30 @@
                 refreshTasks(object); // refreshTasks() -> task.js
 
                 break;
+
+            case 'user-info':
+
+                // refreshTasks(object); // refreshTasks() -> task.js
+                return ajaxGetInfoUser(1); // refreshTasks() -> task.js
+
+                break;
         }
+
+    }
+
+    function ajaxGetInfoUser(id){
+
+        return '<div class="profiler-box">' +
+                    '<div class="profiler-header">' +
+                        '<img src="http://pira.loc/img/user_avatars/3.png" alt="valera">' +
+                        '<a href="#" class="headline">valera</a>' +
+                    '</div>' +
+                    '<div class="profiler-body">' +
+                        '<span class="text-muted">email: <a href="mailto:valera@mail.ru">valera@mail.ru</a></span><br>' +
+                        '<span class="text-muted">skype: <a href="skype:test221">test221</a></span><br>' +
+                        '<span class="text-muted">company: <a href="#">Pira</a></span>' +
+                    '</div>' +
+                '</div>';
 
     }
 

@@ -38,7 +38,7 @@
         </style>
     <!-- TODO вывод последних событий компании, команды, проекта -->
         {{--<h4 class="modal-title" id="name">{{ $project->name }} </h4>--}}
-        <div class="btn btn-default hvr-bounce-in"></div>
+        <a class="btn btn-default hvr-bounce-in profile-sm" data-id="1">valera</a>
     </div>
     <!-- /.row (main row) -->
 

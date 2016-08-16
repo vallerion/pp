@@ -95,7 +95,7 @@
                                 @endforeach
                             </div>
 
-                            <p class="about hidden-xs">{{ Helper::filterHtml($task->about) }}</p>
+                            <p class="about hidden-xs">{{ substr(Helper::filterHtml($task->about), 0, 200) }}</p>
                         </div>
 
                         <div class="label-priority-block col-xs-1 col-md-1">
