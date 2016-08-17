@@ -1,20 +1,21 @@
 
-    // var popover_options = {}
+$('.btn-default').click(function(){
+    console.log("click");
+    $('#modal-confirm').modal();
+});
 
-    $(document).ready(function(){
-        $('.profile-sm').each(function(key, object){
+    $.ajaxSetup({
+        headers: { 'X-CSRF-TOKEN':
+            // document.querySelector('input[name="_token"]') != null ?  document.querySelector('input[name="_token"]').getAttribute('content') : ""}
+            $("input[name=_token]").attr("content")}
+    });
 
-            console.log(object);
+    // $.ajaxSetup({
+    //     headers: { 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').getAttribute('content') }
+    // });
 
-            $(object).popover({
-                html: true,
-                // trigger: "focus",
-                // title: object,
-                placement: "top",
-                content: switcherAction("user-info", object)
-            });
-
-        });
+    $(document).on("click", ".popover .close", function(){
+        $(this).parents(".popover").popover("hide");
     });
 
     $(document).on("click", '*[data-action]', function(e){
@@ -47,7 +48,7 @@
         switch (action){
             case 'apply-task':
 
-                var url = window.location.origin + '/workspace/task/' + $(object).attr("data-id") + '/action?action=close';
+                var url = window.location.origin + '/ajax/task/' + $(object).attr("data-id") + '/action?action=close';
 
                 $.get(url, function(){
 
@@ -61,7 +62,7 @@
 
             case 'reopen-task':
 
-                var url = window.location.origin + '/workspace/task/' + $(object).attr("data-id") + '/action?action=open';
+                var url = window.location.origin + '/ajax/task/' + $(object).attr("data-id") + '/action?action=open';
 
                 $.get(url, function(){
 
@@ -77,7 +78,7 @@
 
                 var data_id = $(object).attr("data-id");
 
-                getModalHtml(window.location.origin + '/workspace/project/' + data_id + '/modal');
+                getModalHtml(window.location.origin + '/ajax/project/' + data_id + '/modal');
 
                 break;
 
@@ -85,7 +86,7 @@
 
                 var data_id = $(object).attr("data-id");
 
-                getModalHtml(window.location.origin + '/workspace/task/' + data_id + '/modal');
+                getModalHtml(window.location.origin + '/ajax/task/' + data_id + '/modal');
 
                 break;
 
@@ -93,25 +94,25 @@
 
                 var data_id = $(object).attr("data-id");
 
-                getModalHtml(window.location.origin + '/workspace/team/' + data_id + '/modal');
+                getModalHtml(window.location.origin + '/ajax/team/' + data_id + '/modal');
 
                 break;
 
             case 'modal-create-team':
 
-                getModalHtml(window.location.origin + '/workspace/team/create');
+                getModalHtml(window.location.origin + '/ajax/team/create');
 
                 break;
 
             case 'modal-create-task':
 
-                getModalHtml(window.location.origin + '/workspace/task/create');
+                getModalHtml(window.location.origin + '/ajax/task/create');
 
                 break;
 
             case 'modal-create-project':
 
-                getModalHtml(window.location.origin + '/workspace/project/create');
+                getModalHtml(window.location.origin + '/ajax/project/create');
 
                 break;
 
@@ -123,35 +124,62 @@
 
             case 'refresh-tasks':
 
-                refreshTasks(object); // refreshTasks() -> task.js
+                var project_box = $(object).parents('.project-box');
+                var data_id = $(project_box).attr("data-id");
+
+                refreshTasks(project_box, data_id); // task.js
 
                 break;
 
             case 'user-info':
 
                 // refreshTasks(object); // refreshTasks() -> task.js
-                return ajaxGetInfoUser(1); // refreshTasks() -> task.js
+                //
+
+                // $(document).find(".popover").each(function(index, value){
+                //     $(value).popover("hide");
+                // });
+
+                // if(!$('*').is('.popover'))
+                uploadProfileSm(object);
+                // else
+                //     $('.popover').popover("hide");
+
+                break;
+
+            case 'delete-task':
+
+                var task_row = $(object).parents('.task-row');
+                var data_id = $(task_row).attr("data-id");
+
+                deleteTask(task_row, data_id); // task.js
 
                 break;
         }
 
     }
 
-    function ajaxGetInfoUser(id){
+    function uploadProfileSm(object){
 
-        return '<div class="profiler-box">' +
-                    '<div class="profiler-header">' +
-                        '<img src="http://pira.loc/img/user_avatars/3.png" alt="valera">' +
-                        '<a href="#" class="headline">valera</a>' +
-                    '</div>' +
-                    '<div class="profiler-body">' +
-                        '<span class="text-muted">email: <a href="mailto:valera@mail.ru">valera@mail.ru</a></span><br>' +
-                        '<span class="text-muted">skype: <a href="skype:test221">test221</a></span><br>' +
-                        '<span class="text-muted">company: <a href="#">Pira</a></span>' +
-                    '</div>' +
-                '</div>';
+        $.ajax({
+            type: "get",
+            url: window.location.origin + '/ajax/user/' + $(object).attr('data-id') + '/profile-sm',
+            success: function(data){
 
+                console.log("popover_update");
+
+                $(object).popover({
+                    html: true,
+                    placement: "top",
+                    content: data
+                }).popover("show");
+
+                // console.log(data);
+            }
+
+        });
     }
+
 
     function onHiddenModal($modal){
         $.noty.closeAll();
@@ -237,7 +265,7 @@
 
     }
 
-    // function postModal(action, data){
+
     function postModal(object){
 
         var form = $(object).parent().parent().find('form');

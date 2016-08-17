@@ -34,54 +34,94 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
         'index', 'show', 'update'
     ]]);
 
-    Route::get('profile/mytask/{id?}', 'Auth\AuthController@myTask');
+
+    Route::resource('project', 'ProjectController', ['except' => [
+        'create'
+    ]]);
 
 
-
-    Route::get('project/{project}/users', 'ProjectController@users');
-
-//    Route::get('project/{project}/mytask', 'ProjectController@myTask');
-
-    Route::get('project/{project}/teams', 'ProjectController@teams');
-
-    Route::get('project/{project}/modal', 'ProjectController@modal');
-
-    Route::resource('project', 'ProjectController');
+    Route::resource('task', 'TaskController', ['except' => [
+        'create'
+    ]]);
 
 
-
-    Route::get('task/{task}/action', 'TaskController@action');
-
-    Route::get('task/{task}/users', 'TaskController@users');
-
-    Route::get('task/{task}/project', 'TaskController@project');
-
-    Route::get('task/{task}/modal', 'TaskController@modal');
-
-    Route::resource('task', 'TaskController');
-
-
-
-
-    Route::get('team/{team}/users', 'TeamController@users');
-
-    Route::get('team/{team}/projects', 'TeamController@projects');
-
-    Route::get('team/{team}/modal', 'TeamController@modal');
-
-    Route::resource('team', 'TeamController');
+    Route::resource('team', 'TeamController', ['except' => [
+        'create'
+    ]]);
 
 });
 
+Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function () {
 
-Route::get('auth/', 'Auth\AuthController@getRegister');
+    Route::group(['prefix' => 'user'], function(){
 
-Route::get('auth/activate', 'Auth\AuthController@getActivate');
+        Route::get('task/{id?}', 'Auth\AuthController@myTask');
 
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+        Route::get('{user}/profile-sm', 'Auth\AuthController@profileSm');
 
-Route::post('auth/login', 'Auth\AuthController@postLogin');
 
-Route::post('auth/register', 'Auth\AuthController@postRegister');
+    });
 
-Route::post('auth/reset', 'Auth\AuthController@postReset');
+
+
+    Route::group(['prefix' => 'project'], function(){
+
+        Route::get('create', 'ProjectController@create');
+
+        Route::get('{project}/teams', 'ProjectController@teams');
+
+        Route::get('{project}/modal', 'ProjectController@modal');
+
+        Route::get('{project}/users', 'ProjectController@users');
+
+    });
+
+
+
+    Route::group(['prefix' => 'task'], function(){
+
+        Route::get('create', 'TaskController@create');
+
+        Route::get('{task}/action', 'TaskController@action');
+
+        Route::get('{task}/users', 'TaskController@users');
+
+        Route::get('{task}/project', 'TaskController@project');
+
+        Route::get('{task}/modal', 'TaskController@modal');
+
+    });
+
+
+
+    Route::group(['prefix' => 'team'], function(){
+
+        Route::get('create', 'TeamController@create');
+
+        Route::get('{team}/users', 'TeamController@users');
+
+        Route::get('{team}/projects', 'TeamController@projects');
+
+        Route::get('{team}/modal', 'TeamController@modal');
+
+    });
+
+
+
+});
+
+Route::group(['prefix' => 'auth'], function(){
+
+    Route::get('/', 'Auth\AuthController@getRegister');
+
+    Route::get('activate', 'Auth\AuthController@getActivate');
+
+    Route::get('logout', 'Auth\AuthController@getLogout');
+
+    Route::post('login', 'Auth\AuthController@postLogin');
+
+    Route::post('register', 'Auth\AuthController@postRegister');
+
+    Route::post('reset', 'Auth\AuthController@postReset');
+
+});

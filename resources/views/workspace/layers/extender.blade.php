@@ -9,14 +9,6 @@
 
 @endpush
 
-@push('scripts')
-
-
-<script src="{{asset('js/move_list.js')}}"></script>
-<script src="{{asset('js/editable.js')}}"></script>
-
-@endpush
-
 @section('header')
     <header class="main-header">
         <!-- Logo -->

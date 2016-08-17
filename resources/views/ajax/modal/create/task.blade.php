@@ -132,12 +132,12 @@
             switch (id){
                 case 'team':
 
-                    refreshSelectpicker('project', window.location.origin + '/workspace/team/' + selected + '/projects');
+                    refreshSelectpicker('project', window.location.origin + '/ajax/team/' + selected + '/projects');
 
                     break;
                 case 'project':
 
-                    refreshSelectpicker('user_to', window.location.origin + '/workspace/project/' + selected + '/users');
+                    refreshSelectpicker('user_to', window.location.origin + '/ajax/project/' + selected + '/users');
 
                     break;
             }

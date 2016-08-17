@@ -53,3 +53,35 @@
 .profiler-header .headline{
   padding: 8px 0 0 20px;
 }
+
+.modal-container{
+  overflow-y: auto;
+  max-height: 800px;
+}
+
+#modal-confirm {
+  text-align: center;
+  padding: 0 !important;
+}
+
+#modal-confirm:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+#modal-confirm .modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+#modal-confirm .modal-footer{
+  text-align: center;
+  padding: 5px;
+}
+
+#modal-confirm .modal-footer .btn{
+  border-radius: 0;
+}
