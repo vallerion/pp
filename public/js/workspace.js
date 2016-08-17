@@ -1,9 +1,4 @@
 
-$('.btn-default').click(function(){
-    console.log("click");
-    $('#modal-confirm').modal();
-});
-
     $.ajaxSetup({
         headers: { 'X-CSRF-TOKEN':
             // document.querySelector('input[name="_token"]') != null ?  document.querySelector('input[name="_token"]').getAttribute('content') : ""}
@@ -152,11 +147,27 @@ $('.btn-default').click(function(){
                 var task_row = $(object).parents('.task-row');
                 var data_id = $(task_row).attr("data-id");
 
-                deleteTask(task_row, data_id); // task.js
+                // deleteTask(task_row, data_id); // task.js
+
+                confirm(function(){
+                    deleteTask(task_row, data_id);
+                    console.log("confirm");
+                });
 
                 break;
         }
 
+    }
+
+    function confirm(callback){
+
+        // $('#modal-confirm').modal({backdrop: 'static'}).on("click", "button.btn-success",function(){
+        //     callback();
+        // });
+
+        $('#modal-confirm').modal({backdrop: 'static'}).one("click", "button.btn-success",function(){
+            callback();
+        });
     }
 
     function uploadProfileSm(object){

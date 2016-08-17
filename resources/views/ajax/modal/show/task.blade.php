@@ -7,9 +7,9 @@
                 {{--</div>--}}
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 @if($task->status == 0)
-                    <a title="closed" href="{{ url('workspace/task/' . $task->id) }}"><h4 class="modal-title header-text-task-closed" id="name">{{ $task->name }} </h4></a>
+                    <h4 class="modal-title header-text-task-closed" id="name"><a title="closed" href="{{ url('workspace/task/' . $task->id) }}">{{ $task->name }} </a></h4>
                 @else
-                    <a href="{{ url('workspace/task/' . $task->id) }}"><h4 class="modal-title" id="name">{{ $task->name }} </h4></a>
+                    <h4 class="modal-title" id="name"><a href="{{ url('workspace/task/' . $task->id) }}">{{ $task->name }} </a></h4>
                 @endif
             </div>
             <div class="modal-container">
@@ -55,9 +55,8 @@
 
                         <div class="headline">
                             <a href="#">SuperUser</a>
-                            <span class="pull-right text-muted">13.08.16 12:14</span>
+                            {{--<span class="pull-right text-muted">13.08.16 12:14</span>--}}
                             <span class="pull-right text-muted">{{ date("d.m.y H:i", strtotime($task->created_at . "+4 hours")) }}</span>
-                            +1 week 2 days 4 hours 2 seconds
                         </div>
 
 
@@ -80,7 +79,7 @@
 
                         <div class="headline">
                             <a href="#">SuperUser</a>
-                            <span class="pull-right text-muted">13.08.16 17:03</span>
+                            {{--<span class="pull-right text-muted">13.08.16 17:03</span>--}}
                             <span class="pull-right text-muted">{{ date("d.m.y H:i", strtotime($task->created_at . "+4 hours 34 min")) }}</span>
                         </div>
 
@@ -104,7 +103,7 @@
 
                         <div class="headline">
                             <a href="#">{{ $task->user_from->name }}</a>
-                            <span class="pull-right text-muted">13.08.16 17:43</span>
+                            {{--<span class="pull-right text-muted">13.08.16 17:43</span>--}}
                             <span class="pull-right text-muted">{{ date("d.m.y H:i", strtotime($task->created_at . "+4 hours 39 min")) }}</span>
                         </div>
 
@@ -127,7 +126,7 @@
 
                         <div class="headline">
                             <a href="#">SuperUser</a>
-                            <span class="pull-right text-muted">13.08.16 17:45</span>
+                            {{--<span class="pull-right text-muted">13.08.16 17:45</span>--}}
                             <span class="pull-right text-muted">{{ date("d.m.y H:i", strtotime($task->created_at . "+4 hours 48 min")) }}</span>
                         </div>
 
@@ -159,7 +158,7 @@
 
                         <div class="headline">
                             <a href="#">{{ $task->user_from->name }}</a>
-                            <span class="pull-right text-muted">13.08.16 17:53</span>
+                            {{--<span class="pull-right text-muted">13.08.16 17:53</span>--}}
                             <span class="pull-right text-muted">{{ date("d.m.y H:i", strtotime($task->created_at . "+4 hours 52 min")) }}</span>
                         </div>
 
@@ -182,7 +181,7 @@
 
                         <div class="headline">
                             <a href="#">SuperUser</a>
-                            <span class="pull-right text-muted">13.08.16 18:15</span>
+                            {{--<span class="pull-right text-muted">13.08.16 18:15</span>--}}
                             <span class="pull-right text-muted">{{ date("d.m.y H:i", strtotime($task->created_at . "+5 hours 2 min")) }}</span>
                         </div>
 
