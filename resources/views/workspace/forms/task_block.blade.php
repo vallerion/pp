@@ -43,9 +43,11 @@
             </div>
 
             <div class="tools col-xs-4 col-md-2 pull-right">
-                <a href="#" class="btn-xs btn-primary hvr-bounce-in">
+                @if($task->status != 0)
+                <a data-action="edit-task" href="#" class="btn-xs btn-primary hvr-bounce-in">
                     <i class="fa fa-pencil"></i>
                 </a>
+                @endif
                 <a data-action="delete-task" href="#" class="btn-xs btn-danger hvr-bounce-in col-xs-offset-1">
                     <i class="fa fa-trash-o"></i>
                 </a>

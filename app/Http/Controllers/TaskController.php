@@ -17,8 +17,9 @@ class TaskController extends Controller
         return view("workspace.tasks");
     }
 
-    public function create(){
-        return view("ajax.modal.create.task", ["marks" => Task::marks]);
+    public function create(TaskRequest $request){
+//        return $request->project_id;
+        return view("ajax.modal.create.task", ["marks" => Task::marks, 'project_id' => $request->project_id]);
     }
 
     public function store(TaskRequest $request, Guard $auth){
@@ -42,8 +43,12 @@ class TaskController extends Controller
         return $task;
     }
 
-    public function modal($task){
+    public function showModal(Task $task){
         return view("ajax.modal.show.task", ['task' => $task]);
+    }
+
+    public function edit($task){
+        return view("ajax.modal.edit.task", ['task' => $task]);
     }
 
     public function users($task){
@@ -77,8 +82,12 @@ class TaskController extends Controller
         
     }
 
-    public function update($task, $data){
+    public function update(TaskRequest $request, Task $task){
+        $task->update($request->all());
 
+        return json_encode(['successful' => true,
+            'detail' => ['Task "' . $task->name . '" is updated']
+        ]);
     }
 
     public function destroy($task){

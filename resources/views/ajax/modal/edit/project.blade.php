@@ -7,45 +7,57 @@
             </div>
             <div class="modal-body">
 
-                <form role="form6" action="workspace/project" method="post">
+                <form role="form6" action="workspace/project" method="put">
                     {!! csrf_field() !!}
 
                     <div class="form-group">
                         <label for="name">Название:</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $project->name }}">
                     </div>
                     <div class="form-group">
                         <label for="about">Описание:</label>
                         {{--<textarea class="form-control" rows="5" id="about" name="about"></textarea>--}}
                         {{--<textarea id="about" name="about" class="textarea form-control" placeholder="Enter text ..." rows="5" style="width: 100%;"></textarea>--}}
 
-                        @include('workspace.forms.text-editor')
+                        @include('workspace.forms.text-editor', [$content => $project->about])
 
                     </div>
                     <div class="form-group">
                         <div class="checkbox">
-                            <label><input checked name="visible" type="checkbox">Публичный проект</label>
+                            <label>
+                                @if($project->visible == 0)
+                                    <input name="visible" type="checkbox">
+                                @else
+                                    <input checked name="visible" type="checkbox">
+
+                                Публичный проект
+                            </label>
                         </div>
                     </div>
 
-                    @if(count(Auth::user()->privilegesTeams) > 0)
+                    @if($project->teams()->count() > 0)
 
-                        <div class="form-group" style="display: inline;">
-                            {{--<label for="sel1">Select Team:</label><br>--}}
+                    <div class="form-group">
+                        <label for="name">Команды:</label>
+                        @foreach($project->teams as $team)
 
-                            <select id="team" class="selectpicker" name="team_id" data-width="33%" data-live-search="true" data-size="5">
+                            <a href="#">{{ $team->name }}  </a>
 
-                                <option value="0"><b>Select Team</b></option>
+                        @endforeach
+                    </div>
 
-                                @foreach(Auth::user()->privilegesTeams as $team)
-                                    <option value="{{ $team->id }}" data-tokens="{{ $team->name }}">{{ $team->name }}</option>
-                                @endforeach
+                    <div class="form-group">
+                        <label for="name">Участники:</label>
+                        @foreach($project->users as $user)
 
-                            </select>
+                            <a href="#" data-action="user-info" data-id="{{ $user->id }}">{{ $user->name }}  </a>
 
-                        </div>
+                        @endforeach
+                    </div>
 
                     @endif
+
+
 
                 </form>
 

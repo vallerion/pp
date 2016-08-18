@@ -61,32 +61,4 @@ class Task extends Model
     public function open(){
         return $this->update(["status" => 1]);
     }
-
-    static function toHtml($tasks){
-
-        $tasks->map(function($task){
-            $task->transformToHtml();
-        });
-
-        return $tasks;
-    }
-
-    private function transformToHtml(){
-
-        $this->about = \Helper::filterHtml($this->about);
-
-        $this->priority = "<span class=\"label\" style='background-color:" . $this::priority[$this->priority] . ";'>" . $this->priority . "</span>";
-
-        $marks = "";
-        foreach ($this->getMark() as $mark){
-            $marks .= "<span class=\"label\" style='background-color:" . $this::marks[$mark] . ";'>" . $mark . "</span>";
-        }
-
-        $this->mark = $marks;
-
-        $this->status = $this->status == 0 ? "#c5c5c5" : $this::status[$this->status]["color"];
-
-
-
-    }
 }

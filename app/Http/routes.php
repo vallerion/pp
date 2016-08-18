@@ -36,17 +36,17 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
 
     Route::resource('project', 'ProjectController', ['except' => [
-        'create'
+        'create', 'edit'
     ]]);
 
 
     Route::resource('task', 'TaskController', ['except' => [
-        'create'
+        'create', 'edit'
     ]]);
 
 
     Route::resource('team', 'TeamController', ['except' => [
-        'create'
+        'create', 'edit'
     ]]);
 
 });
@@ -70,9 +70,11 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function () {
 
         Route::get('{project}/teams', 'ProjectController@teams');
 
-        Route::get('{project}/modal', 'ProjectController@modal');
-
         Route::get('{project}/users', 'ProjectController@users');
+
+        Route::get('{project}/show', 'ProjectController@showModal');
+
+        Route::get('{project}/edit', 'ProjectController@edit');
 
     });
 
@@ -88,7 +90,9 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function () {
 
         Route::get('{task}/project', 'TaskController@project');
 
-        Route::get('{task}/modal', 'TaskController@modal');
+        Route::get('{task}/show', 'TaskController@showModal');
+
+        Route::get('{task}/edit', 'TaskController@edit');
 
     });
 
@@ -102,7 +106,9 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function () {
 
         Route::get('{team}/projects', 'TeamController@projects');
 
-        Route::get('{team}/modal', 'TeamController@modal');
+        Route::get('{team}/show', 'TeamController@showModal');
+
+        Route::get('{team}/edit', 'TeamController@edit');
 
     });
 

@@ -46,10 +46,14 @@ class ProjectController extends Controller
         return $project;
     }
 
-    public function modal($project){
+    public function showModal($project){
 //        return $project->toJson();
 //        return ["project" => $project, "users" => ];
         return view("ajax.modal.show.project", ['project' => $project]);
+    }
+
+    public function edit($project){
+        return view("ajax.modal.edit.project", ['project' => $project]);
     }
     
     public function users($project){

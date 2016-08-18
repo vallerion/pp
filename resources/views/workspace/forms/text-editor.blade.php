@@ -79,6 +79,12 @@
         </div>
 
     </div>
-    <textarea name="about" class="form-control" placeholder="Enter text ..."></textarea>
+    <textarea name="about" class="form-control" placeholder="Enter text ...">
+
+        @if(isset($content))
+            {{ $content }}
+        @endif
+
+    </textarea>
     <br>
 </div>

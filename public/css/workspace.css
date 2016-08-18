@@ -85,3 +85,15 @@
 #modal-confirm .modal-footer .btn{
   border-radius: 0;
 }
+
+.btn-confirm{
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s;
+}
+
+.btn-confirm button{
+
+  margin: -5px 5px;
+}

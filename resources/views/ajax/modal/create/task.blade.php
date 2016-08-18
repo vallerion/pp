@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
 
-                <form role="form6" action="workspace/task">
+                <form role="form6" action="workspace/task"  method="post">
                     {!! csrf_field() !!}
 
                     <div class="form-group">
@@ -82,11 +82,19 @@
 
                             <select id="project" class="selectpicker" data-width="32%" name="project_id" data-live-search="true" data-size="5">
 
-                                <option value="0"><b>Select Project</b></option>
+                                {{ $project_id }}
+                                @if(isset($project_id))
+                                    <? $project =  Auth::user()->privilegesProjects()->where('id', $project_id)->get()[0]; ?>
+                                    <option value="{{ $project->id }}"><b>{{ $project->name }}</b></option>
+                                @else
 
-                                @foreach(Auth::user()->privilegesProjects as $project)
-                                    <option value="{{ $project->id }}" data-tokens="{{ $project->name }}">{{ $project->name }}</option>
-                                @endforeach
+                                    <option value="0"><b>Select Project</b></option>
+
+                                    @foreach(Auth::user()->privilegesProjects as $project)
+                                        <option value="{{ $project->id }}" data-tokens="{{ $project->name }}">{{ $project->name }}</option>
+                                    @endforeach
+
+                                @endif
 
                             </select>
 
@@ -118,6 +126,8 @@
             </div>
         </div>
     </div>
+
+
 
     <script>
 
@@ -167,5 +177,9 @@
 
             });
         }
+
+        @if(isset($project_id))
+            refreshSelectpicker('user_to', window.location.origin + '/ajax/project/' + {{ $project->id }} + '/users');
+        @endif
     </script>
 </div>

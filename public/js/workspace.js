@@ -9,6 +9,37 @@
     //     headers: { 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').getAttribute('content') }
     // });
 
+    $('.btn-confirm').click(function(){
+
+        // $(this).removeClass('btn-confirm');
+
+        console.log("btn-confirm click");
+
+        var btn_confirm = this;
+        var old_html = $(this).html();
+
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-default');
+
+        var btn_yes = '<button class="btn btn-success">Yes</button>';
+        var btn_no = '<button class="btn btn-danger">No</button>';
+
+        $(this).html('Are you sure? ' + btn_yes + btn_no);
+
+        // $(this).one('click', '.btn-success', function(){
+        //     console.log("yes");
+        // });
+        //
+        // $(this).one('click', '.btn-danger', function(){
+        //     console.log("no");
+        //     $(btn_confirm).html('');
+        // });
+
+
+
+
+    });
+
     $(document).on("click", ".popover .close", function(){
         $(this).parents(".popover").popover("hide");
     });
@@ -73,7 +104,7 @@
 
                 var data_id = $(object).attr("data-id");
 
-                getModalHtml(window.location.origin + '/ajax/project/' + data_id + '/modal');
+                getModalHtml(window.location.origin + '/ajax/project/' + data_id + '/show');
 
                 break;
 
@@ -81,7 +112,7 @@
 
                 var data_id = $(object).attr("data-id");
 
-                getModalHtml(window.location.origin + '/ajax/task/' + data_id + '/modal');
+                getModalHtml(window.location.origin + '/ajax/task/' + data_id + '/show');
 
                 break;
 
@@ -89,7 +120,7 @@
 
                 var data_id = $(object).attr("data-id");
 
-                getModalHtml(window.location.origin + '/ajax/team/' + data_id + '/modal');
+                getModalHtml(window.location.origin + '/ajax/team/' + data_id + '/show');
 
                 break;
 
@@ -101,7 +132,13 @@
 
             case 'modal-create-task':
 
-                getModalHtml(window.location.origin + '/ajax/task/create');
+
+                var data_id = $(object).parents('.project-box').attr('data-id');
+
+                if(data_id != undefined)
+                    getModalHtml(window.location.origin + '/ajax/task/create?project_id=' + data_id);
+                else
+                    getModalHtml(window.location.origin + '/ajax/task/create');
 
                 break;
 
@@ -113,7 +150,7 @@
 
             case 'modal-submit':
 
-                postModal(object);
+                submitModal(object);
 
                 break;
 
@@ -153,6 +190,15 @@
                     deleteTask(task_row, data_id);
                     console.log("confirm");
                 });
+
+                break;
+
+            case 'edit-task':
+
+                var task_row = $(object).parents('.task-row');
+                var data_id = $(task_row).attr("data-id");
+
+                getModalHtml(window.location.origin + '/ajax/task/' + data_id + '/edit');
 
                 break;
         }
@@ -205,6 +251,8 @@
             type: "GET",
             url: url,
             success: function(data){
+
+                // console.log(data);
 
                 $modal = $(data).modal({show:false});
 
@@ -277,18 +325,21 @@
     }
 
 
-    function postModal(object){
+    function submitModal(object){
 
         var form = $(object).parent().parent().find('form');
         var form_action = form.attr('action');
         var data = form.serialize();
+        var type = $(form).attr("method");
+
+        console.log(type);
 
         var url = window.location.origin + '/' + form_action;
 
         // console.log(data);
 
         $.ajax({
-            type: "POST",
+            type: type,
             url: url,
             data: data,
             success: function(data){
@@ -309,7 +360,7 @@
             },
             error: function(response){
 
-                // console.log(response.responseText);
+                console.log(response.responseText);
 
                 var errors = $.parseJSON(response.responseText);
 

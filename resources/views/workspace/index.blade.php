@@ -16,46 +16,32 @@
 <section class="content">
         <!-- Small boxes (Stat box) -->
     <div class="row">
-        <style>
-            .hvr-bounce-in {
-                display: inline-block;
-                vertical-align: middle;
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-                box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-                -moz-osx-font-smoothing: grayscale;
-                -webkit-transition-duration: 0.5s;
-                transition-duration: 0.5s;
-            }
-            .hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {
-                -webkit-transform: scale(1.2);
-                transform: scale(1.2);
-                -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-                transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-            }
-        </style>
     <!-- TODO вывод последних событий компании, команды, проекта -->
         {{--<h4 class="modal-title" id="name">{{ $project->name }} </h4>--}}
-        <a style="margin-top: 100px" class="btn btn-default hvr-bounce-in">valera</a>
+        <a style="margin-left:20px;margin-top: 100px;" class="btn btn-success btn-confirm"><i class="fa fa-check"></i> Apply</a>
+        <a style="margin-left:20px;margin-top: 100px;" class="btn btn-default btn-confirm">
+            Are you sure?
+            <button class="btn btn-success">Yes</button>
+            <button class="btn btn-danger">No</button>
+        </a>
+
     </div>
     <!-- /.row (main row) -->
 
 </section>
 
-<div class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Are you sure?</h4>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn col-md-5 col-md-offset-1 btn-success" data-dismiss="modal">Ok</button>
-                <button type="button" class="btn col-md-5 btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
+{{--<div class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-hidden="true">--}}
+    {{--<div class="modal-dialog modal-sm">--}}
+        {{--<div class="modal-content">--}}
+            {{--<div class="modal-header">--}}
+                {{--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>--}}
+                {{--<h4 class="modal-title">Are you sure?</h4>--}}
+            {{--</div>--}}
+            {{--<div class="modal-footer">--}}
+                {{--<button type="button" class="btn col-md-5 col-md-offset-1 btn-success" data-dismiss="modal">Ok</button>--}}
+                {{--<button type="button" class="btn col-md-5 btn-danger" data-dismiss="modal">Cancel</button>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</div>--}}
 @endsection

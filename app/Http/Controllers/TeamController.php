@@ -35,8 +35,12 @@ class TeamController extends Controller
         return $team;
     }
 
-    public function modal($team){
+    public function showModal($team){
         return view("ajax.modal.show.team", ['team' => $team]);
+    }
+
+    public function edit($team){
+        return view("ajax.modal.edit.team", ['team' => $team]);
     }
 
     public function users($project){
