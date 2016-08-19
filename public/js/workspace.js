@@ -9,36 +9,36 @@
     //     headers: { 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').getAttribute('content') }
     // });
 
-    $('.btn-confirm').click(function(){
-
-        // $(this).removeClass('btn-confirm');
-
-        console.log("btn-confirm click");
-
-        var btn_confirm = this;
-        var old_html = $(this).html();
-
-        $(this).removeClass('btn-success');
-        $(this).addClass('btn-default');
-
-        var btn_yes = '<button class="btn btn-success">Yes</button>';
-        var btn_no = '<button class="btn btn-danger">No</button>';
-
-        $(this).html('Are you sure? ' + btn_yes + btn_no);
-
-        // $(this).one('click', '.btn-success', function(){
-        //     console.log("yes");
-        // });
-        //
-        // $(this).one('click', '.btn-danger', function(){
-        //     console.log("no");
-        //     $(btn_confirm).html('');
-        // });
-
-
-
-
-    });
+    // $('.btn-confirm').click(function(){
+    //
+    //     // $(this).removeClass('btn-confirm');
+    //
+    //     console.log("btn-confirm click");
+    //
+    //     var btn_confirm = this;
+    //     var old_html = $(this).html();
+    //
+    //     $(this).removeClass('btn-success');
+    //     $(this).addClass('btn-default');
+    //
+    //     var btn_yes = '<button class="btn btn-success">Yes</button>';
+    //     var btn_no = '<button class="btn btn-danger">No</button>';
+    //
+    //     $(this).html('Are you sure? ' + btn_yes + btn_no);
+    //
+    //     $(this).one('click', '.btn-success', function(){
+    //         console.log("yes");
+    //     });
+    //
+    //     $(this).one('click', '.btn-danger', function(){
+    //         console.log("no");
+    //         $(btn_confirm).html('');
+    //     });
+    //
+    //
+    //
+    //
+    // });
 
     $(document).on("click", ".popover .close", function(){
         $(this).parents(".popover").popover("hide");
@@ -76,13 +76,32 @@
 
                 var url = window.location.origin + '/ajax/task/' + $(object).attr("data-id") + '/action?action=close';
 
-                $.get(url, function(){
+                // $.get(url,
+                //     function(){
+                //         var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
+                //         $task_row.css("border-left", "20px solid #c5c5c5");
+                //         $task_row.find('a[data-action="modal-task"]').addClass('text-task-closed');
+                //     }
+                // );
 
-                    var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
-                    $task_row.css("border-left", "20px solid #c5c5c5");
-                    $task_row.find('a[data-action="modal-task"]').addClass('text-task-closed');
+
+                confirmInline(object, function(){
+
+                    $.get(url,
+                        function(){
+
+                            var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
+                            $task_row.css("border-left", "20px solid #c5c5c5");
+                            $task_row.find('a[data-action="modal-task"]').addClass('text-task-closed');
+
+                            // $('#modal-block').modal('hide');
+                            // $('#modal-block').modal('hide');
+
+                        }
+                    );
 
                 });
+
 
                 break;
 
@@ -90,11 +109,28 @@
 
                 var url = window.location.origin + '/ajax/task/' + $(object).attr("data-id") + '/action?action=open';
 
-                $.get(url, function(){
+                // $.get(url,
+                //     function(){
+                //         var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
+                //         $task_row.css("border-left", "20px solid #3c8dbc");
+                //         $task_row.find('a[data-action="modal-task"]').removeClass('text-task-closed');
+                //     }
+                // );
 
-                    var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
-                    $task_row.css("border-left", "20px solid #3c8dbc");
-                    $task_row.find('a[data-action="modal-task"]').removeClass('text-task-closed');
+                confirmInline(object, function(){
+
+                    $.get(url,
+                        function(){
+
+                            var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
+                            $task_row.css("border-left", "20px solid #3c8dbc");
+                            $task_row.find('a[data-action="modal-task"]').removeClass('text-task-closed');
+
+                            // $('#modal-block').modal('hide');
+                            // $('#modal-block').modal('hide');
+
+                        }
+                    );
 
                 });
 
@@ -186,9 +222,9 @@
 
                 // deleteTask(task_row, data_id); // task.js
 
-                confirm(function(){
+                confirmModal(function(){
                     deleteTask(task_row, data_id);
-                    console.log("confirm");
+                    // console.log("confirm");
                 });
 
                 break;
@@ -201,11 +237,64 @@
                 getModalHtml(window.location.origin + '/ajax/task/' + data_id + '/edit');
 
                 break;
+
+            case 'test':
+
+                // confirmInline(object, function(){
+                //     console.log("click yes");
+                // });
+
+                break;
         }
 
     }
 
-    function confirm(callback){
+    function confirmInline(object, callbackYes){
+
+        if($(object).hasClass('confirm-process'))
+            return;
+
+        if($(object).hasClass('btn-success'))
+            var btn_class = "btn-success";
+        else if($(object).hasClass('btn-danger'))
+            var btn_class = "btn-danger";
+
+        console.log(btn_class);
+
+        $(object).removeClass(btn_class);
+        $(object).addClass('btn-default');
+        $(object).addClass('confirm-process');
+
+        var old_html = $(object).html();
+        console.log(object);
+
+        var btn_yes = '<button class="btn btn-success">Yes</button>';
+        var btn_no = '<button class="btn btn-danger">No</button>';
+
+        $(object).html('Are you sure? ' + btn_yes + btn_no);
+
+        $(object).one('click', '.btn-success', function(){
+            callbackYes();
+
+            $(object).html(old_html);
+            $(object).removeClass('btn-default');
+            $(object).addClass(btn_class);
+            $(object).removeClass('confirm-process');
+        });
+
+        $(object).one('click', '.btn-danger', function(){
+
+            // console.log("no");
+            $(object).html(old_html);
+            $(object).removeClass('btn-default');
+            $(object).addClass(btn_class);
+            $(object).removeClass('confirm-process');
+        });
+
+
+    }
+
+    function confirmModal(callback){
 
         // $('#modal-confirm').modal({backdrop: 'static'}).on("click", "button.btn-success",function(){
         //     callback();

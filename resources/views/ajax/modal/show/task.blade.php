@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-block" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 {{--<div class="tools">--}}
@@ -198,13 +198,16 @@
 
             <div class="modal-footer">
                 @if($task->status == 0)
-                    <a href="{{ url('workspace/task/' . $task->id . '/action?action=open') }}" class="btn btn-danger" data-id="{{ $task->id }}" data-action="reopen-task" data-dismiss="modal"><i class="fa fa-refresh"></i> Reopen</a>
+                    {{--<a href="#" class="btn btn-danger" data-id="{{ $task->id }}" data-action="reopen-task" data-dismiss="modal"><i class="fa fa-refresh"></i> Reopen</a>--}}
+                    <a href="#" class="btn btn-danger btn-confirm" data-id="{{ $task->id }}" data-action="reopen-task"><i class="fa fa-refresh"></i> Reopen</a>
                 @else
 {{--                    <a href="{{ url('workspace/task/' . $task->id . '/action?action=open') }}" class="btn btn-danger" data-id="{{ $task->project_id }}" data-action="reopen-task" data-dismiss="modal"><i class="fa fa-refresh"></i> Reopen</a>--}}
                     {{--<a class="btn btn-success" ><i class="fa fa-check"></i> Apply</a>--}}
-                    <a href="{{ url('workspace/task/' . $task->id . '/action?action=close') }}" class="btn btn-success" data-id="{{ $task->id }}" data-action="apply-task" data-dismiss="modal"><i class="fa fa-check"></i> Apply</a>
+                    {{--<a href="#" class="btn btn-success btn-confirm" data-id="{{ $task->id }}" data-action="apply-task"><i class="fa fa-check"></i> Apply</a>--}}
+                    <a href="#" class="btn btn-success btn-confirm" data-id="{{ $task->id }}" data-action="apply-task"><i class="fa fa-check"></i> Apply</a>
+                    {{--<a href="#" class="btn btn-success" data-id="{{ $task->id }}" data-action="apply-task" data-dismiss="modal"><i class="fa fa-check"></i> Apply</a>--}}
                 @endif
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
                 {{--<button type="button" id="modal-submit" class="btn btn-primary">Создать</button>--}}
             </div>
         </div>

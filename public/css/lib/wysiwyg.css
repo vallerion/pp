@@ -1,12 +1,13 @@
 
 .text-editor .toolbar{
-    padding: 5px 0;
+    /*padding: 5px 0;*/
     margin: 0 -5px;
 }
 
 .text-editor .toolbar .text-tool{
     float: right;
-    margin: 5px 5px -5px 5px;
+    /*margin: 5px 5px 0px 5px;*/
+    margin-right: 5px;
 }
 
 .text-editor .toolbar .text-tool > .btn{

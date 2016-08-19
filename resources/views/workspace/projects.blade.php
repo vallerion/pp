@@ -30,7 +30,8 @@
                 <!-- Widget: user widget style 1 -->
                 <div class="box box-widget widget-user-2">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header" style="background-color: {{ Helper::getMaterialColor($project->id) }}">
+                    <?php $color = Helper::getMaterialColor($project->id); ?>
+                    <div class="widget-user-header" style="background: linear-gradient(to right, {{ $color[0] }}, {{ $color[1] }});">
 
                     @if(!empty($project->image))
                         <div class="widget-user-image">

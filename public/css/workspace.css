@@ -93,7 +93,17 @@
   transition: 1s;
 }
 
+.btn-confirm:active{
+  background-color: #f4f4f4;
+  color: #444;
+  border-color: #ddd
+}
+
 .btn-confirm button{
 
-  margin: -5px 5px;
+  margin: -6px 2px !important;
+}
+
+.modal-footer button.btn-close{
+  padding: 7px 12px;
 }

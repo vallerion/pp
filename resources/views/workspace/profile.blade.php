@@ -8,6 +8,12 @@
 
 @endpush
 
+@push('stylesheets')
+
+<link rel="stylesheet" href="{{ asset("css/profile.css") }}">
+
+@endpush
+
 @section('content')
 <section class="content-header">
     <h1>
@@ -26,7 +32,11 @@
 
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="{{ $user->image }}" alt="User profile picture">
+
+                    <div class="profile-img-block">
+                        <img class="profile-user-img img-responsive img-circle" src="{{ $user->image }}" alt="User profile picture">
+                        <i class="fa fa-search"></i>
+                    </div>
 
                     <h3 class="profile-username text-center">
                         <span id="name" data-type="text" class="editable-click editable-username" data-pk="{{ $user->id }}">{{ $user->name }}</span>

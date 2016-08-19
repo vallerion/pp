@@ -40,15 +40,16 @@
             @continue
         @endif
 
-        <div class="box box-primary project-box" data-id="{{ $project->id }}">
+        <div class="box project-box" style="border-top-color: {{ Helper::getMaterialColor($project->id)[1] }}" data-id="{{ $project->id }}">
             <div class="box-header">
                 <i class="ion ion-clipboard"></i>
 
                 <h3 class="box-title">{{ $project->name }}</h3>
 
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button type="button" data-action="refresh-tasks" class="btn btn-box-tool"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
                     {{--<div class="btn-group">--}}
                         {{--<button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">--}}
                             {{--<i class="fa fa-wrench"></i></button>--}}
@@ -60,7 +61,7 @@
                             {{--<li><a href="#">Separated link</a></li>--}}
                         {{--</ul>--}}
                     {{--</div>--}}
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    {{--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>--}}
                 </div>
 
             </div>

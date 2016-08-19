@@ -18,7 +18,7 @@
     <div class="row">
     <!-- TODO вывод последних событий компании, команды, проекта -->
         {{--<h4 class="modal-title" id="name">{{ $project->name }} </h4>--}}
-        <a style="margin-left:20px;margin-top: 100px;" class="btn btn-success btn-confirm"><i class="fa fa-check"></i> Apply</a>
+        <a data-action="test" style="margin-left:20px;margin-top: 100px;" class="btn btn-success btn-confirm"><i class="fa fa-check"></i> Apply</a>
         <a style="margin-left:20px;margin-top: 100px;" class="btn btn-default btn-confirm">
             Are you sure?
             <button class="btn btn-success">Yes</button>
