@@ -1,4 +1,23 @@
 
+    $(function () {
+        var $image = $('#image');
+        var cropBoxData;
+        var canvasData;
+        $('#modal').on('shown.bs.modal', function () {
+            $image.cropper({
+                autoCropArea: 0.5,
+                built: function () {
+                    $image.cropper('setCanvasData', canvasData);
+                    $image.cropper('setCropBoxData', cropBoxData);
+                }
+            });
+        }).on('hidden.bs.modal', function () {
+            cropBoxData = $image.cropper('getCropBoxData');
+            canvasData = $image.cropper('getCanvasData');
+            $image.cropper('destroy');
+        });
+    });
+
     $.ajaxSetup({
         headers: { 'X-CSRF-TOKEN':
             // document.querySelector('input[name="_token"]') != null ?  document.querySelector('input[name="_token"]').getAttribute('content') : ""}
@@ -91,7 +110,7 @@
                         function(){
 
                             var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
-                            $task_row.css("border-left", "20px solid #c5c5c5");
+                            $task_row.addClass('task-closed');
                             $task_row.find('a[data-action="modal-task"]').addClass('text-task-closed');
 
                             // $('#modal-block').modal('hide');
@@ -123,7 +142,7 @@
                         function(){
 
                             var $task_row = $('.task-row[data-id="' + $(object).attr("data-id") + '"]');
-                            $task_row.css("border-left", "20px solid #3c8dbc");
+                            $task_row.removeClass('task-closed');
                             $task_row.find('a[data-action="modal-task"]').removeClass('text-task-closed');
 
                             // $('#modal-block').modal('hide');
@@ -204,9 +223,9 @@
                 // refreshTasks(object); // refreshTasks() -> task.js
                 //
 
-                // $(document).find(".popover").each(function(index, value){
-                //     $(value).popover("hide");
-                // });
+                $(document).find('*[data-action="user-info"]').each(function(index, value){
+                    $(value).popover("hide");
+                });
 
                 // if(!$('*').is('.popover'))
                 uploadProfileSm(object);
@@ -329,6 +348,10 @@
 
     function onHiddenModal($modal){
         $.noty.closeAll();
+        $('#image-viewer').css({
+            "display":"none",
+            "height":"0px"
+        });
         // $modal.data('bs.modal', null);
         $modal.remove();
         // $('#modal-block').remove();
@@ -347,10 +370,11 @@
                 $modal = $(data).modal({show:false});
 
                 if($(data).find('input[name="image-viewer"]')) {
-                    $('body').append(
-                        '<div class="image-viewer">' +
-                            '<div class="image-block"></div>' +
-                        '</div>');
+
+                    $('#image-viewer').css("display","flex").animate({
+                        "height":"130px",
+                        "opacity":"0.75"
+                    }, "slow");
                     // console.log(data);
                 }
 

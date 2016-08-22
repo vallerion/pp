@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset("css/skin-black.css")}}">
     <link rel="stylesheet" href="{{asset("css/lib/noty/animate.css")}}">
     <link rel="stylesheet" href="{{asset("css/lib/wysiwyg.css")}}">
+    <link rel="stylesheet" href="{{asset("css/lib/cropper.css")}}">
     <link rel="stylesheet" href="{{asset("bootstrap/bootstrap-editable/css/bootstrap-editable.css")}}">
 
     @stack('stylesheets')
@@ -78,6 +79,7 @@
 <script src="{{asset('bootstrap/js/wysihtml5-0.4.0pre.js')}}"></script>
 <script src="{{asset('bootstrap/js/wysihtml5ParserRules.js')}}"></script>
 <script src="{{asset('js/lib/image-viewer.js')}}"></script>
+<script src="{{asset('js/lib/cropper.js')}}"></script>
 
 <script>
     $.widget.bridge('uibutton', $.ui.button);

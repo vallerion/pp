@@ -143,9 +143,9 @@
 
                             <span class="label" style='background-color:#d84315;'>test</span>
 
-                            @foreach($task->getMark() as $mark)
-                                <span class="label" style='background-color:{{ $task::marks[$mark] }};'>{{ $mark }}</span>
-                            @endforeach
+                            {{--@foreach($task->getMark() as $mark)--}}
+                                {{--<span class="label" style='background-color:{{ $task::marks[$mark] }};'>{{ $mark }}</span>--}}
+                            {{--@endforeach--}}
 
                         </span>
                     </div>

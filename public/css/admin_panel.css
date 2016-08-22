@@ -1893,14 +1893,13 @@ a:focus {
   margin: 0;
   padding: 0;
   list-style: none;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 .todo-list > li {
   border-radius: 2px;
   padding: 10px;
   background: #f4f4f4;
   margin-bottom: 2px;
-  border-left: 2px solid #e6e7e8;
   color: #444;
 }
 .todo-list > li:last-of-type {

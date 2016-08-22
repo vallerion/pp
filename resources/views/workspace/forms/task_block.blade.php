@@ -3,9 +3,9 @@
 @foreach($tasks as $task)
 
     @if($task->status == 0)
-        <li class="row task-row" style="border-left: 20px solid #c5c5c5;" data-id="{{ $task->id }}">
+        <li class="row task-row task-closed" data-id="{{ $task->id }}">
     @else
-        <li class="row task-row" style="border-left: 20px solid #3c8dbc;" data-id="{{ $task->id }}">
+        <li class="row task-row" data-id="{{ $task->id }}">
     @endif
 
             <div class="col-xs-3 col-md-5 task-name">
