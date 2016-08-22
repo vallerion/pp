@@ -19,7 +19,7 @@ class TaskController extends Controller
 
     public function create(TaskRequest $request){
 //        return $request->project_id;
-        return view("ajax.modal.create.task", ["marks" => Task::marks, 'project_id' => $request->project_id]);
+        return view("ajax.modal.create.task", ["marks" => Task::marks, 'project' => Auth::user()->privilegesProjects()->where('id', $request->project_id)->get()[0]]);
     }
 
     public function store(TaskRequest $request, Guard $auth){

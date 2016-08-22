@@ -82,9 +82,8 @@
 
                             <select id="project" class="selectpicker" data-width="32%" name="project_id" data-live-search="true" data-size="5">
 
-                                {{ $project_id }}
-                                @if(isset($project_id))
-                                    <? $project =  Auth::user()->privilegesProjects()->where('id', $project_id)->get()[0]; ?>
+                                {{--{{ $project_id }}--}}
+                                @if(isset($project))
                                     <option value="{{ $project->id }}"><b>{{ $project->name }}</b></option>
                                 @else
 
@@ -178,7 +177,7 @@
             });
         }
 
-        @if(isset($project_id))
+        @if(isset($project))
             refreshSelectpicker('user_to', window.location.origin + '/ajax/project/' + {{ $project->id }} + '/users');
         @endif
     </script>

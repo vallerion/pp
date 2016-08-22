@@ -41,8 +41,6 @@
             </div>
         </div>
     </div>
-
-    </div>
     <!-- /.row (main row) -->
 
 </section>
