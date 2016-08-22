@@ -17,10 +17,14 @@
 
                     {!! csrf_field() !!}
 
-                    <label for="about">Описание:</label><br>
-                    <span id="about">{!! $task->about !!}</span>
+                    @if(!empty($task->about))
+                        <label for="about">Описание:</label><br>
+                        <span id="about">{!! $task->about !!}</span>
+                    @endif
 
                 </div>
+
+                <input name="image-viewer" type="hidden" value="">
 
                 <div class="modal-block">
 

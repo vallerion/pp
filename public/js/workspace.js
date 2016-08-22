@@ -149,7 +149,7 @@
                 var data_id = $(object).attr("data-id");
 
                 getModalHtml(window.location.origin + '/ajax/task/' + data_id + '/show');
-
+                
                 break;
 
             case 'modal-team':
@@ -329,9 +329,10 @@
 
     function onHiddenModal($modal){
         $.noty.closeAll();
-        $modal.data('bs.modal', null);
+        // $modal.data('bs.modal', null);
         $modal.remove();
-        $('#modal-block').remove();
+        // $('#modal-block').remove();
+        // $modal.modal("hide");
     }
 
     function getModalHtml(url){
@@ -345,14 +346,29 @@
 
                 $modal = $(data).modal({show:false});
 
+                if($(data).find('input[name="image-viewer"]')) {
+                    $('body').append(
+                        '<div class="image-viewer">' +
+                            '<div class="image-block"></div>' +
+                        '</div>');
+                    // console.log(data);
+                }
+
                 renderModal($modal);
 
-                $('body').append(data);
+                // $('body').append(data);
                 $modal.on('hidden.bs.modal', function(){
                     onHiddenModal($modal);
                 });
 
                 $modal.modal("show");
+
+
+
+                // console.log($modal);
+
+
+                // $modal.after('<div class="image-viewer"></div>');
 
                 // $('#modal-block .modal-content').html(data);
             },

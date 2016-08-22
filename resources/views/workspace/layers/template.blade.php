@@ -60,6 +60,12 @@
     </div>
 </div>
 
+<div id="image-viewer">
+    <div class="image-container">
+        <div class="image add-image"><i class="fa fa-plus"></i></div>
+    </div>
+</div>
+
 
 <script src="{{asset("js/lib/jquery.js")}}"></script>
 <script src="{{asset("js/lib/jquery-ui.js")}}"></script>
@@ -71,6 +77,7 @@
 {{--<script src="{{asset('bootstrap/js/wysihtml5-0.3.0.js')}}"></script>--}}
 <script src="{{asset('bootstrap/js/wysihtml5-0.4.0pre.js')}}"></script>
 <script src="{{asset('bootstrap/js/wysihtml5ParserRules.js')}}"></script>
+<script src="{{asset('js/lib/image-viewer.js')}}"></script>
 
 <script>
     $.widget.bridge('uibutton', $.ui.button);
