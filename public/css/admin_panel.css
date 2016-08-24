@@ -1893,7 +1893,7 @@ a:focus {
   margin: 0;
   padding: 0;
   list-style: none;
-  overflow: hidden;
+/*  overflow: hidden;*/
 }
 .todo-list > li {
   border-radius: 2px;

@@ -43,11 +43,13 @@
                     </h3>
 
                     {{-- TODO about <p class="text-muted text-center"></p>--}}
-
+<!--                        email-->
                     <div class="text-center">
                         <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
                     </div>
-
+                    
+<!--                        skype-->
+                    
                     @if(isset($user->skype))
                         <div class="text-center">
                             <a class="text-center" href="skype:{{ $user->skype }}"><i class="fa fa-skype"></i>{{ $user->skype }}</a>
@@ -57,6 +59,23 @@
                             <span class="editable-click">Enter skype</span>
                         </div>
                     @endif
+                    
+<!--                    city-->
+                    
+                                        @if(isset($user->city))
+                        <div class="text-center">
+                            <a class="text-center" href="city:{{ $user->city }}"><i class="fa fa-home"></i>{{ $user->city }}</a>
+                        </div>
+                    @else
+                        <div class="text-center">
+                            <span class="editable-click">Enter your city</span>
+                        </div>
+                    @endif
+                    
+<!--                   gender-->
+
+                    
+                    
 
                     {{--<ul class="list-group list-group-unbordered">--}}
                         {{--<li class="list-item active">--}}
@@ -84,13 +103,13 @@
                     <ul class="nav nav-pills nav-stacked">
                         <li class="active">
                             <a aria-expanded="true" href="#projects" data-toggle="tab">
-                                <i class="fa fa-inbox"></i><b>Projects</b>
+                                <i class="fa fa-puzzle-piece"></i><b>Projects</b>
                                 <span class="label label-primary pull-right">{{ count($user->projects) }}</span>
                             </a>
                         </li>
                         <li class="">
                             <a aria-expanded="true" href="#tasks" data-toggle="tab">
-                                <i class="fa fa-inbox"></i><b>Tasks</b>
+                                <i class="fa fa-question-circle"></i><b>Tasks</b>
                                 <span class="label label-primary pull-right">{{ count($user->tasks) }}</span>
                             </a>
                         </li>
