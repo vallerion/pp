@@ -55,27 +55,38 @@
                             <a class="text-center" href="skype:{{ $user->skype }}"><i class="fa fa-skype"></i>{{ $user->skype }}</a>
                         </div>
                     @else
-                        <div class="text-center">
-                            <span class="editable-click">Enter skype</span>
+                        <div class="text-center" style="margin-left: -2px;">
+                            <i class="fa fa-skype"></i><span class="editable-click"> Enter skype</span>
                         </div>
                     @endif
                     
-<!--                    city-->
-                    
-                                        @if(isset($user->city))
+<!--                    github-->
+                                        @if(isset($user->github))
                         <div class="text-center">
-                            <a class="text-center" href="city:{{ $user->city }}"><i class="fa fa-home"></i>{{ $user->city }}</a>
+                            <a class="text-center" href="github:{{ $user->github }}"><i class="fa fa-github"></i>{{ $user->github }}</a>
                         </div>
                     @else
                         <div class="text-center">
-                            <span class="editable-click">Enter your city</span>
+                          <i class="fa fa-github"></i>  <span class="editable-click">Enter github</span>
                         </div>
                     @endif
                     
-<!--                   gender-->
-
+                    <hr/>
+                    <!--                        is in company-->
+                        <div class="text-center" style="margin-left: 13px;">
+                            <i class="fa fa-flag"></i><span class=""> Company: none</span>
+                        </div>
+                    <!--                        is having team-->
                     
-                    
+                                        @if(isset($user->team))
+                        <div class="text-center">
+                            <a class="text-center" href="team:{{ $user->team }}"><i class="fa fa-users"></i>{{ $user->team }}</a>
+                        </div>
+                    @else
+                        <div class="text-center" style="">
+                            <i class="fa fa-users"></i><span class="editable-click"> Choose Team</span>
+                        </div>
+                    @endif
 
                     {{--<ul class="list-group list-group-unbordered">--}}
                         {{--<li class="list-item active">--}}
@@ -84,6 +95,10 @@
 
                         {{--<li class="list-item">--}}
                             {{--<a aria-expanded="true" href="#tasks" data-toggle="tab"><b>Tasks</b></a> <a class="pull-right">{{ count($user->tasks) }}</a>--}}
+                        {{--</li>--}}
+                    
+                    {{--<li class="list-item">--}}
+                            {{--<a aria-expanded="true" href="#activity" data-toggle="tab"><b>Activity</b></a> <a class="pull-right">{{ count($user->activity) }}</a>--}}
                         {{--</li>--}}
                     {{--</ul>--}}
                 </div>
@@ -111,6 +126,11 @@
                             <a aria-expanded="true" href="#tasks" data-toggle="tab">
                                 <i class="fa fa-question-circle"></i><b>Tasks</b>
                                 <span class="label label-primary pull-right">{{ count($user->tasks) }}</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a aria-expanded="true" href="#activity" data-toggle="tab">
+                                <i class="fa fa-check"></i><b>Activity</b>
                             </a>
                         </li>
                         {{--<li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>--}}
@@ -168,6 +188,42 @@
                         </div>
                         @endif
 
+                                                @if(count($user->projects) > 0)
+                        <div class="tab-pane" id="activity">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Activity</h3>
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-bordered">
+                                    <tbody><tr>
+                                        <th>Total Projects</th>
+                                        <th>Total Tasks</th>
+                                        <th><span class="label" style='background-color: #3C8DBC; font-weight: 700; font-size: 12px;'>Opened Tasks</span></th>
+                                        <th><span class="label" style='background-color: lime; font-weight: 700; font-size: 12px;'>Closed Tasks</span></th>
+                                    </tr>
+
+
+                                  <tr>
+                                  <td>{{ count($user->projects) }}</td>
+                                    <td>{{ count($user->tasks) }}</td>
+                                      <?php $open_count=0 ?>
+                                     <?php $closed_count=0 ?>
+                                      @foreach($user->tasks()->orderBy('created_at')->get() as $key => $task)
+                                      @if($task->status == 0)
+                                      <?php $closed_count++ ?>
+                                      @else
+                                         <?php $open_count++ ?>
+                                      @endif
+                                      @endforeach
+                                      <td> {{ $open_count }}</td>
+                                        <td>{{ $closed_count }}</td>
+                                        </tr>
+
+                                    </tbody></table>
+                            </div>
+                        </div>
+                        @endif
+                        
                         @if(count($user->tasks) > 0)
                         <div class="tab-pane" id="tasks">
                             <div class="box-header with-border">
