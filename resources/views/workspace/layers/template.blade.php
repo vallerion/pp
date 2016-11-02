@@ -61,11 +61,6 @@
     </div>
 </div>
 
-<div id="image-viewer">
-    <div class="image-container">
-        <div class="image add-image"><i class="fa fa-plus"></i></div>
-    </div>
-</div>
 
 
 <script src="{{asset("js/lib/jquery.js")}}"></script>

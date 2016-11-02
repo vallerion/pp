@@ -16,10 +16,6 @@
 <section class="content">
         <!-- Small boxes (Stat box) -->
     <div class="row">
-
-        <button type="button" class="btn btn-primary btn-lg" data-target="#modal" data-toggle="modal">
-            Launch demo modal
-        </button>
     <!-- TODO вывод последних событий компании, команды, проекта -->
         {{--<h4 class="modal-title" id="name">{{ $project->name }} </h4>--}}
         <div class="modal fade" id="modal" aria-labelledby="modalLabel" role="dialog" tabindex="-1">

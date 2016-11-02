@@ -20,12 +20,6 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
     Route::get('/', 'Workspace\WorkspaceController@index');
 
 
-    Route::get('test', function(){
-        return \Helper::getMaterialColor(5);
-    });
-
-
-
 //    Route::get('profile', 'Auth\AuthController@getProfile');
     
 //    Route::get('profile/{user}', 'Auth\AuthController@getProfile');

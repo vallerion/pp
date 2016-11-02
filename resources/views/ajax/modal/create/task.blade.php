@@ -83,7 +83,8 @@
                             <select id="project" class="selectpicker" data-width="32%" name="project_id" data-live-search="true" data-size="5">
 
                                 {{--{{ $project_id }}--}}
-                                @if(isset($project))
+                                {{--{{ $project->isEmpty() }}--}}
+                                @if(isset($project) && ! $project->isEmpty())
                                     <option value="{{ $project->id }}"><b>{{ $project->name }}</b></option>
                                 @else
 
@@ -177,8 +178,8 @@
             });
         }
 
-        @if(isset($project))
-            refreshSelectpicker('user_to', window.location.origin + '/ajax/project/' + {{ $project->id }} + '/users');
-        @endif
+        {{--@if(isset($project) && ! $project->isEmpty())--}}
+            {{--refreshSelectpicker('user_to', window.location.origin + '/ajax/project/' + {{ $project->id }} + '/users');--}}
+        {{--@endif--}}
     </script>
 </div>
