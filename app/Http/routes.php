@@ -124,7 +124,7 @@ Route::get('/', function(){
  *
  */
 
-Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
+Route::group([ 'prefix' => 'workspace', 'middleware' => 'auth' ], function () {
 //Route::group(['prefix' => 'workspace'], function () {
 
     Route::get('/', function () {
@@ -188,6 +188,18 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
  *
  *
  */
+
+Route::group([ 'prefix' => 'ajax', 'middleware' => 'auth' ], function () {
+
+    Route:group([ 'prefix' => 'user' ], function () {
+
+        Route::post('/', 'Auth\AuthController@postRegister');
+
+        Route::put('{user}', 'User\UserController@updateAjax');
+
+    });
+
+});
 
 
 

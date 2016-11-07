@@ -21,4 +21,11 @@ class UserController extends Controller {
 //            return view('workspace.profile', ['user' => $user]);
     }
 
+    public function updateAjax(User $user, Request $request) {
+//        if( ! $request->ajax())
+//            return response('non found!', 404);
+        
+        
+    }
+
 }
