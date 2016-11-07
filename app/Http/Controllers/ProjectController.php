@@ -82,6 +82,8 @@ class ProjectController extends Controller
 
         $user = Auth::user();
 
+//        dd($project);
+
         $user = $project->users()->withPivot('user_id', 'user_group')->wherePivot('user_id', '=', $user->id)->first();
 
         if( ! is_null($user)){

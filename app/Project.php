@@ -19,7 +19,7 @@ class Project extends Model
     }
 
     public function teams(){
-        return $this->belongsToMany('App\Team', 'company_team_project');
+        return $this->belongsToMany('App\Team', 'project_team');
     }
 
     public function tasks(){
