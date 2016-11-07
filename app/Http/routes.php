@@ -15,29 +15,115 @@ Route::get('/', function(){
     return redirect('workspace');
 });
 
+/**
+ *  User routing
+ *
+ * get - /user/{id}
+ *  return user page (+ edit enable)
+ *
+ * post  - /ajax/user/
+ *  create new user
+ *
+ * put - /ajax/user/{id}
+ *  update user
+ *
+ * delete - /ajax/user/{id}
+ *  delete user
+ *
+ */
+
+/**
+ * Team routing
+ *
+ * get - /team/{id}
+ *  return html page (+ edit enable)
+ *
+ * get - /ajax/team/{id}
+ *  return html modal (+ edit enable)
+ *
+ * post - /ajax/team/
+ *  create new team
+ *
+ * put - /ajax/team/{id}
+ *  update team from modal or page
+ *
+ * delete - /ajax/team/{id}
+ *  delete team
+ *
+ * get - /team/{id}/user
+ *  return members in team, json
+ *
+ * get - /team/{id}/project
+ *  return projects of team, json
+ *
+ */
+
+/**
+ * Project routing
+ *
+ * get - /project/{id}
+ *  return html page (+ edit)
+ *
+ * get - /ajax/project/{id}
+ *  return html modal (+ edit)
+ *
+ * post - /ajax/project/
+ *  create new project
+ *
+ * put - /ajax/project/{id}
+ *  update project from modal or page
+ *
+ * delete - /ajax/project/{id}
+ *  delete project
+ *
+ * get - /project/{id}/user
+ *  return users which work in this project, json
+ *
+ * get - /project/{id}/team
+ *  return teams which work in this project, json
+ *
+ *
+ */
+
+/**
+ * Task routing
+ *
+ * get - /project/{project_id}/{id}
+ *  return html page (+ edit)
+ *
+ * get - /ajax/project/{project_id}/{id}
+ *  return html modal (+ edit)
+ *
+ * post - /ajax/project/{project_id}/
+ *  create new task in project
+ *
+ * put - /ajax/project/{project_id}/{id}
+ *  update task: open, close, reopen, edit
+ *
+ * delete - /ajax/project/{project_id}/{id}
+ *  delete task
+ *
+ */
+
+
+
 Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
 
     Route::get('/', 'Workspace\WorkspaceController@index');
-
-
-//    Route::get('profile', 'Auth\AuthController@getProfile');
-    
-//    Route::get('profile/{user}', 'Auth\AuthController@getProfile');
 
     Route::resource('profile', 'Auth\AuthController', ['only' => [
         'index', 'show', 'update'
     ]]);
 
+//    Route::put
 
     Route::resource('project', 'ProjectController', ['except' => [
         'create', 'edit'
     ]]);
 
-
     Route::resource('task', 'TaskController', ['except' => [
         'create', 'edit'
     ]]);
-
 
     Route::resource('team', 'TeamController', ['except' => [
         'create', 'edit'

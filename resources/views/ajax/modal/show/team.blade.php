@@ -9,8 +9,8 @@
 
                 {!! csrf_field() !!}
 
-                <label for="about">Описание:</label>
-                <span id="about">{{ $team->about }}</span>
+                {{--<label for="about">Описание:</label>--}}
+                <span id="about">{!! $team->about !!}</span>
 
                 {{--<div class="checkbox">--}}
                 {{--<label><input checked name="visible" type="checkbox">Публичная команда</label>--}}

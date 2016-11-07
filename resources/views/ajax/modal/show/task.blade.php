@@ -18,7 +18,7 @@
                     {!! csrf_field() !!}
 
                     @if(!empty($task->about))
-                        <label for="about">Описание:</label><br>
+                        {{--<label for="about">Описание:</label><br>--}}
                         <span id="about">{!! $task->about !!}</span>
                     @endif
 
