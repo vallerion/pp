@@ -18,7 +18,7 @@ Route::get('/', function(){
 /**
  *  User routing
  *
- * get - /user/{id}
+ * get - /workspace/user/{id}
  *  return user page (+ edit enable)
  *
  * post  - /ajax/user/
@@ -35,7 +35,7 @@ Route::get('/', function(){
 /**
  * Team routing
  *
- * get - /team/{id}
+ * get - /workspace/team/{id}
  *  return html page (+ edit enable)
  *
  * get - /ajax/team/{id}
@@ -50,10 +50,10 @@ Route::get('/', function(){
  * delete - /ajax/team/{id}
  *  delete team
  *
- * get - /team/{id}/user
+ * get - /workspace/team/{id}/user
  *  return members in team, json
  *
- * get - /team/{id}/project
+ * get - /workspace/team/{id}/project
  *  return projects of team, json
  *
  */
@@ -61,7 +61,7 @@ Route::get('/', function(){
 /**
  * Project routing
  *
- * get - /project/{id}
+ * get - /workspace/project/{id}
  *  return html page (+ edit)
  *
  * get - /ajax/project/{id}
@@ -76,10 +76,10 @@ Route::get('/', function(){
  * delete - /ajax/project/{id}
  *  delete project
  *
- * get - /project/{id}/user
+ * get - /workspace/project/{id}/user
  *  return users which work in this project, json
  *
- * get - /project/{id}/team
+ * get - /workspace/project/{id}/team
  *  return teams which work in this project, json
  *
  *
@@ -88,7 +88,7 @@ Route::get('/', function(){
 /**
  * Task routing
  *
- * get - /project/{project_id}/{id}
+ * get - /workspace/project/{project_id}/{id}
  *  return html page (+ edit)
  *
  * get - /ajax/project/{project_id}/{id}
@@ -106,95 +106,160 @@ Route::get('/', function(){
  */
 
 
+/**
+ * workspace prefix
+ *
+ * get - /workspace/user/{id}
+ *
+ * get - /workspace/team/{id}
+ * get - /workspace/team/{id}/user
+ * get - /workspace/team/{id}/project
+ *
+ * get - /workspace/project/{id}
+ * get - /workspace/project/{id}/user
+ * get - /workspace/project/{id}/team
+ *
+ * get - /workspace/project/{project_id}/{id}
+ *
+ *
+ */
 
 Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
+//Route::group(['prefix' => 'workspace'], function () {
 
-    Route::get('/', 'Workspace\WorkspaceController@index');
+    Route::group(['prefix' => 'user'], function () {
+        
+        Route::get('{user?}', 'User\UserController@get');
+        
+    });
 
-    Route::resource('profile', 'Auth\AuthController', ['only' => [
-        'index', 'show', 'update'
-    ]]);
-
-//    Route::put
-
-    Route::resource('project', 'ProjectController', ['except' => [
-        'create', 'edit'
-    ]]);
-
-    Route::resource('task', 'TaskController', ['except' => [
-        'create', 'edit'
-    ]]);
-
-    Route::resource('team', 'TeamController', ['except' => [
-        'create', 'edit'
-    ]]);
-
+    Route::group(['prefix' => 'team'], function () {
+        
+        Route::get('{team}', 'TeamController@get');
+        
+    });
+    
+    
 });
 
-Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function () {
 
-    Route::group(['prefix' => 'user'], function(){
-
-        Route::get('task/{id?}', 'Auth\AuthController@myTask');
-
-        Route::get('{user}/profile-sm', 'Auth\AuthController@profileSm');
-
-
-    });
-
-
-
-    Route::group(['prefix' => 'project'], function(){
-
-        Route::get('create', 'ProjectController@create');
-
-        Route::get('{project}/teams', 'ProjectController@teams');
-
-        Route::get('{project}/users', 'ProjectController@users');
-
-        Route::get('{project}/show', 'ProjectController@showModal');
-
-        Route::get('{project}/edit', 'ProjectController@edit');
-
-    });
-
-
-
-    Route::group(['prefix' => 'task'], function(){
-
-        Route::get('create', 'TaskController@create');
-
-        Route::get('{task}/action', 'TaskController@action');
-
-        Route::get('{task}/users', 'TaskController@users');
-
-        Route::get('{task}/project', 'TaskController@project');
-
-        Route::get('{task}/show', 'TaskController@showModal');
-
-        Route::get('{task}/edit', 'TaskController@edit');
-
-    });
+/**
+ * ajax prefix
+ *
+ * post  - /ajax/user/
+ * put - /ajax/user/{id}
+ * delete - /ajax/user/{id}
+ *
+ * get - /ajax/team/{id}
+ * post - /ajax/team/
+ * put - /ajax/team/{id}
+ * delete - /ajax/team/{id}
+ *
+ * get - /ajax/project/{id}
+ * post - /ajax/project/
+ * put - /ajax/project/{id}
+ * delete - /ajax/project/{id}
+ *
+ * get - /ajax/project/{project_id}/{id}
+ * post - /ajax/project/{project_id}
+ * put - /ajax/project/{project_id}/{id}
+ * delete - /ajax/project/{project_id}/{id}
+ *
+ *
+ */
 
 
 
-    Route::group(['prefix' => 'team'], function(){
+// -- old --
 
-        Route::get('create', 'TeamController@create');
-
-        Route::get('{team}/users', 'TeamController@users');
-
-        Route::get('{team}/projects', 'TeamController@projects');
-
-        Route::get('{team}/show', 'TeamController@showModal');
-
-        Route::get('{team}/edit', 'TeamController@edit');
-
-    });
-
-
-
-});
+//Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
+//
+//    Route::get('/', 'Workspace\WorkspaceController@index');
+//
+//    Route::resource('profile', 'Auth\AuthController', ['only' => [
+//        'index', 'show', 'update'
+//    ]]);
+//
+////    Route::put
+//
+//    Route::resource('project', 'ProjectController', ['except' => [
+//        'create', 'edit'
+//    ]]);
+//
+//    Route::resource('task', 'TaskController', ['except' => [
+//        'create', 'edit'
+//    ]]);
+//
+//    Route::resource('team', 'TeamController', ['except' => [
+//        'create', 'edit'
+//    ]]);
+//
+//});
+//
+//Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function () {
+//
+//    Route::group(['prefix' => 'user'], function(){
+//
+//        Route::get('task/{id?}', 'Auth\AuthController@myTask');
+//
+//        Route::get('{user}/profile-sm', 'Auth\AuthController@profileSm');
+//
+//
+//    });
+//
+//
+//
+//    Route::group(['prefix' => 'project'], function(){
+//
+//        Route::get('create', 'ProjectController@create');
+//
+//        Route::get('{project}/teams', 'ProjectController@teams');
+//
+//        Route::get('{project}/users', 'ProjectController@users');
+//
+//        Route::get('{project}/show', 'ProjectController@showModal');
+//
+//        Route::get('{project}/edit', 'ProjectController@edit');
+//
+//    });
+//
+//
+//
+//    Route::group(['prefix' => 'task'], function(){
+//
+//        Route::get('create', 'TaskController@create');
+//
+//        Route::get('{task}/action', 'TaskController@action');
+//
+//        Route::get('{task}/users', 'TaskController@users');
+//
+//        Route::get('{task}/project', 'TaskController@project');
+//
+//        Route::get('{task}/show', 'TaskController@showModal');
+//
+//        Route::get('{task}/edit', 'TaskController@edit');
+//
+//    });
+//
+//
+//
+//    Route::group(['prefix' => 'team'], function(){
+//
+//        Route::get('create', 'TeamController@create');
+//
+//        Route::get('{team}/users', 'TeamController@users');
+//
+//        Route::get('{team}/projects', 'TeamController@projects');
+//
+//        Route::get('{team}/show', 'TeamController@showModal');
+//
+//        Route::get('{team}/edit', 'TeamController@edit');
+//
+//    });
+//
+//
+//
+//});
 
 Route::group(['prefix' => 'auth'], function(){
 

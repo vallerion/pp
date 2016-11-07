@@ -33,6 +33,8 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('team', Team::class);
         $router->model('user', User::class);
 
+        $router->pattern('user', '[0-9]+');
+
         parent::boot($router);
     }
 

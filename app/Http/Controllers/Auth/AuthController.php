@@ -131,7 +131,7 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'image' => asset('img/user_avatars/' .rand(1, 3). '.png'),
+            'image' => '/img/user_avatars/' .rand(1, 3). '.png',
         ]);
     }
 
