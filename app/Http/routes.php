@@ -24,8 +24,8 @@ Route::get('/', function(){
  * post  - /ajax/user/
  *  create new user
  *
- * put - /ajax/user/{id}
- *  update user
+ * put - /ajax/user/
+ *  update CURRENT user
  *
  * delete - /ajax/user/{id}
  *  delete user
@@ -168,7 +168,7 @@ Route::group([ 'prefix' => 'workspace', 'middleware' => 'auth' ], function () {
  * ajax prefix
  *
  * post  - /ajax/user/
- * put - /ajax/user/{id}
+ * put - /ajax/user/
  * delete - /ajax/user/{id}
  *
  * get - /ajax/team/{id}
@@ -196,9 +196,12 @@ Route::group([ 'prefix' => 'ajax' ], function () {
 
         Route::post('/', 'Auth\AuthController@postRegister');
 
-        Route::put('{user}', 'User\UserController@updateAjax');
+//        Route::put('/', 'User\UserController@updateAjax'); not work yet
+
+        Route::delete('{user}', 'User\UserController@deleteAjax');
 
     });
+
 
 });
 

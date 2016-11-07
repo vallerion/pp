@@ -21,11 +21,25 @@ class UserController extends Controller {
 //            return view('workspace.profile', ['user' => $user]);
     }
 
-    public function updateAjax(User $user, Request $request) {
+    public function updateAjax(Request $request) {
 //        if( ! $request->ajax())
 //            return response('non found!', 404);
-        
-        dd($user);
+
+        /**
+         * TODO:
+         *
+         * 1. fix it
+         * 2. create request class - UserReqest
+         *
+         */
+
+        $user = Auth::user();
+
+        $user->update($request->all());
+    }
+
+    public function deleteAjax(User $user) {
+        $user->delete();
     }
 
 }
