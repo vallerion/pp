@@ -112,6 +112,21 @@ class TeamController extends Controller
         return response('access forbidden.', 403); // $response = 403
     }
 
+    public function getAjax(Team $team, Request $request) {
+        return view("ajax.modal.show.team", [ 'team' => $team ]);
+    }
+
+    public function createAjax(TeamRequest $request) {
+
+        $user = Auth::user();
+
+        $team = Team::create($request->all());
+
+        $team->users()->attach($user->id);
+    }
+
+//    public function updateAjax()
+
 
     public function index(Guard $auth){
         return $auth->user()->teams->toJson();

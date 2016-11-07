@@ -203,6 +203,15 @@ Route::group([ 'prefix' => 'ajax' ], function () {
     });
 
 
+    Route::group([ 'prefix' => 'team' ], function () {
+
+        Route::get('{team}', 'TeamController@getAjax');
+
+        Route::post('/', 'TeamController@createAjax');
+
+        Route::put('{team}', 'TeamController@updateAjax');
+
+    });
 });
 
 
