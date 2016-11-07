@@ -25,7 +25,7 @@ class UserController extends Controller {
 //        if( ! $request->ajax())
 //            return response('non found!', 404);
         
-        
+        dd($user);
     }
 
 }
