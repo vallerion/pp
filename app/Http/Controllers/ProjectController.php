@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use Input;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -12,6 +13,103 @@ use App\Http\Requests\ProjectRequest;
 
 class ProjectController extends Controller
 {
+
+    public function get(Project $project, Request $request) {
+
+        $user = Auth::user();
+
+        $user = $project->users()->withPivot('user_id', 'user_group')->wherePivot('user_id', '=', $user->id)->first();
+
+        if( ! is_null($user)){
+
+            /*
+             * TODO: change access system
+             *
+             * example:
+             *
+             * if($user->userGroup()->right >= Rights::admin()) // where userGroup individual table, with record for THIS team
+             *
+             *
+             */
+
+            if($user->pivot->user_group === "author")
+                return $project; //  return view(...);
+
+            else if ($user->pivot->user_group === "user")
+                return $project; //  return view(...);
+
+        }
+        else if ($project->visible === 1)
+            return $project; //  return view(...);
+
+
+        return response('access forbidden.', 403); // $response = 403
+    }
+
+    public function user(Project $project, Request $request) {
+
+        $user = Auth::user();
+
+        $user = $project->users()->withPivot('user_id', 'user_group')->wherePivot('user_id', '=', $user->id)->first();
+
+        if( ! is_null($user)){
+
+            /*
+             * TODO: change access system
+             *
+             * example:
+             *
+             * if($user->userGroup()->right >= Rights::admin()) // where userGroup individual table, with record for THIS team
+             *
+             *
+             */
+
+            if($user->pivot->user_group === "author")
+                return $project->users()->get(); //  return view(...);
+
+            else if ($user->pivot->user_group === "user")
+                return $project->users()->get(); //  return view(...);
+
+        }
+        else if ($project->visible === 1)
+            return $project->users()->get(); //  return view(...);
+
+
+        return response('access forbidden.', 403); // $response = 403
+    }
+
+    public function team(Project $project, Request $request) {
+
+        $user = Auth::user();
+
+        $user = $project->users()->withPivot('user_id', 'user_group')->wherePivot('user_id', '=', $user->id)->first();
+
+        if( ! is_null($user)){
+
+            /*
+             * TODO: change access system
+             *
+             * example:
+             *
+             * if($user->userGroup()->right >= Rights::admin()) // where userGroup individual table, with record for THIS team
+             *
+             *
+             */
+
+            if($user->pivot->user_group === "author")
+                return $project->teams()->get(); //  return view(...);
+
+            else if ($user->pivot->user_group === "user")
+                return $project->teams()->get(); //  return view(...);
+
+        }
+        else if ($project->visible === 1)
+            return $project->teams()->get(); //  return view(...);
+
+
+        return response('access forbidden.', 403); // $response = 403
+    }
+
 
     public function index(Guard $auth){
 //        return Auth::user()->projects->toJson();

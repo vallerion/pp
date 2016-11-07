@@ -16,12 +16,9 @@ use App\Http\Requests\TeamRequest;
 class TeamController extends Controller
 {
 
-    public function get(Team $team, Request $request){
+    public function get(Team $team, Request $request) {
 
         $user = Auth::user();
-
-        if($request->ajax())
-            return $team;
 
         $user = $team->users()->withPivot('user_id', 'user_group')->wherePivot('user_id', '=', $user->id)->first();
 
@@ -38,18 +35,81 @@ class TeamController extends Controller
              */
 
             if($user->pivot->user_group === "author")
-                return 'admin access!';
+                return $team; //  return view(...);
 
             else if ($user->pivot->user_group === "user")
-                return 'user access';
+                return $team; //  return view(...);
 
         }
         else if ($team->visible === 1)
-            return $team;
+            return $team; //  return view(...);
 
-        else
-            return 'access forbiden!';
 
+        return response('access forbidden.', 403); // $response = 403
+    }
+
+    public function user(Team $team, Request $request) {
+
+        $user = Auth::user();
+
+        $user = $team->users()->withPivot('user_id', 'user_group')->wherePivot('user_id', '=', $user->id)->first();
+
+        if( ! is_null($user)){
+
+            /*
+             * TODO: change access system
+             *
+             * example:
+             *
+             * if($user->userGroup()->right >= Rights::admin()) // where userGroup individual table, with record for THIS team
+             *
+             *
+             */
+
+            if($user->pivot->user_group === "author")
+                return $team->users()->get(); //  return view(...);
+
+            else if ($user->pivot->user_group === "user")
+                return $team->users()->get(); //  return view(...);
+
+        }
+        else if ($team->visible === 1)
+            return $team->users()->get(); //  return view(...);
+
+
+        return response('access forbidden.', 403); // $response = 403
+    }
+
+    public function project(Team $team, Request $request) {
+
+        $user = Auth::user();
+
+        $user = $team->users()->withPivot('user_id', 'user_group')->wherePivot('user_id', '=', $user->id)->first();
+
+        if( ! is_null($user)){
+
+            /*
+             * TODO: change access system
+             *
+             * example:
+             *
+             * if($user->userGroup()->right >= Rights::admin()) // where userGroup individual table, with record for THIS team
+             *
+             *
+             */
+
+            if($user->pivot->user_group === "author")
+                return $team->projects()->get(); //  return $ajax ? $team : view(...);
+
+            else if ($user->pivot->user_group === "user")
+                return $team->projects()->get(); //  return $ajax ? $team : view(...);
+
+        }
+        else if ($team->visible === 1)
+            return $team->projects()->get(); //  return $ajax ? $team : view(...);
+
+
+        return response('access forbidden.', 403); // $response = 403
     }
 
 
@@ -99,4 +159,5 @@ class TeamController extends Controller
     public function destroy($team){
 
     }
+
 }

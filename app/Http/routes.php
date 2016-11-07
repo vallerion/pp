@@ -136,7 +136,21 @@ Route::group(['prefix' => 'workspace', 'middleware' => 'auth'], function () {
     Route::group(['prefix' => 'team'], function () {
         
         Route::get('{team}', 'TeamController@get');
+
+        Route::get('{team}/user', 'TeamController@user');
+
+        Route::get('{team}/project', 'TeamController@project');
+
+    });
+
+    Route::group(['prefix' => 'project'], function () {
         
+        Route::get('{project}', 'ProjectController@get');
+
+        Route::get('{project}/user', 'ProjectController@user');
+
+        Route::get('{project}/team', 'ProjectController@team');
+
     });
     
     
