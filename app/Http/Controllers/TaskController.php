@@ -2,16 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use App\Task;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 
 use App\Http\Requests\TaskRequest;
 
 class TaskController extends Controller
 {
+    public function get(Project $project, Task $task, Request $request){
+
+        $task = $project->tasks()->where('id', '=', $task->id)->get();
+        
+        if( ! $task->isEmpty()){
+            // TODO: change rights
+            return $task;
+        }
+
+        return response('non found', 404);
+    }
+
+
 
     public function index(Guard $auth){
         return view("workspace.tasks");
