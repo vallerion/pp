@@ -26,6 +26,7 @@ class TaskRequest extends Request
         switch ($this->method()){
 
             case 'GET':
+                return [];
             case 'DELETE':
                 return [
                     'id' => 'required|integer'
