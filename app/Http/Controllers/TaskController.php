@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mark;
 use App\Project;
 use App\Task;
 use Illuminate\Support\Facades\Auth;
@@ -39,11 +40,28 @@ class TaskController extends Controller
     }
 
     public function getCreateAjax(Project $project, TaskRequest $request) {
-        return $project;
+
+//        echo Mark::all();
+
+        return view("ajax.modal.create.task", ['project' => $project]);
     }
     
-    public function createAjax() {
+    public function createAjax(Project $project, TaskRequest $request) {
+        $request->project_id = $project->id;
 
+        $task = Task::create($request->all());
+
+        if( ! is_null($task))
+            return json_encode([
+                'successful' => true,
+                'detail' => ['Task ' . $task->name . ' created!']
+            ]);
+
+
+        return json_encode([
+            'successful' => false,
+            'detail' => ['Something wrong']
+        ]);
     }
     
 

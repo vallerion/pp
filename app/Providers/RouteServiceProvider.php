@@ -35,6 +35,9 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('task', Task::class);
 
         $router->pattern('user', '[0-9]+');
+        $router->pattern('project', '[0-9]+');
+        $router->pattern('team', '[0-9]+');
+        $router->pattern('task', '[0-9]+');
 
         parent::boot($router);
     }

@@ -42,10 +42,10 @@ class Task extends Model
     public function project(){
         return $this->belongsTo('App\Project', 'project_id');
     }
-//
-//    public function marks(){
-//        return $this->belongsToMany('App\Mark', 'task_mark');
-//    }
+    
+    public function marks(){
+        return $this->belongsToMany('App\Mark', 'task_mark');
+    }
 
     public function close(){
         return $this->update(["status" => 0]);
