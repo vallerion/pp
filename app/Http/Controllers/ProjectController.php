@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\Team;
 use Input;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -112,7 +113,58 @@ class ProjectController extends Controller
         return response('access forbidden.', 403); // $response = 403
     }
 
+    public function getAjax(Project $project) {
+        return view("ajax.modal.show.project", [ 'project' => $project ]);
+    }
+    
+    public function createAjax(ProjectRequest $request) {
 
+        $team = Team::where('id', $request->team)->first();
+
+        $project = $team->projects()->where('name', '=', $request->name)->first();
+
+        if( ! is_null($project))
+            return json_encode(
+                [
+                    'successful' => false,
+                    'detail' => 'Such project in the team already exists' // уже существует в команде
+                ]
+             );
+
+        if( ! is_null($team)){
+
+            $project = Project::create([
+                'name' => $request->name,
+                'about' => isset($request->about) ? $request->about : ''
+//                'about' => $request->about ?? '' // php 7
+            ]);
+
+            $project->teams()->attach($team->id);
+        }
+        else
+            return json_encode(
+                [
+                    'successful' => false,
+                    'detail' => '' // что-то пошло не так...
+                ]
+            );
+
+    }
+
+    public function updateAjax(Project $project, ProjectRequest $request) {
+        $project->update($request->all());
+    }
+
+    public function deleteAjax(Project $project) {
+
+        $project->teams()->detach();
+
+        $project->delete();
+    }
+    
+    
+    
+    
     public function index(Guard $auth){
 //        return Auth::user()->projects->toJson();
 //        return $auth->user()->projects->toJson();

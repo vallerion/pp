@@ -202,7 +202,6 @@ Route::group([ 'prefix' => 'ajax' ], function () {
 
     });
 
-
     Route::group([ 'prefix' => 'team' ], function () {
 
         Route::get('{team}', 'TeamController@getAjax');
@@ -215,7 +214,19 @@ Route::group([ 'prefix' => 'ajax' ], function () {
 
     });
 
+    Route::group([ 'prefix' => 'project' ], function () {
 
+        Route::get('{project}', 'ProjectController@getAjax');
+
+        Route::post('/', 'ProjectController@createAjax');
+
+        Route::put('{project}', 'ProjectController@updateAjax');
+
+        Route::delete('{project}', 'ProjectController@deleteAjax');
+
+
+
+    });
 
 
 

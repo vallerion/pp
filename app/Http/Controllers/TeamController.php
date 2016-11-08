@@ -130,6 +130,9 @@ class TeamController extends Controller
     }
     
     public function deleteAjax(Team $team) {
+
+        $team->users()->detach(); // delete relation (user_team table)
+
         $team->delete();
     }
     
