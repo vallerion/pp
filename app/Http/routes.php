@@ -211,7 +211,14 @@ Route::group([ 'prefix' => 'ajax' ], function () {
 
         Route::put('{team}', 'TeamController@updateAjax');
 
+        Route::delete('{team}', 'TeamController@deleteAjax');
+
     });
+
+
+
+
+
 });
 
 

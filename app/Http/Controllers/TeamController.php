@@ -125,7 +125,14 @@ class TeamController extends Controller
         $team->users()->attach($user->id);
     }
 
-//    public function updateAjax()
+    public function updateAjax(Team $team, TeamRequest $request) {
+        $team->update($request->all());
+    }
+    
+    public function deleteAjax(Team $team) {
+        $team->delete();
+    }
+    
 
 
     public function index(Guard $auth){

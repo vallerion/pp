@@ -21,11 +21,31 @@ class TeamRequest extends Request
      *
      * @return array
      */
-    public function rules()
-    {
-        return [
-            'name' => 'required|max:255',
-            'about' => 'max:1024'
-        ];
+    public function rules() {
+
+        switch($this->method()) {
+
+            case 'GET':
+            case 'DELETE':
+                return [
+                    'id' => 'required|integer'
+                ];
+
+            case 'POST':
+                return [
+                    'name' => 'required|max:255',
+                    'about' => 'max:1024'
+                ];
+
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'name' => 'required|max:255',
+                    'about' => 'max:1024'
+                ];
+
+            default:
+                break;
+        }
     }
 }
