@@ -21,17 +21,17 @@ class TaskRequest extends Request
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
 
         switch ($this->method()){
 
             case 'GET':
-
-                return [];
+            case 'DELETE':
+                return [
+                    'id' => 'required|integer'
+                ];
 
             case 'POST':
-
                 return [
                     'name' => 'required|max:255',
                     'about' => 'max:2048',
@@ -41,15 +41,15 @@ class TaskRequest extends Request
 
             case 'PUT':
             case 'PATCH':
-
                 return [
                     'name' => 'required|max:255',
                     'about' => 'max:2048',
                     'user_to_id' => 'required|integer|not_in:0'
                 ];
+
+            default:
+                return [];
         }
-        
-        
 
     }
 }

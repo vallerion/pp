@@ -94,6 +94,9 @@ Route::get('/', function(){
  * get - /ajax/project/{project_id}/{id}
  *  return html modal (+ edit)
  *
+ * get - /ajax/project/{project_id}/new
+ *  return html modal
+ *
  * post - /ajax/project/{project_id}/
  *  create new task in project
  *
@@ -182,6 +185,7 @@ Route::group([ 'prefix' => 'workspace', 'middleware' => 'auth' ], function () {
  * delete - /ajax/project/{id}
  *
  * get - /ajax/project/{project_id}/{id}
+ * get - /ajax/project/{project_id}/new
  * post - /ajax/project/{project_id}
  * put - /ajax/project/{project_id}/{id}
  * delete - /ajax/project/{project_id}/{id}
@@ -224,7 +228,13 @@ Route::group([ 'prefix' => 'ajax' ], function () {
 
         Route::delete('{project}', 'ProjectController@deleteAjax');
 
+        // -- task -- //
 
+        Route::get('{project}/{task}', 'TaskController@getAjax');
+
+        Route::get('{project}/new', 'TaskController@getCreateAjax');
+
+        Route::post('{project}', 'TaskController@createAjax');
 
     });
 

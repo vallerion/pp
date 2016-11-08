@@ -33,7 +33,7 @@ class ProjectRequest extends Request
 
             case 'POST':
                 return [
-                    'team' => 'required|integer',
+                    'team' => 'required|integer|not_in:0',
                     'name' => 'required|max:255',
                     'about' => 'max:1024'
                 ];

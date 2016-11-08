@@ -13,17 +13,39 @@ use App\Http\Requests\TaskRequest;
 
 class TaskController extends Controller
 {
-    public function get(Project $project, Task $task, Request $request){
+    public function get(Project $project, Task $task, TaskRequest $request){
 
-        $task = $project->tasks()->where('id', '=', $task->id)->get();
+        $task = $project->tasks()->where('id', '=', $task->id)->first();
         
-        if( ! $task->isEmpty()){
+        if( ! is_null($task)) {
             // TODO: change rights
             return $task;
         }
 
         return response('non found', 404);
     }
+    
+    public function getAjax(Project $project, Task $task, TaskRequest $request) {
+
+        $task = $project->tasks()->where('id', '=', $task->id)->first();
+
+        if( ! is_null($task))
+            return $task;
+
+        return json_encode([
+            'successful' => false,
+            'detail' => ['Task non found!']
+        ]);
+    }
+
+    public function getCreateAjax(Project $project, TaskRequest $request) {
+
+    }
+    
+    public function createAjax() {
+
+    }
+    
 
 
 
