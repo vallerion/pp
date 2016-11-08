@@ -28,10 +28,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->model('task', Task::class);
+
         $router->model('project', Project::class);
         $router->model('team', Team::class);
         $router->model('user', User::class);
+        $router->model('task', Task::class);
 
         $router->pattern('user', '[0-9]+');
 
@@ -61,6 +62,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes(Router $router)
     {
+
+//        dd($router);
+
         $router->group([
             'namespace' => $this->namespace, 'middleware' => 'web',
         ], function ($router) {

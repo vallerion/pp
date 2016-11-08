@@ -17,7 +17,6 @@ class CreateTasksTable extends Migration
             $table->integer('user_from_id')->unsigned();
             $table->integer('user_to_id')->unsigned();
             $table->integer('project_id')->unsigned();
-            $table->integer('mark_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('about', 2048);
             $table->integer('priority')->unsigned()->default(1);

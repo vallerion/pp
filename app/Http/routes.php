@@ -127,8 +127,8 @@ Route::get('/', function(){
  *
  */
 
-//Route::group([ 'prefix' => 'workspace', 'middleware' => 'auth' ], function () {
-Route::group(['prefix' => 'workspace'], function () {
+Route::group([ 'prefix' => 'workspace', 'middleware' => 'auth' ], function () {
+//Route::group(['prefix' => 'workspace'], function () {
 
     Route::get('/', function () {
         return 'work!';
@@ -220,21 +220,21 @@ Route::group([ 'prefix' => 'ajax' ], function () {
 
     Route::group([ 'prefix' => 'project' ], function () {
 
-//        Route::get('{project}', 'ProjectController@getAjax');
-//
-//        Route::post('/', 'ProjectController@createAjax');
-//
-//        Route::put('{project}', 'ProjectController@updateAjax');
-//
-//        Route::delete('{project}', 'ProjectController@deleteAjax');
+        Route::get('{project}', 'ProjectController@getAjax');
+
+        Route::post('/', 'ProjectController@createAjax');
+
+        Route::put('{project}', 'ProjectController@updateAjax');
+
+        Route::delete('{project}', 'ProjectController@deleteAjax');
 
         // -- task -- //
 
         Route::get('{project}/{task}', 'TaskController@getAjax');
 
-//        Route::get('{project}/new', 'TaskController@getCreateAjax');
-//
-//        Route::post('{project}', 'TaskController@createAjax');
+        Route::get('{project}/new', 'TaskController@getCreateAjax');
+
+        Route::post('{project}', 'TaskController@createAjax');
 
     });
 
