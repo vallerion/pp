@@ -15,6 +15,8 @@ Route::get('/', function(){
     return redirect('workspace');
 });
 
+Route::get('/activate/{code}', 'User\UserController@activateUser');
+
 /**
  *  User routing
  *
@@ -201,56 +203,63 @@ Route::group([ 'prefix' => 'workspace', 'middleware' => 'auth' ], function () {
  *
  */
 
-Route::group([ 'prefix' => 'ajax', 'middleware' => 'auth' ], function () {
-//Route::group([ 'prefix' => 'ajax' ], function () {
+Route::group([ 'prefix' => 'ajax', 'middleware' => 'web'], function () {
 
-    Route::group([ 'prefix' => 'user' ], function () {
 
-        Route::post('/', 'Auth\AuthController@postRegister');
+    Route::post('user', 'User\UserController@createAjax');
 
-//        Route::put('/', 'User\UserController@updateAjax'); not work yet
 
-        Route::delete('{user}', 'User\UserController@deleteAjax');
+    Route::group([ 'middleware' => 'auth'  ], function () {
 
-    });
 
-    Route::group([ 'prefix' => 'team' ], function () {
+        Route::group(['prefix' => 'user'], function () {
 
-        Route::get('{team}', 'TeamController@getAjax');
+            Route::put('/', 'User\UserController@updateAjax'); //not work yet
 
-        Route::get('/new', 'TeamController@getCreateAjax');
+            Route::delete('{user}', 'User\UserController@deleteAjax');
 
-        Route::post('/', 'TeamController@createAjax');
+        });
 
-        Route::put('{team}', 'TeamController@updateAjax');
+        Route::group(['prefix' => 'team'], function () {
 
-        Route::delete('{team}', 'TeamController@deleteAjax');
+            Route::get('{team}', 'TeamController@getAjax');
 
-    });
+            Route::get('/new', 'TeamController@getCreateAjax');
 
-    Route::group([ 'prefix' => 'project' ], function () {
+            Route::post('/', 'TeamController@createAjax');
 
-        Route::get('{project}', 'ProjectController@getAjax');
+            Route::put('{team}', 'TeamController@updateAjax');
 
-        Route::get('/new', 'ProjectController@getCreateAjax');
+            Route::delete('{team}', 'TeamController@deleteAjax');
 
-        Route::post('/', 'ProjectController@createAjax');
+        });
 
-        Route::put('{project}', 'ProjectController@updateAjax');
+        Route::group(['prefix' => 'project'], function () {
 
-        Route::delete('{project}', 'ProjectController@deleteAjax');
+            Route::get('{project}', 'ProjectController@getAjax');
 
-        // -- task -- //
+            Route::get('/new', 'ProjectController@getCreateAjax');
 
-        Route::get('{project}/{task}', 'TaskController@getAjax');
+            Route::post('/', 'ProjectController@createAjax');
 
-        Route::get('{project}/new', 'TaskController@getCreateAjax');
+            Route::put('{project}', 'ProjectController@updateAjax');
 
-        Route::post('{project}', 'TaskController@createAjax');
+            Route::delete('{project}', 'ProjectController@deleteAjax');
 
-        Route::put('{project}/{task}', 'TaskController@updateAjax');
+            // -- task -- //
 
-        Route::delete('{project}/{task}', 'TaskController@deleteAjax');
+            Route::get('{project}/{task}', 'TaskController@getAjax');
+
+            Route::get('{project}/new', 'TaskController@getCreateAjax');
+
+            Route::post('{project}', 'TaskController@createAjax');
+
+            Route::put('{project}/{task}', 'TaskController@updateAjax');
+
+            Route::delete('{project}/{task}', 'TaskController@deleteAjax');
+
+        });
+
 
     });
 
@@ -258,6 +267,31 @@ Route::group([ 'prefix' => 'ajax', 'middleware' => 'auth' ], function () {
 
 });
 
+
+/**
+ * auth prefix
+ *
+ * get - / - html page
+ *
+ * post - / - login user
+ *
+ */
+
+Route::group(['prefix' => 'auth'], function(){
+
+    Route::get('/', 'Auth\AuthController@getRegister');
+
+    Route::get('activate', 'Auth\AuthController@getActivate');
+
+    Route::get('logout', 'Auth\AuthController@getLogout');
+
+    Route::post('login', 'Auth\AuthController@postLogin');
+
+//    Route::post('register', 'User\UserController@createAjax');
+
+    Route::post('reset', 'Auth\AuthController@postReset');
+
+});
 
 
 // -- old --
@@ -351,18 +385,3 @@ Route::group([ 'prefix' => 'ajax', 'middleware' => 'auth' ], function () {
 //
 //});
 
-Route::group(['prefix' => 'auth'], function(){
-
-    Route::get('/', 'Auth\AuthController@getRegister');
-
-    Route::get('activate', 'Auth\AuthController@getActivate');
-
-    Route::get('logout', 'Auth\AuthController@getLogout');
-
-    Route::post('login', 'Auth\AuthController@postLogin');
-
-    Route::post('register', 'Auth\AuthController@postRegister');
-
-    Route::post('reset', 'Auth\AuthController@postReset');
-
-});

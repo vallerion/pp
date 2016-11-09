@@ -160,7 +160,7 @@ class ProjectController extends Controller
             return json_encode(
                 [
                     'successful' => false,
-                    'detail' => '' // что-то пошло не так...
+                    'detail' => 'Something wrong' // что-то пошло не так...
                 ]
             );
 

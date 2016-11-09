@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-class CodeController extends Controller
-{
+class CodeController extends Controller {
+
+    public static $activateUrl = '/activate/';
+
     public static function generateCode($length, $unique){
 
         $num = range(0, 9);

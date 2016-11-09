@@ -43,7 +43,7 @@
             </div>
         </form>
 
-        <form id="registration-form" role="form6" action="auth/register" method="post">
+        <form id="registration-form" role="form6" action="/ajax/user" method="post">
             {!! csrf_field() !!}
 
             <div class="form-group">

@@ -6,6 +6,7 @@ use App\Project;
 use App\Task;
 use App\Team;
 use App\User;
+use App\Code;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -33,11 +34,13 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('team', Team::class);
         $router->model('user', User::class);
         $router->model('task', Task::class);
+        $router->model('code', Code::class);
 
         $router->pattern('user', '[0-9]+');
         $router->pattern('project', '[0-9]+');
         $router->pattern('team', '[0-9]+');
         $router->pattern('task', '[0-9]+');
+        $router->pattern('code', '[a-zA-Z0-9]{64}');
 
         parent::boot($router);
     }

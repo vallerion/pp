@@ -36,6 +36,15 @@ class User extends Authenticatable
     
     public $current_team_id;
 
+    public static function create (array $data = []) {
+        return parent::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'image' => '/img/user_avatars/' .rand(1, 3). '.png',
+        ]);
+    }
+
     public function company(){
         return $this->belongsToMany(Company::class, 'user_company')->withPivot('user_group');
     }
