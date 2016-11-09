@@ -8,6 +8,8 @@ class Mark extends Model {
 
     protected $table = 'marks';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'name', 'color'
     ];

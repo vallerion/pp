@@ -41,9 +41,11 @@ class TaskController extends Controller
 
     public function getCreateAjax(Project $project, TaskRequest $request) {
 
-//        echo Mark::all();
+        $marks = Mark::all();
 
-        return view("ajax.modal.create.task", ['project' => $project]);
+        dd($marks);
+
+        return view("ajax.modal.create.task", ['project' => $project, 'marks' => $marks]);
     }
     
     public function createAjax(Project $project, TaskRequest $request) {
