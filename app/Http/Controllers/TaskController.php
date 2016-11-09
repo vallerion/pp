@@ -43,13 +43,26 @@ class TaskController extends Controller
 
         $marks = Mark::all();
 
-        dd($marks);
-
         return view("ajax.modal.create.task", ['project' => $project, 'marks' => $marks]);
     }
     
     public function createAjax(Project $project, TaskRequest $request) {
-        $request->project_id = $project->id;
+
+        $user_to = $project->users()->wherePivot('user_id', '=', $request->user_to_id)->first();
+
+        // проверяем еслить ли в команде пользователь
+        // права на создание задачи и назначение ее проверяеются в TaskRequest authorize()
+        if( is_null($user_to))
+            return json_encode([
+                'successful' => false,
+                'detail' => ['User not exist in team']
+            ]);
+
+
+        $request->request->add([
+            'project_id' => $project->id,
+            'user_from_id' => 1, // Auth::user()->id;
+        ]);
 
         $task = Task::create($request->all());
 
@@ -59,6 +72,74 @@ class TaskController extends Controller
                 'detail' => ['Task ' . $task->name . ' created!']
             ]);
 
+
+        return json_encode([
+            'successful' => false,
+            'detail' => ['Something wrong']
+        ]);
+    }
+
+    public function updateAjax(Project $project, Task $task, TaskRequest $request) {
+
+        $projectTask = $task->project()->first();
+
+        if(is_null($projectTask))
+            return json_encode([
+                'successful' => false,
+                'detail' => ['Task not exist in team']
+            ]);
+
+
+        if($projectTask->id == $project->id){
+
+            $user_to = $project->users()->wherePivot('user_id', '=', $request->user_to_id)->first();
+
+            if(is_null($user_to))
+                return json_encode([
+                    'successful' => false,
+                    'detail' => ['User not exist in team']
+                ]);
+
+            $request->request->add([
+                'project_id' => $project->id,
+                'user_from_id' => 1, // Auth::user()->id;
+            ]);
+
+            $update = $task->update($request->all());
+
+            if($update)
+                return json_encode([
+                    'successful' => true,
+                    'detail' => ['Task ' . $task->name . ' updated!']
+                ]);
+        }
+
+        return json_encode([
+            'successful' => false,
+            'detail' => ['Something wrong']
+        ]);
+    }
+    
+    public function deleteAjax(Project $project, Task $task) {
+
+        $projectTask = $task->project()->first();
+
+        if(is_null($projectTask))
+            return json_encode([
+                'successful' => false,
+                'detail' => ['Task not exist in team']
+            ]);
+
+        if($projectTask->id == $project->id){
+
+            $deleted = $task->delete();
+
+            if($deleted)
+                return json_encode([
+                    'successful' => true,
+                    'detail' => ['Task ' . $task->name . ' deleted!']
+                ]);
+        }
 
         return json_encode([
             'successful' => false,

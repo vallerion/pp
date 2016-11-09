@@ -26,9 +26,9 @@
                     <div class="form-group">
                         <select class="selectpicker" data-width="30%" data-max-options="2" name="mark[]" multiple>
 
-                            @foreach($marks as $key => $color)
+                            @foreach($marks as $mark)
 
-                                <option value="{{ $key }}" data-content="<span class='label' style='background-color:{{ $color }};'>{{ $key }}</span>">{{ $key }}</option>
+                                <option value="{{ $mark->id }}" data-content="<span class='label' style='background-color:{{ $mark->color }};'>{{ $mark->name }}</span>">{{ $mark->name }}</option>
 
                             @endforeach
 
@@ -49,60 +49,60 @@
 
                     {{--<div style="width: 100%;height: 1px;background-color: #e5e5e5;margin-bottom: 15px;"></div>--}}
                     <hr>
-                    @if(count(Auth::user()->privilegesTeams) > 0)
+                    {{--@if(count(Auth::user()->privilegesTeams) > 0)--}}
 
-                        <div class="form-group" style="display: inline;">
+                        {{--<div class="form-group" style="display: inline;">--}}
                             {{--<label for="sel1">Select Team:</label><br>--}}
 
-                            <select id="team" class="selectpicker" data-width="32%" data-live-search="true" data-size="5">
+                            {{--<select id="team" class="selectpicker" data-width="32%" data-live-search="true" data-size="5">--}}
 
-                                <option value="0"><b>Select Team</b></option>
+                                {{--<option value="0"><b>Select Team</b></option>--}}
 
-                            @foreach(Auth::user()->privilegesTeams as $team)
-                                <option value="{{ $team->id }}" data-tokens="{{ $team->name }}">{{ $team->name }}</option>
-                            @endforeach
+                            {{--@foreach(Auth::user()->privilegesTeams as $team)--}}
+                                {{--<option value="{{ $team->id }}" data-tokens="{{ $team->name }}">{{ $team->name }}</option>--}}
+                            {{--@endforeach--}}
 
-                            </select>
+                            {{--</select>--}}
 
-                        </div>
+                        {{--</div>--}}
 
-                        <div class="form-group" style="display: none;">
+                        {{--<div class="form-group" style="display: none;">--}}
                             {{--<label for="sel1">Select Project:</label><br>--}}
 
-                            <select id="project" class="selectpicker" data-width="32%" name="project_id" data-live-search="true" data-size="5">
-                                <option value="0"><b>Select Project</b></option>
-                            </select>
+                            {{--<select id="project" class="selectpicker" data-width="32%" name="project_id" data-live-search="true" data-size="5">--}}
+                                {{--<option value="0"><b>Select Project</b></option>--}}
+                            {{--</select>--}}
 
-                        </div>
+                        {{--</div>--}}
 
-                    @else
+                    {{--@else--}}
 
-                        <div class="form-group" style="display: inline;">
+                        {{--<div class="form-group" style="display: inline;">--}}
                             {{--<label for="sel1">Select Project:</label><br>--}}
 
-                            <select id="project" class="selectpicker" data-width="32%" name="project_id" data-live-search="true" data-size="5">
+                            {{--<select id="project" class="selectpicker" data-width="32%" name="project_id" data-live-search="true" data-size="5">--}}
 
                                 {{--{{ $project_id }}--}}
                                 {{--{{ $project->isEmpty() }}--}}
-                                @if(isset($project) && ! $project->isEmpty())
-                                    <option value="{{ $project->id }}"><b>{{ $project->name }}</b></option>
-                                @else
+                                {{--@if(isset($project) && ! $project->isEmpty())--}}
+                                    {{--<option value="{{ $project->id }}"><b>{{ $project->name }}</b></option>--}}
+                                {{--@else--}}
 
-                                    <option value="0"><b>Select Project</b></option>
+                                    {{--<option value="0"><b>Select Project</b></option>--}}
 
-                                    @foreach(Auth::user()->privilegesProjects as $project)
-                                        <option value="{{ $project->id }}" data-tokens="{{ $project->name }}">{{ $project->name }}</option>
-                                    @endforeach
+                                    {{--@foreach(Auth::user()->privilegesProjects as $project)--}}
+                                        {{--<option value="{{ $project->id }}" data-tokens="{{ $project->name }}">{{ $project->name }}</option>--}}
+                                    {{--@endforeach--}}
 
-                                @endif
+                                {{--@endif--}}
 
-                            </select>
+                            {{--</select>--}}
 
-                        </div>
+                        {{--</div>--}}
 
 
 
-                    @endif
+                    {{--@endif--}}
 
 
 

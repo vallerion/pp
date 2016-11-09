@@ -37,7 +37,7 @@
 
                                 <option value="0"><b>Select Team</b></option>
 
-                                @foreach(Auth::user()->privilegesTeams as $team)
+                                @foreach($teams as $team)
                                     <option value="{{ $team->id }}" data-tokens="{{ $team->name }}">{{ $team->name }}</option>
                                 @endforeach
 

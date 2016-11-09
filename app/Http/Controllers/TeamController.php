@@ -116,6 +116,10 @@ class TeamController extends Controller
         return view("ajax.modal.show.team", [ 'team' => $team ]);
     }
 
+    public function getCreateAjax() {
+        return view("ajax.modal.create.team");
+    }
+
     public function createAjax(TeamRequest $request) {
 
         $user = Auth::user();

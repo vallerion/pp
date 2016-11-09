@@ -116,6 +116,21 @@ class ProjectController extends Controller
     public function getAjax(Project $project) {
         return view("ajax.modal.show.project", [ 'project' => $project ]);
     }
+
+    public function getCreateAjax() {
+
+        $user = Auth::user();
+
+        $teams = $user->teams();
+
+        if( ! $teams->isEmpty())
+            return view("ajax.modal.create.project", [ 'teams' => $teams]);
+        else
+            return json_encode(['successful' => false,
+                'detail' => ['You do not have have permission to create project']
+            ]);
+
+    }
     
     public function createAjax(ProjectRequest $request) {
 

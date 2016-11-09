@@ -41,6 +41,9 @@ Route::get('/', function(){
  * get - /ajax/team/{id}
  *  return html modal (+ edit enable)
  *
+ * get - /ajax/team/new
+ *  return html modal (create enable)
+ *
  * post - /ajax/team/
  *  create new team
  *
@@ -66,6 +69,9 @@ Route::get('/', function(){
  *
  * get - /ajax/project/{id}
  *  return html modal (+ edit)
+ *
+ * get - /ajax/project/new
+ *  return html modal (create)
  *
  * post - /ajax/project/
  *  create new project
@@ -95,7 +101,7 @@ Route::get('/', function(){
  *  return html modal (+ edit)
  *
  * get - /ajax/project/{project_id}/new
- *  return html modal
+ *  return html modal (create)
  *
  * post - /ajax/project/{project_id}/
  *  create new task in project
@@ -170,31 +176,33 @@ Route::group([ 'prefix' => 'workspace', 'middleware' => 'auth' ], function () {
 /**
  * ajax prefix
  *
- * post  - /ajax/user/
- * put - /ajax/user/
- * delete - /ajax/user/{id}
+ * post  - /ajax/user/  - create user
+ * put - /ajax/user/    - update user
+ * delete - /ajax/user/{id} - delete user
  *
- * get - /ajax/team/{id}
- * post - /ajax/team/
- * put - /ajax/team/{id}
- * delete - /ajax/team/{id}
+ * get - /ajax/team/new     - html (modal) create team
+ * get - /ajax/team/{id}    - html (modal) team
+ * post - /ajax/team/       - create team
+ * put - /ajax/team/{id}    - update team
+ * delete - /ajax/team/{id} - delete team
  *
- * get - /ajax/project/{id}
- * post - /ajax/project/
- * put - /ajax/project/{id}
- * delete - /ajax/project/{id}
+ * get - /ajax/project/new - html (modal) create project
+ * get - /ajax/project/{id} - html (modal) project
+ * post - /ajax/project/    - create new project
+ * put - /ajax/project/{id} - update project
+ * delete - /ajax/project/{id}  - delete project
  *
- * get - /ajax/project/{project_id}/{id}
- * get - /ajax/project/{project_id}/new
- * post - /ajax/project/{project_id}
- * put - /ajax/project/{project_id}/{id}
- * delete - /ajax/project/{project_id}/{id}
+ * get - /ajax/project/{project_id}/{id} - html (modal) task
+ * get - /ajax/project/{project_id}/new  - html (modal) create task
+ * post - /ajax/project/{project_id}     - create new task
+ * put - /ajax/project/{project_id}/{id} - update task
+ * delete - /ajax/project/{project_id}/{id} - delete task
  *
  *
  */
 
-//Route::group([ 'prefix' => 'ajax', 'middleware' => 'auth' ], function () {
-Route::group([ 'prefix' => 'ajax' ], function () {
+Route::group([ 'prefix' => 'ajax', 'middleware' => 'auth' ], function () {
+//Route::group([ 'prefix' => 'ajax' ], function () {
 
     Route::group([ 'prefix' => 'user' ], function () {
 
@@ -210,6 +218,8 @@ Route::group([ 'prefix' => 'ajax' ], function () {
 
         Route::get('{team}', 'TeamController@getAjax');
 
+        Route::get('/new', 'TeamController@getCreateAjax');
+
         Route::post('/', 'TeamController@createAjax');
 
         Route::put('{team}', 'TeamController@updateAjax');
@@ -221,6 +231,8 @@ Route::group([ 'prefix' => 'ajax' ], function () {
     Route::group([ 'prefix' => 'project' ], function () {
 
         Route::get('{project}', 'ProjectController@getAjax');
+
+        Route::get('/new', 'ProjectController@getCreateAjax');
 
         Route::post('/', 'ProjectController@createAjax');
 
@@ -235,6 +247,10 @@ Route::group([ 'prefix' => 'ajax' ], function () {
         Route::get('{project}/new', 'TaskController@getCreateAjax');
 
         Route::post('{project}', 'TaskController@createAjax');
+
+        Route::put('{project}/{task}', 'TaskController@updateAjax');
+
+        Route::delete('{project}/{task}', 'TaskController@deleteAjax');
 
     });
 
