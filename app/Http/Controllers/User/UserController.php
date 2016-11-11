@@ -40,12 +40,14 @@ class UserController extends Controller {
 
             $code->delete();
 
+            $login = Auth::loginUsingId($user->id);
+
 //            $attempt = Auth::attempt(['email' => $user->email, 'password' => $user->password]);
 //
 //            dd($user);
 
-//            if($attempt)
-//                return redirect()->to('workspace');
+            if($login)
+                return redirect()->to('workspace');
         }
 
         return redirect()->to('auth');

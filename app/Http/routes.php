@@ -15,6 +15,35 @@ Route::get('/', function(){
     return redirect('workspace');
 });
 
+/**
+ * auth prefix
+ *
+ * get - / - html page
+ *
+ * post - / - login user
+ *
+ * get /logout - logout user
+ *
+ */
+
+Route::group(['prefix' => 'auth'], function(){
+
+    Route::get('/', 'Auth\AuthController@get');
+
+    Route::post('/', 'Auth\AuthController@loginAjax');
+
+//    Route::get('activate', 'Auth\AuthController@getActivate');
+
+    Route::get('logout', 'Auth\AuthController@logout');
+
+//    Route::post('login', 'Auth\AuthController@postLogin');
+
+//    Route::post('register', 'User\UserController@createAjax');
+
+//    Route::post('reset', 'Auth\AuthController@postReset');
+
+});
+
 Route::get('/activate/{code}', 'User\UserController@activateUser');
 
 /**
@@ -203,7 +232,7 @@ Route::group([ 'prefix' => 'workspace', 'middleware' => 'auth' ], function () {
  *
  */
 
-Route::group([ 'prefix' => 'ajax', 'middleware' => 'web'], function () {
+Route::group([ 'prefix' => 'ajax'], function () {
 
 
     Route::post('user', 'User\UserController@createAjax');
@@ -267,31 +296,6 @@ Route::group([ 'prefix' => 'ajax', 'middleware' => 'web'], function () {
 
 });
 
-
-/**
- * auth prefix
- *
- * get - / - html page
- *
- * post - / - login user
- *
- */
-
-Route::group(['prefix' => 'auth'], function(){
-
-    Route::get('/', 'Auth\AuthController@getRegister');
-
-    Route::get('activate', 'Auth\AuthController@getActivate');
-
-    Route::get('logout', 'Auth\AuthController@getLogout');
-
-    Route::post('login', 'Auth\AuthController@postLogin');
-
-//    Route::post('register', 'User\UserController@createAjax');
-
-    Route::post('reset', 'Auth\AuthController@postReset');
-
-});
 
 
 // -- old --

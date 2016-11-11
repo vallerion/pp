@@ -21,7 +21,7 @@
 
         <div class="preloader center-block"></div>
 
-        <form id="login-form" role="form6" action="auth/login" method="post">
+        <form id="login-form" role="form6" action="auth" method="post">
             {!! csrf_field() !!}
 
             <div class="form-group">
