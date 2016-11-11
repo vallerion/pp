@@ -2,18 +2,32 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 
-class TeamRequest extends Request
-{
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Request;
+use App\Team;
+
+class TeamRequest extends Request {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return true;
+    public function authorize() {
+
+        $team = $this->route('team');
+
+        $user = Auth::user();
+
+        $user = $team->users()->withPivot('user_id', 'user_group')->wherePivot('user_id', '=', $user->id)->first();
+
+        if ( ! is_null($user))
+            return true;
+        else if ($team->visible == 1)
+            return true;
+
+
+        return false;
     }
 
     /**
@@ -26,6 +40,7 @@ class TeamRequest extends Request
         switch($this->method()) {
 
             case 'GET':
+                return [];
             case 'DELETE':
                 return [
                     'id' => 'required|integer'

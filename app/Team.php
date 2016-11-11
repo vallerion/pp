@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+//use App\Http\Interfaces\UserRole;
 
-class Team extends Model implements UserRole
-{
+class Team extends Model //implements UserRole
+ {
+
     protected $table = 'teams';
 
     protected $fillable = [

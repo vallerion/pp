@@ -16,36 +16,8 @@ use App\Http\Requests\TeamRequest;
 class TeamController extends Controller
 {
 
-    public function get(Team $team, Request $request) {
-
-        $user = Auth::user();
-
-        $user = $team->users()->withPivot('user_id', 'user_group')->wherePivot('user_id', '=', $user->id)->first();
-
-        if( ! is_null($user)){
-
-            /*
-             * TODO: change access system
-             *
-             * example:
-             *
-             * if($user->userGroup()->right >= Rights::admin()) // where userGroup individual table, with record for THIS team
-             *
-             *
-             */
-
-            if($user->pivot->user_group === "author")
-                return $team; //  return view(...);
-
-            else if ($user->pivot->user_group === "user")
-                return $team; //  return view(...);
-
-        }
-        else if ($team->visible === 1)
-            return $team; //  return view(...);
-
-
-        return response('access forbidden.', 403); // $response = 403
+    public function get(Team $team, TeamRequest $request) {
+        return $team;
     }
 
     public function user(Team $team, Request $request) {

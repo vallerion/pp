@@ -3,9 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Interfaces\UserRole;
+//use App\Interfaces\UserRole;
 
-class Project extends Model implements UserRole
+class Project extends Model //implements UserRole
 {
     protected $table = 'projects';
 
