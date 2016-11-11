@@ -224,7 +224,7 @@ Route::group([ 'prefix' => 'ajax'], function () {
     Route::post('user', 'User\UserController@createAjax');
 
 
-    Route::group([ 'middleware' => 'auth'  ], function () {
+//    Route::group([ 'middleware' => 'auth'  ], function () {
 
 
         Route::group(['prefix' => 'user'], function () {
@@ -276,7 +276,7 @@ Route::group([ 'prefix' => 'ajax'], function () {
         });
 
 
-    });
+//    });
 
 
 

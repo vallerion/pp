@@ -2,4 +2,4 @@
 
 namespace App\Http\Interfaces;
 
-interface UseRole {};
+interface RoleModel {};

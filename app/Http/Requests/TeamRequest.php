@@ -15,7 +15,11 @@ class TeamRequest extends Request {
      */
     public function authorize() {
 
+//        dd('request');
+
         $team = $this->route('team');
+
+//        Auth::loginUsingId(30); // for tests
 
         $user = Auth::user();
 

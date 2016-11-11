@@ -20,7 +20,7 @@ class TeamController extends Controller
         return $team;
     }
 
-    public function user(Team $team, Request $request) {
+    public function user(Team $team, TeamRequest $request) {
 
         $user = Auth::user();
 
@@ -102,6 +102,12 @@ class TeamController extends Controller
     }
 
     public function updateAjax(Team $team, TeamRequest $request) {
+
+//        Auth::loginUsingId(30); // for tests
+        $user = Auth::user();
+
+        $this->authorize('update', [ $team, $user ]);
+
         $team->update($request->all());
     }
     
@@ -114,51 +120,51 @@ class TeamController extends Controller
     
 
 
-    public function index(Guard $auth){
-        return $auth->user()->teams->toJson();
-    }
-
-    public function create(){
-        return view("ajax.modal.create.team");
-    }
-
-    public function store(TeamRequest $request, Guard $auth){
-        
-        $team = $auth->user()->teams()->create($request->all(), ['user_group' => 'author']);
-
-        if($team)
-            return json_encode(['successful' => true,
-                                'detail' => ['Team "' . $team->name . '" is created']
-                                ]);
-    }
-
-    public function show($team){
-//        echo \Request::ajax();
-        return $team;
-    }
-
-    public function showModal($team){
-        return view("ajax.modal.show.team", ['team' => $team]);
-    }
-
-    public function edit($team){
-        return view("ajax.modal.edit.team", ['team' => $team]);
-    }
-
-    public function users($project){
-        return json_encode($project->users);
-    }
-
-    public function projects($project){
-        return json_encode($project->projects);
-    }
-
-    public function update($team, $data){
-
-    }
-
-    public function destroy($team){
-
-    }
+//    public function index(Guard $auth){
+//        return $auth->user()->teams->toJson();
+//    }
+//
+//    public function create(){
+//        return view("ajax.modal.create.team");
+//    }
+//
+//    public function store(TeamRequest $request, Guard $auth){
+//
+//        $team = $auth->user()->teams()->create($request->all(), ['user_group' => 'author']);
+//
+//        if($team)
+//            return json_encode(['successful' => true,
+//                                'detail' => ['Team "' . $team->name . '" is created']
+//                                ]);
+//    }
+//
+//    public function show($team){
+////        echo \Request::ajax();
+//        return $team;
+//    }
+//
+//    public function showModal($team){
+//        return view("ajax.modal.show.team", ['team' => $team]);
+//    }
+//
+//    public function edit($team){
+//        return view("ajax.modal.edit.team", ['team' => $team]);
+//    }
+//
+//    public function users($project){
+//        return json_encode($project->users);
+//    }
+//
+//    public function projects($project){
+//        return json_encode($project->projects);
+//    }
+//
+//    public function update($team, $data){
+//
+//    }
+//
+//    public function destroy($team){
+//
+//    }
 
 }
