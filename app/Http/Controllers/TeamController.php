@@ -103,10 +103,7 @@ class TeamController extends Controller
 
     public function updateAjax(Team $team, TeamRequest $request) {
 
-//        Auth::loginUsingId(30); // for tests
-        $user = Auth::user();
-
-        $this->authorize('update', [ $team, $user ]);
+        $this->authorize('update', Team::class);
 
         $team->update($request->all());
     }
