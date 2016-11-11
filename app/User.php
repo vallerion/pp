@@ -48,9 +48,9 @@ class User extends Authenticatable {
 //        return $this->belongsToMany(Project::class, 'user_project')->withPivot('user_group')->wherePivotIn('user_group', ['author']);
 //    }
 //
-//    public function teams(){
-//        return $this->belongsToMany(Team::class, 'user_team')->withPivot('user_group');
-//    }
+    public function teams(){
+        return $this->belongsToMany(Team::class, 'user_team');
+    }
 //
 //    public function privilegesTeams(){
 //        return $this->belongsToMany(Team::class, 'user_team')->withPivot('user_group')->wherePivotIn('user_group', ['author']);

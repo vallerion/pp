@@ -22,9 +22,11 @@ class TeamPolicy
 
     public function update(User $user, Team $team) {
 
-//        $tt = $team->users()->withPivot('user_group')->wherePivotIn('user_group', [ 'author' ])->where('id', '=', $user->id)->first();
 
-//        dd($tt);
+
+        $tt = $team->users()->withPivot('role_id')->wherePivotIn('role_id', [ 'author' ])->where('id', '=', $user->id)->first();
+
+        dd($tt);
 
         return true;
     }
